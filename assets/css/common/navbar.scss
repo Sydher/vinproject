@@ -1,7 +1,7 @@
 @import "color";
 
 #navbar {
-  background-color: $white;
+  background-color: $dark;
   height: 120px;
   display: flex;
 }
@@ -33,9 +33,12 @@
     font-family: "FF Mark", sans-serif;
     font-weight: bold;
     font-size: 20px;
-    color: $dark;
+    color: $lightgrey;
   }
   a:hover {
+    color: $red_wine;
+  }
+  a.nav_active {
     color: $red_wine;
   }
 }
@@ -51,7 +54,7 @@
     font-family: "FF Mark", sans-serif;
     font-weight: bold;
     font-size: 20px;
-    color: $dark;
+    color: $lightgrey;
   }
   a:hover {
     color: $red_wine;
@@ -72,10 +75,10 @@
     text-decoration: none;
     font-family: "FF Mark", sans-serif;
     font-size: 16px;
-    color: $dark;
+    color: $green_wine;
   }
   a:hover {
-    color: $aqua;
+    color: $dark_green;
     border-bottom: 4px solid;
     padding-bottom: 4px;
   }
