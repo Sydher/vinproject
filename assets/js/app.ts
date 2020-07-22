@@ -1,3 +1,9 @@
 import '../css/app.scss';
 
-console.log('Hello World !');
+/**
+ * Gestion de la barre de navigation.
+ */
+document.getElementById("burger").onclick = () => {
+    document.getElementById("burger").classList.toggle("is-active")
+    document.getElementById("navbarVinProject").classList.toggle("is-active")
+}

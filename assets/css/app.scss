@@ -1,0 +1,42 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,300;1,700&display=swap');
+@import url('//db.onlinewebfonts.com/c/88d825431bfee24234c96a4170553e7f?family=FF+Mark');
+@import "common/color";
+
+html {
+  background-color: $lightgrey;
+}
+
+body {
+  height: 100%;
+  font-family: "FF Mark", sans-serif;
+}
+
+#body {
+  margin: 15px;
+  height: 100%;
+}
+
+.card {
+  background-color: $white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.card-shadow {
+  background-color: $white;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,.1);
+  padding: 10px;
+}
+
+.separator {
+  margin-bottom: 15px;
+}
+
+@import "common/navbar";
+@import "home";

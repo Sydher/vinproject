@@ -1,0 +1,82 @@
+@import "color";
+
+#navbar {
+  background-color: $white;
+  height: 120px;
+  display: flex;
+}
+
+#logo {
+  height: 80px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#navigation {
+  width: 100%;
+}
+
+#navigation_top {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+#navigation_site {
+  ul li {
+    display: inline;
+    margin-left: 20px;
+  }
+
+  a {
+    text-decoration: none;
+    font-family: "FF Mark", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: $dark;
+  }
+  a:hover {
+    color: $red_wine;
+  }
+}
+
+#navigation_icon {
+  ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+
+  a {
+    text-decoration: none;
+    font-family: "FF Mark", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: $dark;
+  }
+  a:hover {
+    color: $red_wine;
+  }
+}
+
+#navigation_bottom {
+  margin-top: 28px;
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin-right: 20px;
+  }
+
+  a {
+    text-decoration: none;
+    font-family: "FF Mark", sans-serif;
+    font-size: 16px;
+    color: $dark;
+  }
+  a:hover {
+    color: $aqua;
+    border-bottom: 4px solid;
+    padding-bottom: 4px;
+  }
+}
