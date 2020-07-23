@@ -3,21 +3,28 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselAccueil" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselAccueil" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselAccueil" data-slide-to="1"></li>
+            <li data-target="#carouselAccueil" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="{{ asset('build/images/carrousel/image1.jpg') }}" class="d-block w-100 rounded-sm" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Blablabla</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam neque quam, pulvinar a porttitor
+                        nec, consequat faucibus risus.
+                    </p>
+                </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('build/images/carrousel/image1.jpg') }}" class="d-block w-100 rounded-sm" alt="...">
+                <img src="{{ asset('build/images/carrousel/image2.jpg') }}" class="d-block w-100 rounded-sm" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('build/images/carrousel/image1.jpg') }}" class="d-block w-100 rounded-sm" alt="...">
+                <img src="{{ asset('build/images/carrousel/image3.jpg') }}" class="d-block w-100 rounded-sm" alt="...">
             </div>
         </div>
     </div>

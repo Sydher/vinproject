@@ -11,7 +11,7 @@
  * Liens de navigation (survol).
  */
 .navbar-dark .navbar-nav .nav-link:hover {
-  color: $green_wine;
+  color: $beige;
   border-bottom: 4px solid;
   padding-bottom: 4px;
 }
@@ -23,22 +23,11 @@
 .navbar-dark .navbar-nav .nav-link.active,
 .navbar-dark .navbar-nav .nav-link.show,
 .navbar-dark .navbar-nav .show > .nav-link {
-  color: $red_wine;
-}
-
-/**
- * Lien actif (survol).
- */
-.navbar-dark .navbar-nav .active > .nav-link:hover,
-.navbar-dark .navbar-nav .nav-link.active:hover,
-.navbar-dark .navbar-nav .nav-link.show:hover,
-.navbar-dark .navbar-nav .show > .nav-link:hover {
-  color: $green_wine;
+  color: $beige;
   border-bottom: 4px solid;
   padding-bottom: 4px;
 }
 
 .navbar_bg {
-  //background-color: #464849;
-  background-color: #575858;
+  background-color: $bordeau;
 }
