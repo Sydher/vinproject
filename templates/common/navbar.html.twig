@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar_bg">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{{ path('home') }}">
         <img src="{{ asset('build/images/wine.svg') }}" width="30" height="30" class="d-inline-block align-top"
              alt="logo" loading="lazy">
         Vin Project
@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Accueil</a>
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Blog</a>
@@ -36,10 +36,17 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-user"></i>
-                    Connexion
-                </a>
+                {% if app.user %}
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-user"></i>
+                        {{ app.user.username }}
+                    </a>
+                {% else %}
+                    <a class="nav-link" href="{{ path('login') }}">
+                        <i class="fas fa-user"></i>
+                        Connexion
+                    </a>
+                {% endif %}
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">

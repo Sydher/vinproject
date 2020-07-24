@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Bienvenue {{ app.user.username }} !
+            Pour se déconnecter<a href="{{ path('logout') }}">Logout</a>
+        </div>
+    {% else %}
+        <div class="card mx-auto login_form">
+            <div class="card-body">
+                <h5 class="card-title">Se connecter</h5>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                               class="form-control" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Mot de passe</label>
+                        <input type="password" name="password" id="inputPassword"
+                               class="form-control" required>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Connexion
+                    </button>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                Vous n'avez pas de compte ? Inscrivez-vous <a href="#">ici</a> !
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

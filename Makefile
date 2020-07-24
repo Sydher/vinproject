@@ -9,6 +9,7 @@ start-database:
 .PHONY: init-database
 init-database:
 	php bin/console doctrine:migrations:migrate
+	php bin/console doctrine:fixtures:load --append
 
 .PHONY: stop-database
 stop-database:
