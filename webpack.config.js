@@ -68,6 +68,10 @@ Encore
     // requires WebpackEncoreBundle 1.4 or higher
     //.enableIntegrityHashes(Encore.isProduction())
 
+    .addExternals({
+            jquery: 'jQuery'
+        }
+    )
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
 
@@ -77,5 +81,5 @@ Encore
 ;
 
 let config = Encore.getWebpackConfig();
-config.externals.jquery = 'Jquery';
+config.externals.jquery = 'jQuery';
 module.exports = config;

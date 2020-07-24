@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface, \Serializable {
 
@@ -35,9 +38,14 @@ class User implements UserInterface, \Serializable {
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
 
     public function getId(): ?int {
         return $this->id;
@@ -57,7 +65,7 @@ class User implements UserInterface, \Serializable {
      * A visual identifier that represents this user.
      * @see UserInterface
      */
-    public function getUsername(): string {
+    public function getUsername(): ?string {
         return $this->username;
     }
 
@@ -128,6 +136,16 @@ class User implements UserInterface, \Serializable {
             $this->username,
             $this->password
         ] = unserialize($serialized);
+    }
+
+    public function isVerified(): bool {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self {
+        $this->isVerified = $isVerified;
+
+        return $this;
     }
 
 }

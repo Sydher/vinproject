@@ -1,6 +1,7 @@
 .PHONY: init-docker
 init-docker:
 	docker pull mysql:8.0.21
+	docker pull bytemark/smtp
 
 .PHONY: start-database
 start-database:
@@ -15,3 +16,7 @@ init-database:
 stop-database:
 	docker stop vinproject-mysql
 	docker rm vinproject-mysql
+
+.PHONY: start-smtp
+start-smtp:
+	docker run --name mysmtp -p 25:25 -d bytemark/smtp

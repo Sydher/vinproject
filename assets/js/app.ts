@@ -1,3 +1,8 @@
 import '../css/app.scss';
 
-// let $ = require("jquery");
+const $ = require("jquery");
+
+// Configuration toast Bootstrap
+$(document).ready(function () {
+    $(".toast").toast("show");
+});

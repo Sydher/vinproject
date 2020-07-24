@@ -1,0 +1,7 @@
+'You should agree to our terms': "Merci d'accepter les conditions d'utilisations"
+'Please enter a password': "Le mot de passe est obligatoire"
+'Please enter an email': "L'adresse mail est obligatoire"
+'Please enter an username': "Le nom d'utilisateur est obligatoire"
+'There is already an account with this email': "Un compte existe déjà avec cette adresse mail"
+'There is already an account with this username': "Un compte existe déjà avec ce nom d'utilisateur"
+'Your password should be at least {{ limit }} characters': "Le mot de passe doit contenir au moins {{ limit }} caractères"
