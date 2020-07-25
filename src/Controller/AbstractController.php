@@ -22,7 +22,7 @@ class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\Abst
         foreach ($errors as $error) {
             $messages[] = $error->getMessage();
         }
-        $this->addFlash('danger', implode("\n", $messages));
+        $this->addFlash('error', implode("\n", $messages));
     }
 
     /**
@@ -30,7 +30,7 @@ class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\Abst
      * @param string $message
      */
     protected function flashError(string $message): void {
-        $this->addFlash('danger', $message);
+        $this->addFlash('error', $message);
     }
 
     /**
@@ -39,6 +39,14 @@ class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\Abst
      */
     protected function flashWarning(string $message): void {
         $this->addFlash('warning', $message);
+    }
+
+    /**
+     * Créer un message flash d'attention.
+     * @param string $message
+     */
+    protected function flashInfo(string $message): void {
+        $this->addFlash('info', $message);
     }
 
 }

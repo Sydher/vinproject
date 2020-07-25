@@ -14,14 +14,24 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class SecurityController extends AbstractController {
 
+    /**
+     * @var EmailVerifier
+     */
     private $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier) {
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    public function __construct(EmailVerifier $emailVerifier, TranslatorInterface $translator) {
         $this->emailVerifier = $emailVerifier;
+        $this->translator = $translator;
     }
 
     /**
@@ -38,10 +48,15 @@ class SecurityController extends AbstractController {
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+        if ($error) {
+            $errMsg = $this->translator->trans($error->getMessageKey(), [], 'security');
+            $this->flashError($errMsg);
+        }
+
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => null]);
     }
 
     /**

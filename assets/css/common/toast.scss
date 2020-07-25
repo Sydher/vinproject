@@ -1,0 +1,37 @@
+@import "color";
+
+.flash_container {
+  z-index: 99;
+  position: relative;
+}
+
+.toast_align {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.toast {
+  min-width: 200px;
+}
+
+.toast_error {
+  .toast-header {
+    background-color: $red_error;
+    color: $white;
+  }
+}
+
+.toast_warning {
+  .toast-header {
+    background-color: $jaune;
+    color: $white;
+  }
+}
+
+.toast_info {
+  .toast-header {
+    background-color: $aqua;
+    color: $white;
+  }
+}

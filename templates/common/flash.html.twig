@@ -1,7 +1,10 @@
-{% for type, messages in app.session.flashbag.all() %}
-    {% for message in messages %}
-        <div class="alert alert-{{ type }}" role="alert">
-            {{ message | trans }}
-        </div>
-    {% endfor %}
-{% endfor %}
+<div aria-live="polite" aria-atomic="true" class="flash_container">
+    <div class="toast_align">
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                {% include 'common/toast.html.twig'
+                    with { 'type': type, 'message': message | trans } %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,40 @@
+{% if type == "error" %}
+    <div class="toast toast_error" data-autohide="false">
+        <div class="toast-header">
+            <i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;
+            <strong class="mr-auto">Erreur !</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            {{ message }}
+        </div>
+    </div>
+{% elseif type == "warning" %}
+    <div class="toast toast_warning" data-autohide="false">
+        <div class="toast-header">
+            <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <strong class="mr-auto">Attention !</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            {{ message }}
+        </div>
+    </div>
+{% else %}
+    <div class="toast toast_info" data-autohide="false">
+        <div class="toast-header">
+            <i class="fas fa-info-circle"></i>&nbsp;&nbsp;
+            <strong class="mr-auto">Information</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            {{ message }}
+        </div>
+    </div>
+{% endif %}

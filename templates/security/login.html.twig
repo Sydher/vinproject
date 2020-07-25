@@ -3,27 +3,6 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    {% if error %}
-        {#<div aria-live="polite" aria-atomic="true" style="position: relative;">
-            <div class="toast" style="position: absolute; top: 0; right: 0;" data-autohide="false">
-                <div class="toast-header">
-                    <i class="fas fa-exclamation-circle"></i>&nbsp;
-                    <strong class="mr-auto">Erreur lors de la connexion</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    {{ error.messageKey|trans(error.messageData, 'security') }}
-                </div>
-            </div>
-        </div>#}
-        {# TODO composant pour toast (idem pour flash ?) #}
-        <div class="alert alert-danger" role="alert">
-            {{ error.messageKey|trans(error.messageData, 'security') }}
-        </div>
-    {% endif %}
-
     {% if app.user %}
         <div class="mb-3">
             Bienvenue {{ app.user.username }} !
@@ -35,14 +14,50 @@
                 <h5 class="card-title">Se connecter</h5>
                 <form method="post">
                     <div class="form-group">
-                        <label for="inputEmail">Email</label>
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
-                               class="form-control" required autofocus>
+                        {% if error and error.messageKey == "Email could not be found." %}
+                            <label for="inputEmail">
+                                Email
+                                <span class="invalid-feedback d-block">
+                                    <span class="d-block">
+                                        <span class="form-error-icon badge badge-danger text-uppercase">
+                                            Erreur
+                                        </span>
+                                        <span class="form-error-message">
+                                            {{ error.messageKey | trans(error.messageData, 'security') }}
+                                        </span>
+                                    </span>
+                                </span>
+                            </label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                                   class="form-control is-invalid" required autofocus>
+                        {% else %}
+                            <label for="inputEmail">Email</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                                   class="form-control" required autofocus>
+                        {% endif %}
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword">Mot de passe</label>
-                        <input type="password" name="password" id="inputPassword"
-                               class="form-control" required>
+                        {% if error and error.messageKey == "Invalid credentials." %}
+                            <label for="inputPassword">
+                                Mot de passe
+                                <span class="invalid-feedback d-block">
+                                    <span class="d-block">
+                                        <span class="form-error-icon badge badge-danger text-uppercase">
+                                            Erreur
+                                        </span>
+                                        <span class="form-error-message">
+                                            {{ error.messageKey | trans(error.messageData, 'security') }}
+                                        </span>
+                                    </span>
+                                </span>
+                            </label>
+                            <input type="password" name="password" id="inputPassword"
+                                   class="form-control is-invalid" required>
+                        {% else %}
+                            <label for="inputPassword">Mot de passe</label>
+                            <input type="password" name="password" id="inputPassword"
+                                   class="form-control" required>
+                        {% endif %}
                     </div>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
