@@ -6,10 +6,8 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use App\Security\LoginFormAuthenticator;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
@@ -99,14 +97,7 @@ class SecurityController extends AbstractController {
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('no-reply@vinproject.fr', 'Vin Project'))// TODO nom projet
-                    ->to($user->getEmail())
-                    ->subject('Confirmer votre adresse e-mail')
-                    ->htmlTemplate('security/confirmation_email.html.twig')
-            );
-            // do anything else you need here, like send an email
+            $this->emailVerifier->sendEmailConfirmationFR($user);
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
@@ -140,22 +131,6 @@ class SecurityController extends AbstractController {
 
         $this->flashSuccess('Adresse email vérifiée !');
         return $this->redirectToRoute('home');
-    }
-
-    /**
-     * @Route("/user/is-verify", name="user_is_verify")
-     * @param Request $request
-     * @return Response
-     */
-    public function userIsVerify(Request $request): Response {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
-        if ($request->getUser() != null && $request->getUser()->isVerified()) {
-            return $this->redirectToRoute('home');
-        } else {
-            $this->flashWarning("Please verify your email address");
-            return $this->redirectToRoute('home');
-        }
     }
 
 }

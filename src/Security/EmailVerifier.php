@@ -2,10 +2,12 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
@@ -20,6 +22,20 @@ class EmailVerifier {
         $this->verifyEmailHelper = $helper;
         $this->mailer = $mailer;
         $this->entityManager = $manager;
+    }
+
+    /**
+     * Envoie un mail de validation (avec un lien généré).
+     * @param User $user
+     */
+    public function sendEmailConfirmationFR(User $user): void {
+        $this->sendEmailConfirmation('verify_email', $user,
+            (new TemplatedEmail())
+                ->from(new Address('no-reply@vinproject.fr', 'Vin Project'))// TODO nom projet
+                ->to($user->getEmail())
+                ->subject('Confirmer votre adresse e-mail')
+                ->htmlTemplate('security/confirmation_email.html.twig')
+        );
     }
 
     public function sendEmailConfirmation(string $verifyEmailRouteName, UserInterface $user, TemplatedEmail $email): void {
