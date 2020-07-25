@@ -42,6 +42,14 @@ class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\Abst
     }
 
     /**
+     * Créer un message flash de succès.
+     * @param string $message
+     */
+    protected function flashSuccess(string $message): void {
+        $this->addFlash('success', $message);
+    }
+
+    /**
      * Créer un message flash d'attention.
      * @param string $message
      */

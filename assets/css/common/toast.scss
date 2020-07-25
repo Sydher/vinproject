@@ -29,6 +29,13 @@
   }
 }
 
+.toast_success {
+  .toast-header {
+    background-color: $vert;
+    color: $white;
+  }
+}
+
 .toast_info {
   .toast-header {
     background-color: $aqua;

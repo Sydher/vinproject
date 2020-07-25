@@ -1,11 +1,13 @@
-<h1>Hi! Please confirm your email!</h1>
+<h1>Bonjour !</h1>
 
+<p>Bienvenue sur VinProject !</p>
 <p>
-    Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl|raw }}">Confirm my Email</a>.
-    This link will expire in {{ expiresAt|date('g') }} hour(s).
+    Merci de valider votre adresse mail via ce lien :
+    <a href="{{ signedUrl|raw }}">confirmer mon adresse</a>.<br>
+    Cela vous permettra de profiter de toutes les fonctionnalités du site !<br>
+    Le lien expire dans {{ expiresAt|date('g') }} heures.
 </p>
-
 <p>
-    Cheers!
+    Bonne journée,<br>
+    L'équipe de VinProject
 </p>

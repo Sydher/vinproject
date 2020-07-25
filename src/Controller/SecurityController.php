@@ -138,7 +138,7 @@ class SecurityController extends AbstractController {
             return $this->redirectToRoute('register');
         }
 
-        $this->addFlash('success', 'Adresse email vérifiée !');
+        $this->flashSuccess('Adresse email vérifiée !');
         return $this->redirectToRoute('home');
     }
 

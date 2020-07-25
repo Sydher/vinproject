@@ -1,22 +1,17 @@
-.PHONY: init-docker
-init-docker:
-	docker pull mysql:8.0.21
-	docker pull bytemark/smtp
+# Commandes relatives à docker
+.PHONY: start-docker
+start-docker:
+	cd docker && docker-compose up -d
 
-.PHONY: start-database
-start-database:
-	docker run --name vinproject-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=vinproject -p 3306:3306 -d mysql:8.0.21
+.PHONY: stop-docker
+stop-docker:
+	docker stop vinproject_mysql
+	docker stop vinproject_maildev
+	docker rm vinproject_mysql
+	docker rm vinproject_maildev
 
+# Commandes relatives à la base de données
 .PHONY: init-database
 init-database:
-	php bin/console doctrine:migrations:migrate --append
+	php bin/console doctrine:migrations:migrate
 	php bin/console doctrine:fixtures:load --append
-
-.PHONY: stop-database
-stop-database:
-	docker stop vinproject-mysql
-	docker rm vinproject-mysql
-
-.PHONY: start-smtp
-start-smtp:
-	docker run --name mysmtp -p 25:25 -d bytemark/smtp

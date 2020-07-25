@@ -1,0 +1,21 @@
+version: '3'
+services:
+  vinproject_mysql:
+    image: mysql:8.0.21
+    container_name: vinproject_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vinproject
+    ports:
+      - "3306:3306"
+
+  vinproject_maildev:
+    image: maildev/maildev
+    container_name: vinproject_maildev
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vinproject
+    ports:
+      - "1080:80"
+      - "25:25"
