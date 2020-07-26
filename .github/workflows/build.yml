@@ -44,3 +44,10 @@ jobs:
     # TODO mise en place BD
     - name: Lancement des TU
       run: ./bin/phpunit
+
+    # ----- Sonar -----
+    - name: Analyse sonar
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
