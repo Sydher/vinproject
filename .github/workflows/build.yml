@@ -1,4 +1,4 @@
-name: Main
+name: build
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build_job:
     runs-on: ubuntu-latest
     steps:
     # ----- Configuration environnement -----
