@@ -15,3 +15,8 @@ stop-docker:
 init-database:
 	php bin/console doctrine:migrations:migrate
 	php bin/console doctrine:fixtures:load --append
+
+# Commandes relatives aux tests
+.PHONY: test
+test:
+	./bin/phpunit
