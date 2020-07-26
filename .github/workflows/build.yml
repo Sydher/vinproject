@@ -45,6 +45,12 @@ jobs:
     - name: Lancement des TU
       run: ./bin/phpunit
 
+    - name: Fix chemin couverture de code
+      working-directory: ./var/test/
+      run: |
+        sed -i 's/\/home\/runner\/work\/vinproject\/vinproject\//\/github\/workspace\//g' phpunit.coverage.xml
+        sed -i 's/\/home\/runner\/work\/vinproject\/vinproject\//\/github\/workspace\//g' phpunit.report.xml
+
     # ----- Sonar -----
     - name: Analyse sonar
       uses: sonarsource/sonarcloud-github-action@master
