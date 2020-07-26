@@ -30,4 +30,10 @@
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
+
+    <logging>
+        <log type="coverage-html" target="var/test/html" />
+        <log type="coverage-clover" target="var/test/phpunit.coverage.xml" />
+        <log type="junit" target="var/test/phpunit.report.xml" />
+    </logging>
 </phpunit>
