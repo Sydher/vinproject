@@ -10,8 +10,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    # ----- Configuration environnement -----
+    - name: Téléchargement des sources
       uses: actions/checkout@v2
 
-    - name: Run a one-line script
-      run: echo Hello, world!
+    - name: Configuration de PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo
+      env:
+        update: true
+
+    # ----- Composer -----
+    - name: Validation composer
+      run: composer validate
+
+    - name: Récupération du cache composer
+      id: composer-cache
+      run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+    - name: Mise en cache des dépendances composer
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - name: Installation composer
+      run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+
+    # ----- Symfony -----
+    # TODO mise en place BD
+    - name: Lancement des TU
+      run: ./bin/phpunit
