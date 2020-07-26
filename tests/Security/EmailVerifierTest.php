@@ -11,7 +11,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Model\VerifyEmailSignatureComponents;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class EmailVerifierAbstractTest extends AbstractTest {
+class EmailVerifierTest extends AbstractTest {
 
     /* ***** Mocks ***** */
 
