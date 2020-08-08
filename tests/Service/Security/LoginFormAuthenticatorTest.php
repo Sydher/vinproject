@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Security;
+namespace App\Tests\Service\Security;
 
 use App\Repository\UserRepository;
-use App\Security\LoginFormAuthenticator;
+use App\Service\Security\LoginFormAuthenticator;
 use App\Tests\AbstractTest;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\ParameterBag;

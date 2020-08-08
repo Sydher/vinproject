@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\User;
 
+use App\Controller\AbstractController;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Security\EmailVerifier;
-use App\Security\LoginFormAuthenticator;
+use App\Service\Security\EmailVerifier;
+use App\Service\Security\LoginFormAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
@@ -17,14 +19,10 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class SecurityController extends AbstractController {
 
-    /**
-     * @var EmailVerifier
-     */
+    /** @var EmailVerifier */
     private $emailVerifier;
 
-    /**
-     * @var TranslatorInterface
-     */
+    /** @var TranslatorInterface */
     private $translator;
 
     public function __construct(EmailVerifier $emailVerifier, TranslatorInterface $translator) {
@@ -33,8 +31,8 @@ class SecurityController extends AbstractController {
     }
 
     /**
-     * @Route("connexion")
-     * @Route("se-connecter")
+     * @Route("/connexion")
+     * @Route("/se-connecter")
      * @Route("/login", name="login")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
@@ -58,8 +56,8 @@ class SecurityController extends AbstractController {
     }
 
     /**
-     * @Route("deconnexion")
-     * @Route("se-deconnecter")
+     * @Route("/deconnexion")
+     * @Route("/se-deconnecter")
      * @Route("/logout", name="logout")
      */
     public function logout() {
@@ -67,13 +65,14 @@ class SecurityController extends AbstractController {
     }
 
     /**
-     * @Route("inscription")
-     * @Route("/register", name="register")
+     * @Route("/register")
+     * @Route("/inscription", name="register")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param LoginFormAuthenticator $authenticator
      * @return Response
+     * @throws TransportExceptionInterface
      */
     public function register(Request $request,
                              UserPasswordEncoderInterface $passwordEncoder,
@@ -113,7 +112,7 @@ class SecurityController extends AbstractController {
     }
 
     /**
-     * @Route("/user/verify/email", name="verify_email")
+     * @Route("/utilisateur/verification/email", name="verify_email")
      * @param Request $request
      * @return Response
      */

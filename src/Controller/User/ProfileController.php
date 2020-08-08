@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\User;
 
+use App\Controller\AbstractController;
 use App\Entity\User;
-use App\Form\EditPasswordFormType;
 use App\Form\EditProfileFormType;
-use App\Security\EmailVerifier;
-use App\Security\LoginFormAuthenticator;
+use App\Service\Security\EmailVerifier;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserController extends AbstractController {
+class ProfileController extends AbstractController {
 
     /** @var EmailVerifier */
     private $emailVerifier;
@@ -26,6 +25,7 @@ class UserController extends AbstractController {
      * @Route("/user/edit/profile", name="edit_profile")
      * @param Request $request
      * @return Response
+     * @throws TransportExceptionInterface
      */
     public function editProfile(Request $request): Response {
         if (!$this->getUser()) {
@@ -64,52 +64,6 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/user/edit/password", name="edit_password")
-     * @param Request $request
-     * @param LoginFormAuthenticator $loginFormAuthenticator
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @return Response
-     */
-    public function editPassword(Request $request,
-                                 LoginFormAuthenticator $loginFormAuthenticator,
-                                 UserPasswordEncoderInterface $passwordEncoder): Response {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('login');
-        }
-
-        /** @var User $user */
-        $user = $this->getUser();
-        $form = $this->createForm(EditPasswordFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $credentials = ["password" => $form->get('oldPassword')->getData()];
-            if ($loginFormAuthenticator->checkCredentials($credentials, $user)) {
-                // Encode the plain password
-                $user->setPassword(
-                    $passwordEncoder->encodePassword(
-                        $user,
-                        $form->get('plainPassword')->getData()
-                    )
-                );
-
-                $entityManager->flush();
-                $this->flashSuccess("Password updated");
-            } else {
-                $this->flashError("Wrong old password");
-            }
-
-            $entityManager->refresh($user);
-        }
-
-        return $this->render('user/edit_password.html.twig', [
-            'editPasswordForm' => $form->createView(),
-        ]);
-    }
-
-    /**
      * Vérifie si l'adresse mail a été mise à jour.
      * @param ObjectManager $entityManager
      * @param User $user
@@ -126,6 +80,7 @@ class UserController extends AbstractController {
      * Envoie un email de confirmation.
      * @param ObjectManager $entityManager
      * @param User $user
+     * @throws TransportExceptionInterface
      */
     private function validateEmail(ObjectManager $entityManager, User $user) {
         $entityManager->refresh($user);

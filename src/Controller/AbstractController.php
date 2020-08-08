@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use Symfony\Component\Form\FormInterface;
+use App\Entity\User;
 
 /**
  * Class AbstractController
  * @package App\Controller
- * @method App\Entity\User|null getUser()
+ * @method User|null getUser()
  */
-class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController {
+abstract class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController {
 
     /**
      * Affiche la liste de erreurs sous forme de message flash.

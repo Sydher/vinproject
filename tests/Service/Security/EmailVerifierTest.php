@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Security;
+namespace App\Tests\Service\Security;
 
-use App\Security\EmailVerifier;
+use App\Service\Security\EmailVerifier;
 use App\Tests\AbstractTest;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
