@@ -40,7 +40,7 @@ class EmailVerifier {
                 ->from(new Address('no-reply@vinproject.fr', 'Vin Project'))// TODO nom projet
                 ->to($user->getEmail())
                 ->subject('Confirmer votre adresse e-mail')
-                ->htmlTemplate('security/confirmation_email.html.twig')
+                ->htmlTemplate('user/confirmation_email.html.twig')
         );
     }
 

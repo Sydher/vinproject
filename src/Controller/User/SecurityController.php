@@ -52,7 +52,7 @@ class SecurityController extends AbstractController {
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => null]);
+        return $this->render('user/login.html.twig', ['last_username' => $lastUsername, 'error' => null]);
     }
 
     /**
@@ -106,7 +106,7 @@ class SecurityController extends AbstractController {
             );
         }
 
-        return $this->render('security/register.html.twig', [
+        return $this->render('user/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
