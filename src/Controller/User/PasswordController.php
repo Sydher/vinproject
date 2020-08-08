@@ -4,7 +4,7 @@ namespace App\Controller\User;
 
 use App\Controller\AbstractController;
 use App\Entity\User;
-use App\Form\EditPasswordFormType;
+use App\Form\User\EditPasswordFormType;
 use App\Service\Security\LoginFormAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

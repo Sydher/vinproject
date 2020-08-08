@@ -4,7 +4,7 @@ namespace App\Controller\User;
 
 use App\Controller\AbstractController;
 use App\Entity\User;
-use App\Form\EditProfileFormType;
+use App\Form\User\EditProfileFormType;
 use App\Service\Security\EmailVerifier;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;

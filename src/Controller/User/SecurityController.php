@@ -4,7 +4,7 @@ namespace App\Controller\User;
 
 use App\Controller\AbstractController;
 use App\Entity\User;
-use App\Form\RegistrationFormType;
+use App\Form\User\RegistrationFormType;
 use App\Service\Security\EmailVerifier;
 use App\Service\Security\LoginFormAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
