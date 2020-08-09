@@ -61,13 +61,14 @@
                     </div>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                    <button class="btn btn-lg btn-primary" type="submit">
+                    <button class="btn btn-primary" type="submit">
                         Connexion
                     </button>
                 </form>
             </div>
             <div class="card-footer text-center">
-                Vous n'avez pas de compte ? Inscrivez-vous <a href="{{ path('register') }}">ici</a> !
+                Vous n'avez pas de compte ? Inscrivez-vous <a href="{{ path('register') }}">ici</a> !<br>
+                <small><a href="{{ path('password_reset_forgot') }}">Mot de passe oublié</a></small>
             </div>
         </div>
     {% endif %}

@@ -3,6 +3,7 @@
 'Password': "Mot de passe"
 'Repeat Password': "Entrez le mot de passe à nouveau"
 'Old password': "Ancien mot de passe"
+'New password': "Nouveau mot de passe"
 'Agree terms': "J'accepte les conditions d'utilisations"
 'Please verify your email address': "Merci de vérifier votre adresse mail"
 'Change email need new validation.': "Si vous changez votre adresse mail, il faudra de nouveau valider cette dernière."
@@ -10,3 +11,4 @@
 'Wrong old password': "L'ancien mot de passe est invalide !"
 'Updated': "Les modifications ont étaient réalisées avec succès !"
 'Email verified': "Adresse email vérifiée !"
+'forgot_password_help': "Entrez votre email et nous vous enverrons un lien pour réinitialiser votre mot de passe."
