@@ -34,7 +34,7 @@ class UserFixtures extends Fixture {
         $user2->setUsername('michel');
         $user2->setEmail('michel@yopmail.com');
         $user2->setPassword($this->encoder->encodePassword($user2, 'michel'));
-        $manager->persist($user1);
+        $manager->persist($user2);
 
         $manager->flush();
     }
