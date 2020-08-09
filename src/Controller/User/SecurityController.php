@@ -112,7 +112,7 @@ class SecurityController extends AbstractController {
     }
 
     /**
-     * @Route("/utilisateur/verification/email", name="verify_email")
+     * @Route("/utilisateur/verification/email", name="user_verify_email")
      * @param Request $request
      * @return Response
      */
@@ -123,7 +123,7 @@ class SecurityController extends AbstractController {
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $exception->getReason());
+            $this->addFlash('user_verify_email_error', $exception->getReason());
 
             return $this->redirectToRoute('register');
         }

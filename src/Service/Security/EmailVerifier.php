@@ -35,12 +35,12 @@ class EmailVerifier {
      * @throws TransportExceptionInterface
      */
     public function sendEmailConfirmationFR(User $user): void {
-        $this->sendEmailConfirmation('verify_email', $user,
+        $this->sendEmailConfirmation('user_verify_email', $user,
             (new TemplatedEmail())
                 ->from(new Address('no-reply@vinproject.fr', 'Vin Project'))// TODO nom projet
                 ->to($user->getEmail())
                 ->subject('Confirmer votre adresse e-mail')
-                ->htmlTemplate('user/confirmation_email.html.twig')
+                ->htmlTemplate('email/user_verify_email.html.twig')
         );
     }
 

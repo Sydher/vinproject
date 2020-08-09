@@ -5,6 +5,7 @@ namespace App\Controller\User;
 use App\Controller\AbstractController;
 use App\Entity\User;
 use App\Form\User\DeleteProfileFormType;
+use App\Form\User\EditPasswordFormType;
 use App\Form\User\EditProfileFormType;
 use App\Service\Security\EmailVerifier;
 use App\Service\Security\LoginFormAuthenticator;
@@ -17,8 +18,9 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class ProfileController extends AbstractController {
+class UserController extends AbstractController {
 
     /** @var EmailVerifier */
     private $emailVerifier;
@@ -28,8 +30,7 @@ class ProfileController extends AbstractController {
     }
 
     /**
-     * @Route("user/profile/edit")
-     * @Route("/utilisateur/profile/modifier", name="edit_profile")
+     * @Route("/utilisateur/profile/modifier", name="user_edit_profile")
      * @param Request $request
      * @return Response
      * @throws TransportExceptionInterface
@@ -60,6 +61,7 @@ class ProfileController extends AbstractController {
                 }
 
                 $this->flashSuccess("Updated");
+                return $this->redirectToRoute("home");
             }
 
             $entityManager->refresh($user);
@@ -67,12 +69,60 @@ class ProfileController extends AbstractController {
 
         return $this->render('user/edit_profile.html.twig', [
             'editProfileForm' => $form->createView(),
+            'menu' => 'session'
         ]);
     }
 
     /**
-     * @Route("user/profile/delete")
-     * @Route("/utilisateur/profile/supprimer", name="delete_profile")
+     * @Route("/utilisateur/motdepasse/modifier", name="user_edit_password")
+     * @param Request $request
+     * @param LoginFormAuthenticator $loginFormAuthenticator
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
+     */
+    public function editPassword(Request $request,
+                                 LoginFormAuthenticator $loginFormAuthenticator,
+                                 UserPasswordEncoderInterface $passwordEncoder): Response {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
+
+        /** @var User $user */
+        $user = $this->getUser();
+        $form = $this->createForm(EditPasswordFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $credentials = ["password" => $form->get('oldPassword')->getData()];
+            if ($loginFormAuthenticator->checkCredentials($credentials, $user)) {
+                // Encode the plain password
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+
+                $entityManager->flush();
+                $this->flashSuccess("Password updated");
+                return $this->redirectToRoute("home");
+            } else {
+                $this->flashError("Wrong old password");
+            }
+
+            $entityManager->refresh($user);
+        }
+
+        return $this->render('user/edit_password.html.twig', [
+            'editPasswordForm' => $form->createView(),
+            'menu' => 'session'
+        ]);
+    }
+
+    /**
+     * @Route("/utilisateur/profile/supprimer", name="user_delete_profile")
      * @param Request $request
      * @param LoginFormAuthenticator $loginFormAuthenticator
      * @param MailerInterface $mailer
@@ -110,6 +160,7 @@ class ProfileController extends AbstractController {
 
         return $this->render('user/delete_profile.html.twig', [
             'deleteProfileForm' => $form->createView(),
+            'menu' => 'session'
         ]);
     }
 
@@ -144,7 +195,7 @@ class ProfileController extends AbstractController {
             ->from(new Address('noreply@vinproject.fr', 'VinProject'))// TODO nom
             ->to($email)
             ->subject('Compte Supprimer')
-            ->htmlTemplate('user/delete_profile_email.html.twig');
+            ->htmlTemplate('email/user_delete_profile_email.twig');
         $mailer->send($email);
     }
 
