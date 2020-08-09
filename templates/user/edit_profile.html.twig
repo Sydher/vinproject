@@ -10,14 +10,44 @@
             {{ form_row(editProfileForm.email) }}
             {{ form_row(editProfileForm.username) }}
 
-            <button class="btn btn-lg btn-primary" type="submit">
+            <button class="btn btn-primary" type="submit">
                 Sauvegarder
             </button>
             {{ form_end(editProfileForm) }}
         </div>
         <div class="card-footer text-center">
-            TODO suppression compte
-            Vous avez déjà un compte ? Connectez-vous <a href="{{ path('login') }}">ici</a> !
+            <small>
+                <a data-toggle="modal" data-target="#deleteProfileModal" href="#">
+                    Supprimer mon compte
+                </a>
+            </small>
+        </div>
+    </div>
+
+    <!-- Modal Suppresion compte -->
+    <div class="modal fade" id="deleteProfileModal" tabindex="-1"
+         aria-labelledby="deleteProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteProfileModalLabel">Supprimer le compte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Etes-vous sûr de vouloir supprimer votre compte ?<br>
+                    Cette action est définitive !
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Ne PAS supprimer mon compte
+                    </button>
+                    <a type="button" class="btn btn-danger" href="{{ path('delete_profile') }}">
+                        Supprimer mon compte
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

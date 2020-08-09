@@ -6,3 +6,4 @@
 'There is already an account with this username': "Un compte existe déjà avec ce nom d'utilisateur"
 'Your password should be at least {{ limit }} characters': "Le mot de passe doit contenir au moins {{ limit }} caractères"
 'The password fields must match.': "Les mots de passe doivent êtres identiques"
+'You should agree to delete your account': "Vous devez cocher cette case pour supprimer votre compte"

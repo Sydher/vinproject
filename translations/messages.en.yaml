@@ -12,3 +12,5 @@
 'Updated': "Updated !"
 'Email verified': "Email verified !"
 'forgot_password_help': "Enter your email address and we we will send you a link to reset your password."
+'AccountDeleted': "Account succesfully deleted"
+'Invalid credentials.': 'The password you entered was invalid!'
