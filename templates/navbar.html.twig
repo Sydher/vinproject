@@ -51,9 +51,15 @@
                         <a class="dropdown-item" href="{{ path('user_edit_password') }}">
                             Modifier mon mot de passe
                         </a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item link_admin" href="{{ path('admin_home') }}">
+                                Espace d'administration
+                            </a>
+                        {% endif %}
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ path('logout') }}">
-                            Déconnexion<!-- TODO couleur -->
+                        <a class="dropdown-item link_logout" href="{{ path('logout') }}">
+                            Déconnexion
                         </a>
                     </div>
                 </li>
