@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès non autorisé{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">
+                <img src="{{ asset('build/images/bottle.svg') }}" alt="bouteille" class="h1_bottle">
+                Accès non autorisé !
+            </h1>
+            <p class="card-text">
+                Vous n'êtes pas autorisé à accéder à cette ressource !<br>
+                <a type="button" class="btn btn-secondary" href="{{ path('home') }}">
+                    Aller à l'accueil
+                </a>
+                <a type="button" class="btn btn-primary" href="{{ path('login') }}">
+                    Se connecter
+                </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

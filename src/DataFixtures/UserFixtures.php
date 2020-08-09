@@ -13,9 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserFixtures extends Fixture {
 
-    /**
-     * @var UserPasswordEncoderInterface
-     */
+    /** @var UserPasswordEncoderInterface */
     private $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder) {
@@ -23,18 +21,27 @@ class UserFixtures extends Fixture {
     }
 
     public function load(ObjectManager $manager) {
-        $user1 = new User();
-        $user1->setUsername('hugotest');
-        $user1->setEmail('hugotest@yopmail.com');
-        $user1->setPassword($this->encoder->encodePassword($user1, 'test'));
-        $user1->setIsVerified(true);
-        $manager->persist($user1);
+        $superAdmin = new User();
+        $superAdmin->setUsername('hugotest');
+        $superAdmin->setEmail('hugotest@yopmail.com');
+        $superAdmin->setPassword($this->encoder->encodePassword($superAdmin, 'test'));
+        $superAdmin->setIsVerified(true);
+        $superAdmin->setRoles(["ROLE_SUPER_ADMIN"]);
+        $manager->persist($superAdmin);
 
-        $user2 = new User();
-        $user2->setUsername('michel');
-        $user2->setEmail('michel@yopmail.com');
-        $user2->setPassword($this->encoder->encodePassword($user2, 'michel'));
-        $manager->persist($user2);
+        $simpleAdmin = new User();
+        $simpleAdmin->setUsername('thierry');
+        $simpleAdmin->setEmail('thierry@yopmail.com');
+        $simpleAdmin->setPassword($this->encoder->encodePassword($simpleAdmin, 'foot'));
+        $simpleAdmin->setIsVerified(true);
+        $simpleAdmin->setRoles(["ROLE_ADMIN"]);
+        $manager->persist($simpleAdmin);
+
+        $simpleUser = new User();
+        $simpleUser->setUsername('michel');
+        $simpleUser->setEmail('michel@yopmail.com');
+        $simpleUser->setPassword($this->encoder->encodePassword($simpleUser, 'michelmichel'));
+        $manager->persist($simpleUser);
 
         $manager->flush();
     }

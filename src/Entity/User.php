@@ -96,6 +96,15 @@ class User implements UserInterface, \Serializable {
         return $this;
     }
 
+    public function isAdmin(): bool {
+        return in_array("ROLE_ADMIN", $this->getRoles())
+            || $this->isSuperAdmin();
+    }
+
+    public function isSuperAdmin(): bool {
+        return in_array("ROLE_SUPER_ADMIN", $this->getRoles());
+    }
+
     /**
      * @see UserInterface
      */

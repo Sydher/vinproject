@@ -16,3 +16,4 @@
 'Agree delete' : "Je veux supprimer mon compte"
 'AccountDeleted': "Votre compte a bien été supprimé"
 'Invalid credentials.': 'Le mot de passe est incorrect !'
+'Roles': "Droits"

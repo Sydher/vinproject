@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark navbar_bg">
+    <a class="navbar-brand" href="{{ path('home') }}">
+        <img src="{{ asset('build/images/wine.svg') }}" width="30" height="30"
+             class="d-inline-block align-top" alt="logo" loading="lazy">
+        Espace d'administration
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {{ menu_active('accueil') }}">
+                <a class="nav-link" href="{{ path('admin_home') }}">Accueil</a>
+            </li>
+            <li class="nav-item {{ menu_active('utilisateurs') }}">
+                <a class="nav-link" href="{{ path('admin_user_list') }}">Utilisateurs</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navAdminUsersDD" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Todo
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navAdminUsersDD">
+                    <a class="dropdown-item" href="#">Rouge</a>
+                    <a class="dropdown-item" href="#">Blanc</a>
+                    <a class="dropdown-item" href="#">Rosé</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Tous les Vin</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('home') }}">
+                    <i class="fas fa-chevron-left"></i>
+                    Retour au site
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
