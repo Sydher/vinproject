@@ -17,3 +17,10 @@
 'AccountDeleted': "Votre compte a bien été supprimé"
 'Invalid credentials.': 'Le mot de passe est incorrect !'
 'Roles': "Droits"
+'Title': "Titre"
+'Tags': "Tags"
+'Content': "Contenu"
+'Created': "Création réussi !"
+'PostCreated': "Création de l'article réussi !"
+'Name': "Nom"
+'TagsHelper': "Les tags doivent êtres séparés par une virgule"

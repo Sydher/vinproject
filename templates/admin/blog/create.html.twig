@@ -1,0 +1,25 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Créer un article{% endblock %}
+
+{% block body %}
+    <div class="card mx-auto blog_form">
+        <div class="card-body">
+            <h5 class="card-title">Créer un article</h5>
+            {{ form_start(createForm) }}
+            {{ form_row(createForm.title) }}
+            {{ form_row(createForm.tags) }}
+            {{ form_row(createForm.content) }}
+
+            <div class="text-center">
+                <a class="btn btn-light" href="{{ path('admin_blog_list') }}">
+                    Annuler
+                </a>
+                <button class="btn btn-success" type="submit">
+                    Créer
+                </button>
+            </div>
+            {{ form_end(createForm) }}
+        </div>
+    </div>
+{% endblock %}

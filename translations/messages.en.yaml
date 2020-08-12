@@ -15,3 +15,10 @@
 'AccountDeleted': "Account succesfully deleted"
 'Invalid credentials.': 'The password you entered was invalid!'
 'Roles': "Roles"
+'Title': "Title"
+'Tags': "Tags"
+'Content': "Content"
+'Created': "Created !"
+'PostCreated': "Post succesfully created !"
+'Name': "Name"
+'TagsHelper': "Tags need to be seperated by a coma"

@@ -1,0 +1,58 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Gestion du blog{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">
+                <img src="{{ asset('build/images/bottle.svg') }}" alt="bouteille" class="h1_bottle">
+                Gestion des articles
+            </h1>
+            <div class="text-right mb-3">
+                <a type="button" class="btn btn-success" href="{{ path('admin_blog_add_post') }}">
+                    <i class="fas fa-plus"></i>
+                    Créer un article
+                </a>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">{{ "Title" | trans }}</th>
+                        <th scope="col">{{ "Author" | trans }}</th>
+                        <th scope="col">Créé le</th>
+                        <th scope="col">Dernière modification</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in allPosts %}
+                        <tr>
+                            <td>{{ post.title }}</td>{#TODO lien vers consult#}
+                            <td>{{ post.author.username }}</td>
+                            <td>{{ post.createdAt | format_datetime() }}</td>
+                            <td>{{ post.updatedAt | format_datetime() }}</td>
+                            <td>
+                                <a type="button" class="btn btn-primary"
+                                   href="{{ path('admin_user_edit', {id: post.id}) }}">
+                                    <i class="fas fa-cog"></i>
+                                    Modifier
+                                </a>
+                                <a type="button" class="btn btn-danger" href="#">
+                                    <i class="fas fa-trash-alt"></i>
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-right">
+                <a type="button" class="btn btn-success" href="{{ path('admin_blog_add_post') }}">
+                    <i class="fas fa-plus"></i>
+                    Créer un article
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
