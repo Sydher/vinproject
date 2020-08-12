@@ -20,5 +20,7 @@
 'Content': "Content"
 'Created': "Created !"
 'PostCreated': "Post succesfully created !"
+'PostDeleted': "Post succesfully deleted !"
 'Name': "Name"
 'TagsHelper': "Tags need to be seperated by a coma"
+'Author': "Author"

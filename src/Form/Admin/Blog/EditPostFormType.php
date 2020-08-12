@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class CreatePostFormType extends AbstractType {
+class EditPostFormType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
@@ -40,14 +40,14 @@ class CreatePostFormType extends AbstractType {
                 ],
                 "help" => "TagsHelper"
             ])
-            ->add('content', TextareaType::class, [
+            ->add('content', TextareaType::class, [ // TODO WYSWYG ?
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a title',
                     ]),
                     new Length([
                         'min' => 3,
-                        'max' => 50
+                        'max' => 255 // TODO taille plus grande ?
                     ])
                 ],
                 'attr' => array('rows' => '10')
