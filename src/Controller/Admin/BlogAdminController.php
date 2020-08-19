@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\AbstractController;
 use App\Entity\Post;
 use App\Form\Admin\Blog\EditPostFormType;
+use App\Form\ConfirmDeleteFormType;
 use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,16 +86,28 @@ class BlogAdminController extends AbstractController {
 
     /**
      * @Route("/admin/blog/supprimer/{id}", name="admin_blog_delete_post")
+     * @param Request $request
      * @param string $id identifiant de l'article à supprimer
      * @return Response
      */
-    public function delete(string $id): Response {
+    public function delete(Request $request, string $id): Response {
         $post = $this->postRepository->find($id);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($post);
-        $entityManager->flush();
-        $this->flashInfo("PostDeleted");
-        return $this->redirectToRoute('admin_blog_list');
+        $form = $this->createForm(ConfirmDeleteFormType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($post);
+            $entityManager->flush();
+            $this->flashInfo("PostDeleted");
+            return $this->redirectToRoute('admin_blog_list');
+        }
+
+        return $this->render('admin/blog/delete.html.twig', [
+            'form' => $form->createView(),
+            'post' => $post,
+            'menu' => 'blog'
+        ]);
     }
 
 }

@@ -7,3 +7,4 @@
 'Your password should be at least {{ limit }} characters': "Le mot de passe doit contenir au moins {{ limit }} caractères"
 'The password fields must match.': "Les mots de passe doivent êtres identiques"
 'You should agree to delete your account': "Vous devez cocher cette case pour supprimer votre compte"
+'You should be sure you want to delete': "Merci de cocher la case pour supprimer"
