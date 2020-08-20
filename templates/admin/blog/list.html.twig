@@ -9,12 +9,15 @@
                 <img src="{{ asset('build/images/bottle.svg') }}" alt="bouteille" class="h1_bottle">
                 Gestion des articles
             </h1>
+            <hr>
+
             <div class="text-right mb-3">
                 <a type="button" class="btn btn-success" href="{{ path('admin_blog_add_post') }}">
                     <i class="fas fa-plus"></i>
                     Créer un article
                 </a>
             </div>
+
             <table class="table">
                 <thead>
                     <tr>
@@ -48,6 +51,11 @@
                     {% endfor %}
                 </tbody>
             </table>
+
+            <div class="pagination">
+                {{ knp_pagination_render(allPosts) }}
+            </div>
+
             <div class="text-right">
                 <a type="button" class="btn btn-success" href="{{ path('admin_blog_add_post') }}">
                     <i class="fas fa-plus"></i>

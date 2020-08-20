@@ -23,7 +23,7 @@ class PostRepository extends ServiceEntityRepository {
      * @return Query
      */
     public function findAllQuery(): Query {
-        return $this->createQueryBuilder('c')->getQuery();
+        return $this->createQueryBuilder('p')->getQuery();
     }
 
 }

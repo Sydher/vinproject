@@ -7,6 +7,7 @@ use App\Entity\Post;
 use App\Form\Admin\Blog\EditPostFormType;
 use App\Form\ConfirmDeleteFormType;
 use App\Repository\PostRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,12 +23,18 @@ class BlogAdminController extends AbstractController {
 
     /**
      * @Route("/admin/blog/liste", name="admin_blog_list")
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return Response
      */
-    public function liste(): Response {
-        $post = $this->postRepository->findAll();
+    public function liste(PaginatorInterface $paginator, Request $request): Response {
+        $posts = $paginator->paginate(
+            $this->postRepository->findAllQuery(),
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('admin/blog/list.html.twig', [
-            'allPosts' => $post,
+            'allPosts' => $posts,
             'menu' => 'blog'
         ]);
     }
