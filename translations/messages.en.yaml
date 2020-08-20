@@ -25,3 +25,5 @@
 'TagsHelper': "Tags need to be seperated by a coma"
 'Author': "Author"
 'Sure delete': "Are you sure you want to delete ?"
+'Image file': "Image file"
+'DeleteCurrentImg': 'Delete current image ?'

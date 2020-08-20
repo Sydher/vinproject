@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class EditPostFormType extends AbstractType {
 
@@ -41,8 +42,11 @@ class EditPostFormType extends AbstractType {
                 ],
                 "help" => "TagsHelper"
             ])
-            ->add('imageFile', FileType::class, [
-                'required' => false
+            ->add('imageFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'DeleteCurrentImg',
+                'download_uri' => false
             ])
             ->add('content', TextareaType::class, [ // TODO WYSWYG ?
                 'constraints' => [
