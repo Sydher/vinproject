@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">
+                <img src="{{ asset('build/images/bottle.svg') }}" alt="bouteille" class="h1_bottle">
+                Blog
+            </h1>
+            <hr>
+
+            <div class="row">
+                {% for post in allPosts %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="{{ asset('storage/images/' ~ post.image) }}"
+                                 class="card-img-top img-fluid blog_preview_img"
+                                 alt="image-{{ post.slug }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <div class="mb-1 text-muted">
+                                    {{ post.createdAt | format_datetime() }}
+                                    -
+                                    {{ post.author.username }}
+                                </div>
+                                <p class="card-text">
+                                    {{ post.content | u.truncate(200, '...') }}
+                                </p>
+                                <a href="#" class="btn btn-primary">Lire l'article</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="pagination">
+                {{ knp_pagination_render(allPosts) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

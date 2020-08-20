@@ -19,11 +19,14 @@ class PostFixtures extends Fixture implements DependentFixtureInterface {
         for ($i = 0; $i < 25; $i++) {
             $fakePost = new Post();
             $fakePost->setTitle($faker->realText(20));
+            $fakePost->setSlug($faker->slug());
             $fakePost->setTags($faker->colorName . ', ' . $faker->jobTitle . ', ' . $faker->city);
             $fakePost->setAuthor($this->getReference($this->getRandomRef()));
-            $fakePost->setContent($faker->realText());
+            $fakePost->setContent($faker->realText(500));
             $fakePost->setCreatedAt($faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now'));
             $fakePost->setUpdatedAt($faker->dateTimeBetween($startDate = '-1 month', $endDate = 'now'));
+            $fakePost->setImage($faker->image('public/storage/images',
+                400, 300, null, false));
             $manager->persist($fakePost);
         }
 

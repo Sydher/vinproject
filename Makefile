@@ -20,3 +20,9 @@ init-database:
 .PHONY: test
 test:
 	./bin/phpunit
+
+# Commandes diverses
+.PHONY: clean
+clean:
+	php bin/console cache:clear
+	find public/storage/images/ -name "*.jpg" -type f -delete

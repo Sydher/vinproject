@@ -1,3 +1,5 @@
+# ####################
+
 # Symfony
 /.env.local
 /.env.local.php
@@ -21,3 +23,11 @@ yarn-error.log
 
 # macOS
 .DS_Store
+
+# ####################
+
+# Spécifique au projet
+
+## Dossier storage (sauf le .gitkeep)
+/public/storage/images/**
+!/public/storage/images/.gitkeep
