@@ -37,8 +37,8 @@
                                 </a>
                             </td>
                             <td>{{ post.author.username }}</td>
-                            <td>{{ post.createdAt | format_datetime() }}</td>
-                            <td>{{ post.updatedAt | format_datetime() }}</td>
+                            <td>{{ post.createdAt | format_datetime('short') }}</td>
+                            <td>{{ post.updatedAt | format_datetime('short') }}</td>
                             <td>
                                 <a type="button" class="btn btn-primary"
                                    href="{{ path('admin_blog_edit_post', {id: post.id}) }}">

@@ -29,7 +29,7 @@ class BlogAdminController extends AbstractController {
      */
     public function liste(PaginatorInterface $paginator, Request $request): Response {
         $posts = $paginator->paginate(
-            $this->postRepository->findAllQuery(),
+            $this->postRepository->findAllByLastUpdateQuery(),
             $request->query->getInt('page', 1),
             10
         );
