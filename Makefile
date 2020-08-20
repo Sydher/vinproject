@@ -13,6 +13,7 @@ stop-docker:
 # Commandes relatives à la base de données
 .PHONY: init-database
 init-database:
+	make clean
 	php bin/console doctrine:migrations:migrate
 	php bin/console doctrine:fixtures:load --append
 
@@ -26,3 +27,4 @@ test:
 clean:
 	php bin/console cache:clear
 	find public/storage/images/ -name "*.jpg" -type f -delete
+	find public/storage/images/ -name "*.png" -type f -delete

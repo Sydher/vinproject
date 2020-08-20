@@ -21,6 +21,9 @@
 npm-debug.log
 yarn-error.log
 
+# liip/imagine-bundle
+/public/media/cache/
+
 # macOS
 .DS_Store
 
@@ -29,5 +32,5 @@ yarn-error.log
 # Spécifique au projet
 
 ## Dossier storage (sauf le .gitkeep)
-/public/storage/images/**
-!/public/storage/images/.gitkeep
+/public/storage/images/post/**
+!/public/storage/images/post/.gitkeep

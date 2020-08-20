@@ -4,6 +4,7 @@ namespace App\Form\Admin\Blog;
 
 use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,14 +41,16 @@ class EditPostFormType extends AbstractType {
                 ],
                 "help" => "TagsHelper"
             ])
+            ->add('imageFile', FileType::class, [
+                'required' => false
+            ])
             ->add('content', TextareaType::class, [ // TODO WYSWYG ?
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a title',
                     ]),
                     new Length([
-                        'min' => 3,
-                        'max' => 255 // TODO taille plus grande ?
+                        'min' => 5,
                     ])
                 ],
                 'attr' => array('rows' => '10')

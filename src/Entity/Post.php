@@ -5,10 +5,15 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
+ * TODO unique sur le titre
  */
 class Post {
 
@@ -51,14 +56,18 @@ class Post {
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var File|null
+     * @Assert\Image(
+     *     mimeTypes = {"image/jpeg", "image/png"}
+     * )
+     * @Vich\UploadableField(mapping="post_image", fileNameProperty="imageName")
      */
-    private $slug;
+    private $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $image;
+    private $imageName;
 
     public function getId(): ?int {
         return $this->id;
@@ -143,15 +152,35 @@ class Post {
         return (new Slugify())->slugify($this->title);
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File {
+        return $this->imageFile;
     }
 
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
+    /**
+     * @param File|null $imageFile
+     * @return Post
+     */
+    public function setImageFile(?File $imageFile): Post {
+        $this->imageFile = $imageFile;
+        return $this;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getImageName() {
+        return $this->imageName;
+    }
+
+    /**
+     * @param mixed $imageName
+     * @return Post
+     */
+    public function setImageName($imageName): self {
+        $this->imageName = $imageName;
         return $this;
     }
 

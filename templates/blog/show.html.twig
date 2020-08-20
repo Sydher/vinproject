@@ -16,11 +16,13 @@
             </div>
             <hr>
 
-            <div class="text-center mb-4">
-                <img src="{{ asset('storage/images/' ~ post.image) }}"
-                     class="img-fluid"
-                     alt="image-{{ post.slug }}">
-            </div>
+            {% if post.imageName %}
+                <div class="text-center mb-4">
+                    <img src="{{ vich_uploader_asset(post, 'imageFile') }}"
+                         class="img-fluid"
+                         alt="image-{{ post.slug }}">
+                </div>
+            {% endif %}
 
             <div class="text-justify">
                 {{ post.content }}
