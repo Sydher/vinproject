@@ -6,3 +6,8 @@ const $ = require("jquery");
 $(document).ready(function () {
     $(".toast").toast("show");
 });
+
+// Configuration tooltip Bootstrap
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

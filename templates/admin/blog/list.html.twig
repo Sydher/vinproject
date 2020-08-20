@@ -23,8 +23,8 @@
                     <tr>
                         <th scope="col">{{ "Title" | trans }}</th>
                         <th scope="col">{{ "Author" | trans }}</th>
-                        <th scope="col">Créé le</th>
                         <th scope="col">Dernière modification</th>
+                        <th scope="col">Etat</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -37,9 +37,33 @@
                                 </a>
                             </td>
                             <td>{{ post.author.username }}</td>
-                            <td>{{ post.createdAt | format_datetime('short') }}</td>
                             <td>{{ post.updatedAt | format_datetime('short') }}</td>
                             <td>
+                                {% if post.isVisible %}
+                                    <i class="fas fa-eye text-success"
+                                       data-toggle="tooltip" data-placement="top"
+                                       title="L'article est visible dans le blog !"></i>
+                                {% else %}
+                                    <i class="fas fa-eye-slash text-warning"
+                                       data-toggle="tooltip" data-placement="top"
+                                       title="L'article n'est PAS visible dans le blog !"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if post.isVisible %}
+                                    <a type="button" class="btn btn-dark"
+                                       href="{{ path('admin_blog_set_invisible_post', {id: post.id}) }}">
+                                        <i class="fas fa-glasses"></i>
+                                        Masquer
+                                    </a>
+                                {% else %}
+                                    <a type="button" class="btn btn-info"
+                                       href="{{ path('admin_blog_set_visible_post', {id: post.id}) }}">
+                                        <i class="fas fa-glasses"></i>
+                                        Afficher&nbsp;&nbsp;
+                                    </a>
+                                {% endif %}
+
                                 <a type="button" class="btn btn-primary"
                                    href="{{ path('admin_blog_edit_post', {id: post.id}) }}">
                                     <i class="fas fa-cog"></i>

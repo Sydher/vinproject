@@ -26,5 +26,6 @@ test:
 .PHONY: clean
 clean:
 	php bin/console cache:clear
+	find public/media/cache/ -name "*.jpg" -type f -delete
 	find public/storage/images/ -name "*.jpg" -type f -delete
 	find public/storage/images/ -name "*.png" -type f -delete

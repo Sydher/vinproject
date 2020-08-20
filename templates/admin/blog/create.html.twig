@@ -11,6 +11,10 @@
             {{ form_row(createForm.tags) }}
             {{ form_row(createForm.imageFile) }}
             {{ form_row(createForm.content) }}
+            <small id="emailHelp" class="form-text text-muted">
+                Par défaut l'article sera invisible (non affiché dans le blog).
+                Il faut l'activer via la liste des articles.
+            </small>
 
             <div class="text-center">
                 <a class="btn btn-light" href="{{ path('admin_blog_list') }}">

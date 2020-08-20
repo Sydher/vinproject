@@ -22,8 +22,9 @@ class PostRepository extends ServiceEntityRepository {
     /**
      * @return Query
      */
-    public function findAllQuery(): Query {
+    public function findAllActiveQuery(): Query {
         return $this->createQueryBuilder('p')
+            ->where('p.isVisible = true')
             ->orderBy('p.createdAt', 'DESC')
             ->getQuery();
     }

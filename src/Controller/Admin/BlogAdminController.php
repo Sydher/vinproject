@@ -117,4 +117,33 @@ class BlogAdminController extends AbstractController {
         ]);
     }
 
+    /**
+     * @Route("/admin/blog/visible/{id}", name="admin_blog_set_visible_post")
+     * @param string $id identifiant de l'article à rendre visible
+     * @return Response
+     */
+    public function setVisible(string $id): Response {
+        return $this->changeVisibility($id, true);
+    }
+
+    /**
+     * @Route("/admin/blog/invisible/{id}", name="admin_blog_set_invisible_post")
+     * @param string $id identifiant de l'article à rendre invisible
+     * @return Response
+     */
+    public function setInvisible(string $id): Response {
+        return $this->changeVisibility($id, false);
+    }
+
+    private function changeVisibility(string $id, bool $state): Response {
+        $post = $this->postRepository->find($id);
+        $post->setIsVisible($state);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($post);
+        $entityManager->flush();
+        $this->flashSuccess("Updated");
+        $entityManager->refresh($post);
+        return $this->redirectToRoute('admin_blog_list');
+    }
+
 }
