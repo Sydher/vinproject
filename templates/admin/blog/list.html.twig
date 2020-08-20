@@ -31,7 +31,11 @@
                 <tbody>
                     {% for post in allPosts %}
                         <tr>
-                            <td>{{ post.title }}</td>{#TODO lien vers consult#}
+                            <td>
+                                <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}">
+                                    {{ post.title }}
+                                </a>
+                            </td>
                             <td>{{ post.author.username }}</td>
                             <td>{{ post.createdAt | format_datetime() }}</td>
                             <td>{{ post.updatedAt | format_datetime() }}</td>

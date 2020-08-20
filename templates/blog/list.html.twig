@@ -15,9 +15,11 @@
                 {% for post in allPosts %}
                     <div class="col-md-4">
                         <div class="card mb-4">
-                            <img src="{{ asset('storage/images/' ~ post.image) }}"
-                                 class="card-img-top img-fluid blog_preview_img"
-                                 alt="image-{{ post.slug }}">
+                            <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}">
+                                <img src="{{ asset('storage/images/' ~ post.image) }}"
+                                     class="card-img-top img-fluid blog_preview_img"
+                                     alt="image-{{ post.slug }}">
+                            </a>
                             <div class="card-body">
                                 <h5 class="card-title">{{ post.title }}</h5>
                                 <div class="mb-1 text-muted">
@@ -28,7 +30,10 @@
                                 <p class="card-text">
                                     {{ post.content | u.truncate(200, '...') }}
                                 </p>
-                                <a href="#" class="btn btn-primary">Lire l'article</a>
+                                <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}"
+                                   class="btn btn-primary">
+                                    Lire l'article
+                                </a>
                             </div>
                         </div>
                     </div>

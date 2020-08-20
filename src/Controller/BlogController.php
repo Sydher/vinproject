@@ -35,4 +35,18 @@ class BlogController extends AbstractController {
         ]);
     }
 
+    /**
+     * @Route("/blog/{slug}-{id}", name="blog_show_post", requirements={"slug": "[a-z0-9\-]*"})
+     * @param string $slug
+     * @param string $id
+     * @return Response
+     */
+    public function show(string $slug, string $id): Response {
+        $post = $this->postRepository->find($id);
+        return $this->render('blog/show.html.twig', [
+            'post' => $post,
+            'menu' => 'blog'
+        ]);
+    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -139,13 +140,7 @@ class Post {
     }
 
     public function getSlug(): ?string {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self {
-        $this->slug = $slug;
-
-        return $this;
+        return (new Slugify())->slugify($this->title);
     }
 
     public function getImage(): ?string
