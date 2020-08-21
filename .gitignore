@@ -1,11 +1,10 @@
-# ####################
-
 # Symfony
 /.env.local
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
+/public/storage/
 /var/
 /vendor/
 .phpunit
@@ -26,11 +25,3 @@ yarn-error.log
 
 # macOS
 .DS_Store
-
-# ####################
-
-# Spécifique au projet
-
-## Dossier storage (sauf le .gitkeep)
-/public/storage/images/post/**
-!/public/storage/images/post/.gitkeep

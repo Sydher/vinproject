@@ -1,8 +1,9 @@
-# Commandes relatives à docker
+# Démarrage containers Docker
 .PHONY: start-docker
 start-docker:
 	cd docker && docker-compose up -d
 
+# Arrêt des containers Docker
 .PHONY: stop-docker
 stop-docker:
 	docker stop vinproject_mysql
@@ -10,22 +11,28 @@ stop-docker:
 	docker rm vinproject_mysql
 	docker rm vinproject_maildev
 
-# Commandes relatives à la base de données
+# Initialisation et remplissage de la BD
 .PHONY: init-database
 init-database:
-	make clean
+	mkdir -p public/storage/images/post
 	php bin/console doctrine:migrations:migrate
-	php bin/console doctrine:fixtures:load --append
+	php bin/console doctrine:fixtures:load
 
-# Commandes relatives aux tests
+# Lancement des TU
 .PHONY: test
 test:
 	./bin/phpunit
 
-# Commandes diverses
+# Initialisation des bundles
+.PHONY: init-bundles
+init-bundles:
+	symfony console ckeditor:install
+	symfony console assets:install public
+	symfony console elfinder:install
+
+# Nettoyage du projet
 .PHONY: clean
 clean:
 	php bin/console cache:clear
-	find public/media/cache/ -name "*.jpg" -type f -delete
-	find public/storage/images/ -name "*.jpg" -type f -delete
-	find public/storage/images/ -name "*.png" -type f -delete
+	rm -Rf public/media/
+	rm -Rf public/storage/

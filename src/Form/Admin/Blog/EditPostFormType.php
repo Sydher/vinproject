@@ -3,8 +3,8 @@
 namespace App\Form\Admin\Blog;
 
 use App\Entity\Post;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -47,10 +47,10 @@ class EditPostFormType extends AbstractType {
                 'delete_label' => 'DeleteCurrentImg',
                 'download_uri' => false
             ])
-            ->add('content', TextareaType::class, [ // TODO WYSWYG ?
+            ->add('content', CKEditorType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a title',
+                        'message' => 'Please enter a content',
                     ]),
                     new Length([
                         'min' => 5,
