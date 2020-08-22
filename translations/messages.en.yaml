@@ -22,7 +22,7 @@
 'PostCreated': "Post succesfully created !"
 'PostDeleted': "Post succesfully deleted !"
 'Name': "Name"
-'TagsHelper': "Tags need to be seperated by a coma"
+'DescriptionHelper': "~ 200c"
 'Author': "Author"
 'Sure delete': "Are you sure you want to delete ?"
 'Image file': "Image file"

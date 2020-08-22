@@ -42,7 +42,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface {
     private function getFakePost(Generator $faker): Post {
         $fakePost = new Post();
         $fakePost->setTitle($faker->realText(20));
-        $fakePost->setTags($faker->colorName . ', ' . $faker->jobTitle . ', ' . $faker->city);
+        $fakePost->setDescription($faker->realText(200));
         $fakePost->setAuthor($this->getReference($this->getRandomRef()));
         $fakePost->setContent($faker->realText(500));
         $fakePost->setCreatedAt($faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now'));

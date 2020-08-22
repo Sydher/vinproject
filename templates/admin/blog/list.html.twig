@@ -32,7 +32,8 @@
                     {% for post in allPosts %}
                         <tr>
                             <td>
-                                <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}">
+                                <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}"
+                                   target="_blank">
                                     {{ post.title }}
                                 </a>
                             </td>

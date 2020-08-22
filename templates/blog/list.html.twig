@@ -36,7 +36,7 @@
                                     {{ post.author.username }}
                                 </div>
                                 <p class="card-text">
-                                    {{ post.content | u.truncate(200, '...') }}
+                                    {{ post.description | u.truncate(200, '...') }}
                                 </p>
                                 <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}"
                                    class="btn btn-primary">

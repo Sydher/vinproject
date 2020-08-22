@@ -45,7 +45,7 @@ class Post {
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $tags;
+    private $description;
 
     /**
      * @ORM\Column(type="datetime")
@@ -114,15 +114,17 @@ class Post {
     /**
      * @return mixed
      */
-    public function getTags() {
-        return $this->tags;
+    public function getDescription() {
+        return $this->description;
     }
 
     /**
-     * @param mixed $tags
+     * @param mixed $description
+     * @return Post
      */
-    public function setTags($tags): void {
-        $this->tags = $tags;
+    public function setDescription($description) {
+        $this->description = $description;
+        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface {

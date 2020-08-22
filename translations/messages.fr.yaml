@@ -24,7 +24,7 @@
 'PostCreated': "Création de l'article réussi !"
 'PostDeleted': "L'article a bien été supprimé !"
 'Name': "Nom"
-'TagsHelper': "Les tags doivent êtres séparés par une virgule"
+'DescriptionHelper': "La description doit idéalement faire 200 caractères"
 'Author': "Auteur"
 'Sure delete': "Êtes-vous sûr de vouloir supprimer ?"
 'Image file': "Image"

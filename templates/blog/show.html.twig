@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Blog{% endblock %}
+{% block description %}
+    <meta name="description" content="{{ post.description }}">
+{% endblock %}
+{% block author %}
+    <meta name="author" content="{{ post.author.username }}">
+{% endblock %}
 
 {% block body %}
     <div class="card">

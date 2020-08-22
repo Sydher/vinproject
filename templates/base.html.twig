@@ -2,9 +2,12 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        {% block description %}{% endblock %}
+        {% block author %}{% endblock %}
+        <meta name="language" content="fr">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Vin Project{% endblock %} - Vin Project</title>
-        <link rel="icon" type="image/svg" href="{{ asset('build/images/wine.svg') }}"/>
+        <link rel="icon" type="image/svg" href="{{ asset('build/images/wine.svg') }}">
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
@@ -28,8 +31,6 @@
             {% include 'common/flash.html.twig' %}
             {% block body %}{% endblock %}
         </div>
-
-        <!-- TODO footer avec L'abus d'alcool est dangereux pour la santé. Consommer avec modération. -->
 
         <!-- Pied du site -->
         {% include 'footer.html.twig' %}

@@ -5,6 +5,7 @@ namespace App\Form\Admin\Blog;
 use App\Entity\Post;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -29,17 +30,17 @@ class EditPostFormType extends AbstractType {
                     ])
                 ]
             ])
-            ->add('tags', TextType::class, [
+            ->add('description', TextareaType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a title',
                     ]),
                     new Length([
-                        'min' => 3,
-                        'max' => 50
+                        'min' => 30,
+                        'max' => 255
                     ])
                 ],
-                "help" => "TagsHelper"
+                "help" => "DescriptionHelper",
             ])
             ->add('imageFile', VichFileType::class, [
                 'required' => false,
