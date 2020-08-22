@@ -58,6 +58,11 @@ class User implements UserInterface, \Serializable {
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isBanned = false;
+
     public function getId(): ?int {
         return $this->id;
     }
@@ -201,6 +206,15 @@ class User implements UserInterface, \Serializable {
         if ($this->getCreatedAt() === null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+
+    public function isBanned(): ?bool {
+        return $this->isBanned;
+    }
+
+    public function setIsBanned(bool $isBanned): self {
+        $this->isBanned = $isBanned;
+        return $this;
     }
 
 }

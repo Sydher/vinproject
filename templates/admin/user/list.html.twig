@@ -15,7 +15,6 @@
                 <thead>
                     <tr>
                         <th scope="col">{{ "Username" | trans }}</th>
-                        <th scope="col">{{ "Email" | trans }}</th>
                         <th scope="col">{{ "Roles" | trans }}</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -23,8 +22,12 @@
                 <tbody>
                     {% for user in allUsers %}
                         <tr>
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.email }}</td>
+                            <td>
+                                {{ user.username }}
+                                {% if user.isBanned %}
+                                    <span class="text-danger"><i class="fas fa-user-slash"></i></span>
+                                {% endif %}
+                            </td>
                             <td>{{ user.roles | join(', ') }}</td>
                             <td>
                                 {% if user.superAdmin %}
@@ -44,8 +47,15 @@
                                         <i class="fas fa-user-slash"></i>
                                         Bannir
                                     </button>
+                                {% elseif user.isBanned %}
+                                    <a type="button" class="btn btn-dark"
+                                       href="{{ path('admin_user_unban', {id: user.id}) }}">
+                                        <i class="fas fa-user"></i>
+                                        Débannir
+                                    </a>
                                 {% else %}
-                                    <a type="button" class="btn btn-danger" href="#">
+                                    <a type="button" class="btn btn-danger"
+                                       href="{{ path('admin_user_ban', {id: user.id}) }}">
                                         <i class="fas fa-user-slash"></i>
                                         Bannir
                                     </a>

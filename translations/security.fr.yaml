@@ -1,2 +1,3 @@
 'Invalid credentials.': 'Le mot de passe est incorrect !'
 'Email could not be found.': "Aucun compte n'existe avec cette adresse mail !"
+'YouAreBanned': "YouAreBanned"

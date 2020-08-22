@@ -82,4 +82,33 @@ class UserAdminController extends AbstractController {
         ]);
     }
 
+    /**
+     * @Route("/admin/utilisateur/ban/{id}", name="admin_user_ban")
+     * @param string $id identifiant de l'utilisateur à bannir
+     * @return Response
+     */
+    public function ban(string $id): Response {
+        return $this->changeBanStatus($id, true);
+    }
+
+    /**
+     * @Route("/admin/utilisateur/unban/{id}", name="admin_user_unban")
+     * @param string $id identifiant de l'utilisateur à bannir
+     * @return Response
+     */
+    public function unban(string $id): Response {
+        return $this->changeBanStatus($id, false);
+    }
+
+    private function changeBanStatus(string $id, bool $state): Response {
+        $user = $this->userRepository->find($id);
+        $user->setIsBanned($state);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+        $this->flashSuccess("Updated");
+        $entityManager->refresh($user);
+        return $this->redirectToRoute('admin_user_list');
+    }
+
 }
