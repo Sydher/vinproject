@@ -3,6 +3,7 @@
 namespace App\Form\User;
 
 use App\Entity\User;
+use Beelab\Recaptcha2Bundle\Form\Type\RecaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -59,7 +60,8 @@ class RegistrationFormType extends AbstractType {
                         'max' => 4096,
                     ]),
                 ],
-            ]);
+            ])
+            ->add('captcha', RecaptchaType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
