@@ -11,3 +11,4 @@
 'There is already a post with this title': "Un article existe déjà dans le blog avec ce titre"
 'Please enter a content': "Le contenu est obligatoire"
 'Invalid ReCaptcha.': "Merci de prouver que vous n'êtes pas un robot"
+'PatternPassword': "Votre mot de passe doit comporter au moins 1 lettre minuscule, 1 lettre majuscule, 1 chiffre et 1 caractère spécial"

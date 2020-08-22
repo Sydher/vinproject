@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class EditPasswordFormType extends AbstractType {
 
@@ -42,10 +43,15 @@ class EditPasswordFormType extends AbstractType {
                         'message' => 'Please enter a password',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => 8,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        'max' => 4096,
+                        'max' => 255,
                     ]),
+                    new Regex([
+                        'pattern' => '/^(?=.*[^a-zA-Z\d])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$/',
+                        'match' => true,
+                        'message' => 'PatternPassword',
+                    ])
                 ],
             ]);
     }
