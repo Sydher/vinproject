@@ -4,14 +4,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Vin Project{% endblock %} - Vin Project</title>
-        <link rel="icon" type="image/svg" href="{{ asset('build/images/wine.svg') }}" />
+        <link rel="icon" type="image/svg" href="{{ asset('build/images/wine.svg') }}"/>
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
               crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('build/app.css') }}">
         {% block stylesheets %}{% endblock %}
-        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     </head>
     <body>
         <!-- Entête du site -->
@@ -30,6 +30,9 @@
         </div>
 
         <!-- TODO footer avec L'abus d'alcool est dangereux pour la santé. Consommer avec modération. -->
+
+        <!-- Pied du site -->
+        {% include 'footer.html.twig' %}
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

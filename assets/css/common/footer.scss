@@ -1,0 +1,55 @@
+@import "color";
+
+.footer {
+  background-color: $vert;
+  color: $white;
+}
+
+.footer_title {
+  font-size: 14px;
+  font-weight: bold;
+  color: $white;
+}
+
+.footer_link {
+  font-size: 14px;
+  color: $white;
+}
+
+.footer_link:hover {
+  font-size: 14px;
+  color: $white;
+  opacity: 0.7;
+}
+
+.footer_socials {
+  display: inline;
+}
+
+.footer_socials a {
+  font-size: 30px;
+  color: $white;
+}
+
+.footer_socials a:hover {
+  font-size: 30px;
+  color: $white;
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+.footer_law {
+  font-size: 13px;
+  color: $white;
+}
+
+a.footer_law:hover {
+  font-size: 13px;
+  color: $white;
+  opacity: 0.7;
+}
+
+.footer_credits {
+  font-size: 12px;
+  color: $white;
+}

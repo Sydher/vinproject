@@ -1,0 +1,92 @@
+<footer class="footer pt-4">
+    <div class="container">
+        <!-- Ligne 1 : Liens utiles -->
+        <div class="row">
+            <div class="col-3">
+                <h6 class="footer_title">Nous contacter</h6>
+                <ul class="list-unstyled">
+                    <li><a class="footer_link" href="#">FAQ</a></li>
+                    <li><a class="footer_link" href="#">Presse</a></li>
+                    <li><a class="footer_link" href="#">Contactez-nous</a></li>
+                    <li><a class="footer_link" href="#">Proposer votre vin</a></li>
+                </ul>
+            </div>
+            <div class="col-3">
+                <h6 class="footer_title">A propos</h6>
+                <ul class="list-unstyled">
+                    <li><a class="footer_link" href="#">Notre histoire</a></li>
+                    <li><a class="footer_link" href="#">L'équipe</a></li>
+                    <li><a class="footer_link" href="#">Notre boutique</a></li>
+                </ul>
+            </div>
+            <div class="col-3">
+                <h6 class="footer_title">Nos services</h6>
+                <ul class="list-unstyled">
+                    <li><a class="footer_link" href="#">Acheter en ligne</a></li>
+                    <li><a class="footer_link" href="#">La cave</a></li>
+                    <li><a class="footer_link" href="#">Evénements</a></li>
+                    <li><a class="footer_link" href="#">Réservation</a></li>
+                </ul>
+            </div>
+            <!-- Réseaux sociaux -->
+            <div class="col-3">
+                <h6 class="footer_title">Suivez-nous !</h6>
+                <ul class="list-unstyled">
+                    <li class="footer_socials">
+                        <a href="#" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="footer_socials">
+                        <a href="#" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="footer_socials">
+                        <a href="#" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li class="footer_socials">
+                        <a href="#" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Ligne 2 : Loi + Crédits -->
+        <div class="row border-top pt-2 pb-2">
+            <!-- Ligne 2A -->
+            <div class="col-6">
+                <a class="footer_link" href="#">
+                    Mentions légales & CGV
+                </a>
+            </div>
+            <div class="col-6 text-right">
+                <span class="footer_law">
+                    L'abus d'alcool est dangereux pour la santé. Consommer avec modération.
+                </span>
+            </div>
+            <!-- Ligne 2B -->
+            <div class="col-6">
+                <a class="footer_credits" href="https://github.com/Sydher" target="_blank">
+                    by Sydher
+                </a>
+                <img class="mb-2" src="{{ asset('build/images/wine.svg') }}"
+                     alt="vinproject" width="24" height="24">
+                <a class="footer_credits"
+                   href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
+                    2020 - {{ 'now' | format_date(pattern="yyyy") }}
+                </a>
+            </div>
+            <div class="col-6 text-right">
+                <a href="{{ asset('build/images/bandeau_boissons_alcooliques.jpg') }}"
+                   target="_blank" class="footer_law">
+                    Interdiction de vente de boissons alcooliques aux mineurs.
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
