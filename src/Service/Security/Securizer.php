@@ -15,7 +15,17 @@ class Securizer {
         $this->accessDecisionManager = $accessDecisionManager;
     }
 
-    public function isGranted(User $user, $attribute, $object = null) {
+    /**
+     * @param User|null $user
+     * @param $attribute
+     * @param null $object
+     * @return bool
+     */
+    public function isGranted(?User $user, $attribute, $object = null) {
+        if (!$user) {
+            return false;
+        }
+
         $token = new UsernamePasswordToken($user, 'none', 'none', $user->getRoles());
         return ($this->accessDecisionManager->decide($token, [$attribute], $object));
     }

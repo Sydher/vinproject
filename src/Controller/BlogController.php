@@ -46,17 +46,16 @@ class BlogController extends AbstractController {
     public function show(Securizer $securizer, string $slug, string $id): Response {
         $post = $this->postRepository->find($id);
 
-        // Si le post est invisible et que l'utilisateur n'est pas un admin
-        // Alors il n'est pas autorisé à consulter l'article
-        $isAdmin = $securizer->isGranted($this->getUser(), 'ROLE_ADMIN');
-        if (!$post->getIsVisible() && !$isAdmin) {
+        if ($post->getIsVisible()
+            || $securizer->isGranted($this->getUser(), 'ROLE_ADMIN')) {
+
+            return $this->render('blog/show.html.twig', [
+                'post' => $post,
+                'menu' => 'blog'
+            ]);
+        } else {
             return $this->redirectToRoute('blog_list');
         }
-
-        return $this->render('blog/show.html.twig', [
-            'post' => $post,
-            'menu' => 'blog'
-        ]);
     }
 
 }
