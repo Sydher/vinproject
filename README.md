@@ -15,6 +15,9 @@ TODO
 ### Pré-requis
 TODO
 
+Commande utile :
+`grep -R --exclude-dir=vendor --exclude-dir=var "recherche" *`
+
 ### Configuration
 TODO
 
