@@ -19,17 +19,14 @@
             <li class="nav-item {{ menu_active('blog') }}">
                 <a class="nav-link" href="{{ path('admin_blog_list') }}">Blog</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ menu_active('boutique') }}">
                 <a class="nav-link dropdown-toggle" href="#" id="navAdminUsersDD" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Todo
+                    Boutique
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navAdminUsersDD">
-                    <a class="dropdown-item" href="#">Rouge</a>
-                    <a class="dropdown-item" href="#">Blanc</a>
-                    <a class="dropdown-item" href="#">Rosé</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Tous les Vin</a>
+                    <a class="dropdown-item" href="{{ path('admin_shop_list_region') }}">Régions</a>
+                    <a class="dropdown-item" href="#">Vins</a>
                 </div>
             </li>
         </ul>

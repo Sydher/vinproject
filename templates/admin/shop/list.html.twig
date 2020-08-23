@@ -1,0 +1,64 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Gestion des régions{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">
+                <img src="{{ asset('build/images/bottle.svg') }}" alt="bouteille" class="h1_bottle">
+                Gestion des régions
+            </h1>
+            <hr>
+
+            <div class="text-right mb-3">
+                <a type="button" class="btn btn-success" href="{{ path('admin_shop_add_region') }}">
+                    <i class="fas fa-plus"></i>
+                    Ajouter une région
+                </a>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Dernière modification</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for region in regions %}
+                        <tr>
+                            <td>
+                                <a href="#"
+                                   target="_blank">
+                                    {{ region.name }}
+                                </a>
+                            </td>
+                            <td>{{ region.updatedAt | format_datetime('short') }}</td>
+                            <td>
+                                <a type="button" class="btn btn-primary"
+                                   href="{{ path('admin_shop_edit_region', {id: region.id}) }}">
+                                    <i class="fas fa-cog"></i>
+                                    Modifier
+                                </a>
+                                <a type="button" class="btn btn-danger"
+                                   href="{{ path('admin_shop_delete_region', {id: region.id}) }}">
+                                    <i class="fas fa-trash-alt"></i>
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="text-right">
+                <a type="button" class="btn btn-success" href="{{ path('admin_shop_add_region') }}">
+                    <i class="fas fa-plus"></i>
+                    Ajouter une région
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

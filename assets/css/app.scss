@@ -17,6 +17,14 @@ body {
   margin-bottom: 15px;
 }
 
+.short_form {
+  max-width: 500px;
+}
+
+.medium_form {
+  max-width: 800px;
+}
+
 @import "common/navbar";
 @import "common/footer";
 @import "common/toast";

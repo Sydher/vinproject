@@ -17,17 +17,17 @@
             <li class="nav-item {{ menu_active('blog') }}">
                 <a class="nav-link" href="{{ path('blog_list') }}">Blog</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ menu_active('boutique') }}">
                 <a class="nav-link dropdown-toggle" href="#" id="navCatalogueDD" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Catalogue
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navCatalogueDD">
-                    <a class="dropdown-item" href="#">Rouge</a>
-                    <a class="dropdown-item" href="#">Blanc</a>
-                    <a class="dropdown-item" href="#">Rosé</a>
+                    <a class="dropdown-item" href="#">Région 1</a>
+                    <a class="dropdown-item" href="#">Région 2</a>
+                    <a class="dropdown-item" href="#">Région 3</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Tous les Vin</a>
+                    <a class="dropdown-item" href="{{ path('shop_home') }}">Tous les Vin</a>
                 </div>
             </li>
             <li class="nav-item">

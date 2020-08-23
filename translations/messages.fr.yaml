@@ -21,6 +21,7 @@
 'Tags': "Tags"
 'Content': "Contenu"
 'Created': "Création réussi !"
+'Deleted': "L'élement a bien été supprimé !"
 'PostCreated': "Création de l'article réussi !"
 'PostDeleted': "L'article a bien été supprimé !"
 'Name': "Nom"
