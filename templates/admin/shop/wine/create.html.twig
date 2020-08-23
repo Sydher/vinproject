@@ -1,0 +1,40 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Ajouter un vin{% endblock %}
+
+{% block body %}
+    <div class="card mx-auto medium_form">
+        <div class="card-body">
+            <h5 class="card-title">Ajouter un vin</h5>
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.region) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.color) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.year) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.format) }}
+                </div>
+            </div>
+            {{ form_row(form.description) }}
+
+            <div class="text-center">
+                <a class="btn btn-light" href="{{ path('admin_shop_list_wine') }}">
+                    Annuler
+                </a>
+                <button class="btn btn-success" type="submit">
+                    Ajouter
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
