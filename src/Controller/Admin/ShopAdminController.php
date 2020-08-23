@@ -39,7 +39,7 @@ class ShopAdminController extends AbstractController {
      */
     public function listRegions(): Response {
         $regions = $this->regionRepository->findAllOrderByName();
-        return $this->render('admin/shop/list.html.twig', [
+        return $this->render('admin/shop/region/list.html.twig', [
             'regions' => $regions,
             'menu' => 'boutique'
         ]);
@@ -64,7 +64,7 @@ class ShopAdminController extends AbstractController {
             return $this->redirectToRoute('admin_shop_list_region');
         }
 
-        return $this->render('admin/shop/create.html.twig', [
+        return $this->render('admin/shop/region/create.html.twig', [
             'form' => $form->createView(),
             'region' => $region,
             'menu' => 'boutique'
@@ -91,7 +91,7 @@ class ShopAdminController extends AbstractController {
             return $this->redirectToRoute('admin_shop_list_region');
         }
 
-        return $this->render('admin/shop/edit.html.twig', [
+        return $this->render('admin/shop/region/edit.html.twig', [
             'form' => $form->createView(),
             'region' => $region,
             'menu' => 'boutique'
@@ -117,7 +117,7 @@ class ShopAdminController extends AbstractController {
             return $this->redirectToRoute('admin_shop_list_region');
         }
 
-        return $this->render('admin/shop/delete.html.twig', [
+        return $this->render('admin/shop/region/delete.html.twig', [
             'form' => $form->createView(),
             'region' => $region,
             'menu' => 'boutique'
