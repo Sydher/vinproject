@@ -36,3 +36,13 @@ clean:
 	php bin/console cache:clear
 	rm -Rf public/media/
 	rm -Rf public/storage/
+
+# Démarrage du serveur
+.PHONY: start-server
+start-server:
+	/usr/local/bin/symfony server:start -d
+
+# Arrêt du serveur
+.PHONY: stop-server
+stop-server:
+	/usr/local/bin/symfony server:stop
