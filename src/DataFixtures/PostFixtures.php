@@ -41,7 +41,8 @@ class PostFixtures extends Fixture implements DependentFixtureInterface {
 
     private function getFakePost(Generator $faker): Post {
         $fakePost = new Post();
-        $fakePost->setTitle($faker->realText(20));
+        $fakePost->setTitle($faker->text($this->getRandomSize())
+            . $faker->randomLetter . $faker->randomNumber());
         $fakePost->setDescription($faker->realText(200));
         $fakePost->setAuthor($this->getReference($this->getRandomRef()));
         $fakePost->setContent($faker->realText(500));
@@ -53,13 +54,17 @@ class PostFixtures extends Fixture implements DependentFixtureInterface {
 
     private function getFakePostWithImage(Generator $faker): Post {
         $fakePost = $this->getFakePost($faker);
-        $fakePost->setImageName($faker->image('public/storage/images/post',
-            400, 300, null, false));
+//        $fakePost->setImageName($faker->image('public/storage/images/post',
+//            400, 300, null, false));
         return $fakePost;
     }
 
-    private function getRandomRef() {
+    private function getRandomRef(): string {
         return 'user_' . rand(1, 3);
+    }
+
+    private function getRandomSize(): int {
+        return rand(10, 20);
     }
 
     public function getDependencies() {

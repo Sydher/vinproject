@@ -2,18 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\AppellationRepository;
+use App\Repository\ProductorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass=AppellationRepository::class)
- * @UniqueEntity(fields={"name"}, message="AppelationUnique")
+ * @ORM\Entity(repositoryClass=ProductorRepository::class)
+ * @UniqueEntity(fields={"name"}, message="ProductorUnique")
  * @ORM\HasLifecycleCallbacks
  */
-class Appellation {
+class Productor {
 
     /**
      * @ORM\Id()
@@ -33,10 +33,9 @@ class Appellation {
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="appellations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity=Appellation::class, inversedBy="productors")
      */
-    private $region;
+    private $appellations;
 
     /**
      * @ORM\Column(type="datetime")
@@ -48,13 +47,8 @@ class Appellation {
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Productor::class, mappedBy="appellations")
-     */
-    private $productors;
-
     public function __construct() {
-        $this->productors = new ArrayCollection();
+        $this->appellations = new ArrayCollection();
     }
 
     public function getId(): ?int {
@@ -79,12 +73,24 @@ class Appellation {
         return $this;
     }
 
-    public function getRegion(): ?Region {
-        return $this->region;
+    /**
+     * @return Collection|Appellation[]
+     */
+    public function getAppellations(): Collection {
+        return $this->appellations;
     }
 
-    public function setRegion(?Region $region): self {
-        $this->region = $region;
+    public function addAppellation(Appellation $appellation): self {
+        if (!$this->appellations->contains($appellation)) {
+            $this->appellations[] = $appellation;
+        }
+        return $this;
+    }
+
+    public function removeAppellation(Appellation $appellation): self {
+        if ($this->appellations->contains($appellation)) {
+            $this->appellations->removeElement($appellation);
+        }
         return $this;
     }
 
@@ -115,29 +121,6 @@ class Appellation {
         if ($this->getCreatedAt() === null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
-    }
-
-    /**
-     * @return Collection|Productor[]
-     */
-    public function getProductors(): Collection {
-        return $this->productors;
-    }
-
-    public function addProductor(Productor $productor): self {
-        if (!$this->productors->contains($productor)) {
-            $this->productors[] = $productor;
-            $productor->addAppellation($this);
-        }
-        return $this;
-    }
-
-    public function removeProductor(Productor $productor): self {
-        if ($this->productors->contains($productor)) {
-            $this->productors->removeElement($productor);
-            $productor->removeAppellation($this);
-        }
-        return $this;
     }
 
 }

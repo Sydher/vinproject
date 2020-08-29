@@ -15,3 +15,4 @@
 'Invalid ReCaptcha.': "Merci de prouver que vous n'êtes pas un robot"
 'PatternPassword': "Votre mot de passe doit comporter au moins 1 lettre minuscule, 1 lettre majuscule, 1 chiffre et 1 caractère spécial"
 'AppelationUnique': "Une appellation existe déjà avec ce nom"
+'ProductorUnique': "Un producteur existe déjà avec ce nom"

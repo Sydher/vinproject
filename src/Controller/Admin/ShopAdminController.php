@@ -4,13 +4,16 @@ namespace App\Controller\Admin;
 
 use App\Controller\AbstractController;
 use App\Entity\Appellation;
+use App\Entity\Productor;
 use App\Entity\Region;
 use App\Entity\Wine;
 use App\Form\Admin\Shop\AppellationFormType;
+use App\Form\Admin\Shop\ProductorFormType;
 use App\Form\Admin\Shop\RegionFormType;
 use App\Form\Admin\Shop\WineFormType;
 use App\Form\ConfirmDeleteFormType;
 use App\Repository\AppellationRepository;
+use App\Repository\ProductorRepository;
 use App\Repository\RegionRepository;
 use App\Repository\WineRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -29,16 +32,21 @@ class ShopAdminController extends AbstractController {
     /** @var AppellationRepository */
     private $appellationRepository;
 
+    /** @var ProductorRepository */
+    private $productorRepository;
+
     /** @var WineRepository */
     private $wineRepository;
 
     public function __construct(PaginatorInterface $paginator,
                                 RegionRepository $regionRepository,
                                 AppellationRepository $appellationRepository,
+                                ProductorRepository $productorRepository,
                                 WineRepository $wineRepository) {
         $this->paginator = $paginator;
         $this->regionRepository = $regionRepository;
         $this->appellationRepository = $appellationRepository;
+        $this->productorRepository = $productorRepository;
         $this->wineRepository = $wineRepository;
     }
 
@@ -191,7 +199,7 @@ class ShopAdminController extends AbstractController {
      * @return Response
      */
     public function editAppellation(Request $request, string $id): Response {
-        $appellation = $this->regionRepository->find($id);
+        $appellation = $this->appellationRepository->find($id);
         $form = $this->createForm(AppellationFormType::class, $appellation);
         $form->handleRequest($request);
 
@@ -218,7 +226,7 @@ class ShopAdminController extends AbstractController {
      * @return Response
      */
     public function deleteAppellation(Request $request, string $id): Response {
-        $appellation = $this->regionRepository->find($id);
+        $appellation = $this->appellationRepository->find($id);
         $form = $this->createForm(ConfirmDeleteFormType::class, $appellation);
         $form->handleRequest($request);
 
@@ -233,6 +241,106 @@ class ShopAdminController extends AbstractController {
         return $this->render('admin/shop/appellation/delete.html.twig', [
             'form' => $form->createView(),
             'appellation' => $appellation,
+            'menu' => 'boutique'
+        ]);
+    }
+
+    /* ******************************************************* */
+    /* *************** Gestion des Producteurs *************** */
+    /* ******************************************************* */
+
+    /**
+     * @Route("/admin/boutique/producteurs", name="admin_shop_list_productor")
+     * @param Request $request
+     * @return Response
+     */
+    public function listProductors(Request $request): Response {
+        $productors = $this->paginator->paginate(
+            $this->productorRepository->findAllOrderByNameQuery(),
+            $request->query->getInt('page', 1),
+            10
+        );
+        return $this->render('admin/shop/productor/list.html.twig', [
+            'productors' => $productors,
+            'menu' => 'boutique'
+        ]);
+    }
+
+    /**
+     * @Route("/admin/boutique/producteurs/creer", name="admin_shop_add_productor")
+     * @param Request $request
+     * @return Response
+     */
+    public function createProductor(Request $request): Response {
+        $productor = new Productor();
+        $form = $this->createForm(ProductorFormType::class, $productor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($productor);
+            $entityManager->flush();
+            $this->flashSuccess("Created");
+            $entityManager->refresh($productor);
+            return $this->redirectToRoute('admin_shop_list_productor');
+        }
+
+        return $this->render('admin/shop/productor/create.html.twig', [
+            'form' => $form->createView(),
+            'productor' => $productor,
+            'menu' => 'boutique'
+        ]);
+    }
+
+    /**
+     * @Route("/admin/boutique/producteurs/modifier/{id}", name="admin_shop_edit_productor")
+     * @param Request $request
+     * @param string $id
+     * @return Response
+     */
+    public function editProductor(Request $request, string $id): Response {
+        $productor = $this->productorRepository->find($id);
+        $form = $this->createForm(ProductorFormType::class, $productor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($productor);
+            $entityManager->flush();
+            $this->flashSuccess("Updated");
+            $entityManager->refresh($productor);
+            return $this->redirectToRoute('admin_shop_list_productor');
+        }
+
+        return $this->render('admin/shop/productor/edit.html.twig', [
+            'form' => $form->createView(),
+            'productor' => $productor,
+            'menu' => 'boutique'
+        ]);
+    }
+
+    /**
+     * @Route("/admin/boutique/producteurs/supprimer/{id}", name="admin_shop_delete_productor")
+     * @param Request $request
+     * @param string $id
+     * @return Response
+     */
+    public function deleteProductor(Request $request, string $id): Response {
+        $productor = $this->productorRepository->find($id);
+        $form = $this->createForm(ConfirmDeleteFormType::class, $productor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($productor);
+            $entityManager->flush();
+            $this->flashInfo("Deleted");
+            return $this->redirectToRoute('admin_shop_list_productor');
+        }
+
+        return $this->render('admin/shop/productor/delete.html.twig', [
+            'form' => $form->createView(),
+            'productor' => $productor,
             'menu' => 'boutique'
         ]);
     }
