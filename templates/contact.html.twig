@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div class="card mx-auto medium_form">
+        <div class="card-body">
+            <h1 class="card-title">
+                <img src="{{ asset('build/images/bottle.svg') }}" alt="bouteille" class="h1_bottle">
+                Contactez-nous
+            </h1>
+            <p class="card-text">
+                {{ form_start(form) }}
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.firstName) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.lastName) }}
+                </div>
+            </div>
+            {{ form_row(form.email) }}
+            {{ form_row(form.message) }}
+
+            <div class="text-right">
+            <button class="btn btn-primary" type="submit">
+                Envoyer
+            </button>
+            </div>
+            {{ form_end(form) }}
+            </p>
+        </div>
+    </div>
+{% endblock %}

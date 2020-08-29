@@ -41,3 +41,7 @@
 'Description': "Description"
 'Millésime': "Millésime"
 'PlaceHolderWineFormat': "Exemple : Bouteille (75 cl)"
+'First name': "Prénom"
+'Last name': "Nom"
+'Message': "Message"
+'MessageSend': "Votre message a bien été envoyé !"
