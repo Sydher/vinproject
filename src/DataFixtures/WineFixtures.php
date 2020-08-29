@@ -19,7 +19,6 @@ class WineFixtures extends Fixture implements DependentFixtureInterface {
     public function load(ObjectManager $manager) {
         $faker = Faker\Factory::create('fr_FR');
 
-        // Articles classiques
         for ($i = 0; $i < 25; $i++) {
             $fakeWine = $this->getFakeWine($faker);
             $manager->persist($fakeWine);
@@ -36,7 +35,7 @@ class WineFixtures extends Fixture implements DependentFixtureInterface {
         $fakeWine->setColor($this->getRandomColor());
         $fakeWine->setYear($faker->year('now'));
         $fakeWine->setFormat('Bouteille (' . $faker->numberBetween(25, 100) . ' cl)');
-        $fakeWine->setDescription($faker->realText(300));
+        $fakeWine->setDescription($faker->sentence(20));
         return $fakeWine;
     }
 

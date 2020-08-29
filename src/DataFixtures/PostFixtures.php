@@ -43,9 +43,9 @@ class PostFixtures extends Fixture implements DependentFixtureInterface {
         $fakePost = new Post();
         $fakePost->setTitle($faker->text($this->getRandomSize())
             . $faker->randomLetter . $faker->randomNumber());
-        $fakePost->setDescription($faker->realText(200));
+        $fakePost->setDescription($faker->sentence(20));
         $fakePost->setAuthor($this->getReference($this->getRandomRef()));
-        $fakePost->setContent($faker->realText(500));
+        $fakePost->setContent($faker->sentence(500));
         $fakePost->setCreatedAt($faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now'));
         $fakePost->setUpdatedAt($faker->dateTimeBetween($startDate = '-1 month', $endDate = 'now'));
         $fakePost->setIsVisible(true);
@@ -54,8 +54,8 @@ class PostFixtures extends Fixture implements DependentFixtureInterface {
 
     private function getFakePostWithImage(Generator $faker): Post {
         $fakePost = $this->getFakePost($faker);
-//        $fakePost->setImageName($faker->image('public/storage/images/post',
-//            400, 300, null, false));
+        $fakePost->setImageName($faker->image('public/storage/images/post',
+            400, 300, null, false));
         return $fakePost;
     }
 
