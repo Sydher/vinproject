@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Form\Admin;
+namespace App\Form\Admin\Shop;
 
+use App\Entity\Appellation;
 use App\Entity\Region;
-use App\Entity\Wine;
-use App\Enum\WineColors;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,9 +14,8 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Regex;
 
-class WineFormType extends AbstractType {
+class AppellationFormType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
@@ -38,42 +35,12 @@ class WineFormType extends AbstractType {
                 'choice_label' => 'name',
                 'required' => true
             ])
-            ->add('color', ChoiceType::class, [
-                'required' => true,
-                'choices' => WineColors::getColorsChoice()
-            ])
-            ->add('year', TextType::class, [
-                'label' => 'Millésime',
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'min' => 4,
-                        'max' => 4
-                    ]),
-                    new Regex([
-                        'pattern' => '/^[\d]*$/',
-                        'match' => true,
-                    ])
-                ]
-            ])
-            ->add('format', TextType::class, [
-                'attr' => [
-                    'placeholder' => 'PlaceHolderWineFormat',
-                ],
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'min' => 3,
-                        'max' => 50
-                    ])
-                ]
-            ])
             ->add('description', TextareaType::class, [
                 'constraints' => [
                     new NotBlank(),
                     new Length([
                         'min' => 10,
-                        'max' => 500
+                        'max' => 800
                     ])
                 ]
             ]);
@@ -85,7 +52,7 @@ class WineFormType extends AbstractType {
 
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults([
-            'data_class' => Wine::class,
+            'data_class' => Appellation::class,
         ]);
     }
 

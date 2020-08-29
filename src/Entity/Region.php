@@ -42,8 +42,14 @@ class Region {
      */
     private $wines;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Appellation::class, mappedBy="region")
+     */
+    private $appellations;
+
     public function __construct() {
         $this->wines = new ArrayCollection();
+        $this->appellations = new ArrayCollection();
     }
 
     public function getId(): ?int {
@@ -111,6 +117,34 @@ class Region {
                 $wine->setRegion(null);
             }
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Appellation[]
+     */
+    public function getAppellations(): Collection {
+        return $this->appellations;
+    }
+
+    public function addAppellation(Appellation $appellation): self {
+        if (!$this->appellations->contains($appellation)) {
+            $this->appellations[] = $appellation;
+            $appellation->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAppellation(Appellation $appellation): self {
+        if ($this->appellations->contains($appellation)) {
+            $this->appellations->removeElement($appellation);
+            // set the owning side to null (unless already changed)
+            if ($appellation->getRegion() === $this) {
+                $appellation->setRegion(null);
+            }
+        }
+
         return $this;
     }
 

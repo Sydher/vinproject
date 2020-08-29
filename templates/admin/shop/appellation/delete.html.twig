@@ -1,0 +1,33 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Supprimer une appellation{% endblock %}
+
+{% block body %}
+    <div class="card mx-auto medium_form">
+        <div class="card-body">
+            <h5 class="card-title">Supprimer une appellation</h5>
+
+            <div class="jumbotron">
+                <h1 class="display-4">{{ appellation.name }}</h1>
+                <hr class="my-4">
+                <p>
+                    Dernière modification le {{ appellation.updatedAt | format_datetime() }}
+                </p>
+            </div>
+
+            {{ form_start(form) }}
+            {{ form_row(form.sureDelete) }}
+
+            <div class="text-center">
+                <a class="btn btn-light" href="{{ path('admin_shop_list_appellation') }}">
+                    Ne PAS supprimer l'appellation
+                </a>
+                <button class="btn btn-danger" type="submit">
+                    <i class="fas fa-trash-alt"></i>
+                    Supprimer l'appellation
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

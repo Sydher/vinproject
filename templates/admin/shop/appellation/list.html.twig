@@ -1,0 +1,72 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Gestion des appellations{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">
+                <img src="{{ asset('build/images/bottle.svg') }}"
+                     alt="bouteille" class="h1_bottle">
+                Gestion des appellations
+            </h1>
+            <hr>
+
+            <div class="text-right mb-3">
+                <a type="button" class="btn btn-success"
+                   href="{{ path('admin_shop_add_appellation') }}">
+                    <i class="fas fa-plus"></i>
+                    Ajouter une appellation
+                </a>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Région</th>
+                        <th scope="col">Dernière modification</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appellation in appellations %}
+                        <tr>
+                            <td>
+                                <a href="#"
+                                   target="_blank">
+                                    {{ appellation.name }}
+                                </a>
+                            </td>
+                            <td>{{ appellation.region.name }}</td>
+                            <td>{{ appellation.updatedAt | format_datetime('short') }}</td>
+                            <td>
+                                <a type="button" class="btn btn-primary"
+                                   href="{{ path('admin_shop_edit_appellation', {id: appellation.id}) }}">
+                                    <i class="fas fa-cog"></i>
+                                    Modifier
+                                </a>
+                                <a type="button" class="btn btn-danger"
+                                   href="{{ path('admin_shop_delete_appellation', {id: appellation.id}) }}">
+                                    <i class="fas fa-trash-alt"></i>
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                {{ knp_pagination_render(appellations) }}
+            </div>
+
+            <div class="text-right">
+                <a type="button" class="btn btn-success" href="{{ path('admin_shop_add_appellation') }}">
+                    <i class="fas fa-plus"></i>
+                    Ajouter une appellation
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

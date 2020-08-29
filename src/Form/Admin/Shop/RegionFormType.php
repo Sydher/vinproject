@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\Admin;
+namespace App\Form\Admin\Shop;
 
 use App\Entity\Region;
 use Symfony\Component\Form\AbstractType;

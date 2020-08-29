@@ -3,11 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Controller\AbstractController;
+use App\Entity\Appellation;
 use App\Entity\Region;
 use App\Entity\Wine;
-use App\Form\Admin\RegionFormType;
-use App\Form\Admin\WineFormType;
+use App\Form\Admin\Shop\AppellationFormType;
+use App\Form\Admin\Shop\RegionFormType;
+use App\Form\Admin\Shop\WineFormType;
 use App\Form\ConfirmDeleteFormType;
+use App\Repository\AppellationRepository;
 use App\Repository\RegionRepository;
 use App\Repository\WineRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -17,15 +20,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ShopAdminController extends AbstractController {
 
+    /** @var PaginatorInterface */
+    private $paginator;
+
     /** @var RegionRepository */
     private $regionRepository;
+
+    /** @var AppellationRepository */
+    private $appellationRepository;
 
     /** @var WineRepository */
     private $wineRepository;
 
-    public function __construct(RegionRepository $regionRepository,
+    public function __construct(PaginatorInterface $paginator,
+                                RegionRepository $regionRepository,
+                                AppellationRepository $appellationRepository,
                                 WineRepository $wineRepository) {
+        $this->paginator = $paginator;
         $this->regionRepository = $regionRepository;
+        $this->appellationRepository = $appellationRepository;
         $this->wineRepository = $wineRepository;
     }
 
@@ -120,6 +133,106 @@ class ShopAdminController extends AbstractController {
         return $this->render('admin/shop/region/delete.html.twig', [
             'form' => $form->createView(),
             'region' => $region,
+            'menu' => 'boutique'
+        ]);
+    }
+
+    /* ******************************************************** */
+    /* *************** Gestion des Appellations *************** */
+    /* ******************************************************** */
+
+    /**
+     * @Route("/admin/boutique/appellations", name="admin_shop_list_appellation")
+     * @param Request $request
+     * @return Response
+     */
+    public function listAppellations(Request $request): Response {
+        $appellations = $this->paginator->paginate(
+            $this->appellationRepository->findAllOrderByNameAndRegionQuery(),
+            $request->query->getInt('page', 1),
+            10
+        );
+        return $this->render('admin/shop/appellation/list.html.twig', [
+            'appellations' => $appellations,
+            'menu' => 'boutique'
+        ]);
+    }
+
+    /**
+     * @Route("/admin/boutique/appellations/creer", name="admin_shop_add_appellation")
+     * @param Request $request
+     * @return Response
+     */
+    public function createAppellation(Request $request): Response {
+        $appellation = new Appellation();
+        $form = $this->createForm(AppellationFormType::class, $appellation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($appellation);
+            $entityManager->flush();
+            $this->flashSuccess("Created");
+            $entityManager->refresh($appellation);
+            return $this->redirectToRoute('admin_shop_list_appellation');
+        }
+
+        return $this->render('admin/shop/appellation/create.html.twig', [
+            'form' => $form->createView(),
+            'appellation' => $appellation,
+            'menu' => 'boutique'
+        ]);
+    }
+
+    /**
+     * @Route("/admin/boutique/appellations/modifier/{id}", name="admin_shop_edit_appellation")
+     * @param Request $request
+     * @param string $id
+     * @return Response
+     */
+    public function editAppellation(Request $request, string $id): Response {
+        $appellation = $this->regionRepository->find($id);
+        $form = $this->createForm(AppellationFormType::class, $appellation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($appellation);
+            $entityManager->flush();
+            $this->flashSuccess("Updated");
+            $entityManager->refresh($appellation);
+            return $this->redirectToRoute('admin_shop_list_appellation');
+        }
+
+        return $this->render('admin/shop/appellation/edit.html.twig', [
+            'form' => $form->createView(),
+            'appellation' => $appellation,
+            'menu' => 'boutique'
+        ]);
+    }
+
+    /**
+     * @Route("/admin/boutique/appellations/supprimer/{id}", name="admin_shop_delete_appellation")
+     * @param Request $request
+     * @param string $id
+     * @return Response
+     */
+    public function deleteAppellation(Request $request, string $id): Response {
+        $appellation = $this->regionRepository->find($id);
+        $form = $this->createForm(ConfirmDeleteFormType::class, $appellation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($appellation);
+            $entityManager->flush();
+            $this->flashInfo("Deleted");
+            return $this->redirectToRoute('admin_shop_list_appellation');
+        }
+
+        return $this->render('admin/shop/appellation/delete.html.twig', [
+            'form' => $form->createView(),
+            'appellation' => $appellation,
             'menu' => 'boutique'
         ]);
     }
