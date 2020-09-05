@@ -72,6 +72,16 @@ class Wine {
      */
     private $productor;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $vintage;
+
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=2)
+     */
+    private $price;
+
     public function getId(): ?int {
         return $this->id;
     }
@@ -179,6 +189,24 @@ class Wine {
 
     public function getSlug(): ?string {
         return (new Slugify())->slugify($this->name);
+    }
+
+    public function getVintage(): ?string {
+        return $this->vintage;
+    }
+
+    public function setVintage(?string $vintage): self {
+        $this->vintage = $vintage;
+        return $this;
+    }
+
+    public function getPrice(): ?string {
+        return $this->price;
+    }
+
+    public function setPrice(string $price): self {
+        $this->price = $price;
+        return $this;
     }
 
 }

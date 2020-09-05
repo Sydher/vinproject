@@ -40,7 +40,7 @@
                             </tr>
                             <tr>
                                 <th scope="row">Cuvée</th>
-                                <td>TODO</td>
+                                <td>{{ wine.vintage }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Format</th>
@@ -50,6 +50,9 @@
                     </div>
                     <div class="col">image</div>
                 </div>
+                <a class="btn btn-info" href="{{ path('cart_add', {id: wine.id}) }}">
+                    Ajouter au panier
+                </a><br>
                 {{ wine.description }}
             </div>
         </div>

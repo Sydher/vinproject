@@ -10,6 +10,7 @@ use App\Enum\WineColors;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -78,6 +79,20 @@ class WineFormType extends AbstractType {
                         'min' => 3,
                         'max' => 50
                     ])
+                ]
+            ])
+            ->add('vintage', TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'min' => 3,
+                        'max' => 50
+                    ])
+                ],
+                'required' => false
+            ])
+            ->add('price', NumberType::class, [
+                'constraints' => [
+                    new NotBlank(),
                 ]
             ])
             ->add('description', TextareaType::class, [

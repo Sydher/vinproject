@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">
+                <img src="{{ asset('build/images/bottle.svg') }}" alt="bouteille" class="h1_bottle">
+                Panier
+            </h1>
+            <hr>
+            {% if items | length > 0 %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Produit</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Total</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.product.price }} €</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.product.price * item.quantity }} €</td>
+                                <td>
+                                    <a href="{{ path('cart_remove', { id: item.product.id }) }}"
+                                       class="btn btn-dark">
+                                        <i class="fas fa-minus"></i>
+                                    </a>
+                                    <a href="{{ path('cart_add', { id: item.product.id }) }}"
+                                       class="btn btn-success">
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                    <a href="{{ path('cart_delete', { id: item.product.id }) }}"
+                                       class="btn btn-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right font-weight-bold">Total :</td>
+                            <td class="font-weight-bold">{{ total }} €</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="text-center mt-5">
+                    <a href="#" class="btn btn-primary btn-lg">
+                        <i class="fas fa-shopping-cart"></i>
+                        Valider la commande
+                    </a>
+                </div>
+            {% else %}
+                Panier vide
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
