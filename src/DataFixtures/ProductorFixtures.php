@@ -15,8 +15,12 @@ use Faker\Generator;
  */
 class ProductorFixtures extends Fixture implements DependentFixtureInterface {
 
+    /** @var int */
+    private $cpt;
+
     public function load(ObjectManager $manager) {
         $faker = Faker\Factory::create('fr_FR');
+        $this->cpt = 1;
 
         for ($i = 0; $i < 15; $i++) {
             $fakeWine = $this->getFakeProductor($faker);
@@ -35,6 +39,8 @@ class ProductorFixtures extends Fixture implements DependentFixtureInterface {
             $fakeProductor->addAppellation($this->getReference($this->getRandomAppellation()));
         }
         $fakeProductor->setDescription($faker->sentence(20));
+        $this->addReference('productor_' . $this->cpt, $fakeProductor);
+        $this->cpt++;
         return $fakeProductor;
     }
 

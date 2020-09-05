@@ -2,6 +2,8 @@
 
 namespace App\Form\Admin\Shop;
 
+use App\Entity\Appellation;
+use App\Entity\Productor;
 use App\Entity\Region;
 use App\Entity\Wine;
 use App\Enum\WineColors;
@@ -35,6 +37,16 @@ class WineFormType extends AbstractType {
             ])
             ->add('region', EntityType::class, [
                 'class' => Region::class,
+                'choice_label' => 'name',
+                'required' => true
+            ])
+            ->add('appellation', EntityType::class, [
+                'class' => Appellation::class,
+                'choice_label' => 'name',
+                'required' => false
+            ])
+            ->add('productor', EntityType::class, [
+                'class' => Productor::class,
                 'choice_label' => 'name',
                 'required' => true
             ])

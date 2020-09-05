@@ -60,6 +60,17 @@ class Wine {
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Appellation::class, inversedBy="wines")
+     */
+    private $appellation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Productor::class, inversedBy="wines")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $productor;
+
     public function getId(): ?int {
         return $this->id;
     }
@@ -145,6 +156,24 @@ class Wine {
         if ($this->getCreatedAt() === null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+
+    public function getAppellation(): ?Appellation {
+        return $this->appellation;
+    }
+
+    public function setAppellation(?Appellation $appellation): self {
+        $this->appellation = $appellation;
+        return $this;
+    }
+
+    public function getProductor(): ?Productor {
+        return $this->productor;
+    }
+
+    public function setProductor(?Productor $productor): self {
+        $this->productor = $productor;
+        return $this;
     }
 
 }

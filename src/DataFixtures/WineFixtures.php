@@ -32,6 +32,8 @@ class WineFixtures extends Fixture implements DependentFixtureInterface {
         $fakeWine->setName($faker->text($this->getRandomSize())
             . $faker->randomLetter . $faker->randomNumber());
         $fakeWine->setRegion($this->getReference($this->getRandomRegion()));
+        $fakeWine->setAppellation($this->getReference($this->getRandomAppellation()));
+        $fakeWine->setProductor($this->getReference($this->getRandomProductor()));
         $fakeWine->setColor($this->getRandomColor());
         $fakeWine->setYear($faker->year('now'));
         $fakeWine->setFormat('Bouteille (' . $faker->numberBetween(25, 100) . ' cl)');
@@ -43,6 +45,14 @@ class WineFixtures extends Fixture implements DependentFixtureInterface {
         return 'region_' . rand(1, 4);
     }
 
+    private function getRandomAppellation() {
+        return 'appellation_' . rand(1, 15);
+    }
+
+    private function getRandomProductor() {
+        return 'productor_' . rand(1, 15);
+    }
+
     private function getRandomColor() {
         return WineColors::getColors()[rand(0, 2)];
     }
@@ -52,7 +62,7 @@ class WineFixtures extends Fixture implements DependentFixtureInterface {
     }
 
     public function getDependencies() {
-        return [RegionFixtures::class];
+        return [RegionFixtures::class, AppellationFixtures::class, ProductorFixtures::class];
     }
 
 }

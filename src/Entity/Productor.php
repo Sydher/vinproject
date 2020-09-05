@@ -47,8 +47,14 @@ class Productor {
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Wine::class, mappedBy="productor")
+     */
+    private $wines;
+
     public function __construct() {
         $this->appellations = new ArrayCollection();
+        $this->wines = new ArrayCollection();
     }
 
     public function getId(): ?int {
@@ -121,6 +127,34 @@ class Productor {
         if ($this->getCreatedAt() === null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+
+    /**
+     * @return Collection|Wine[]
+     */
+    public function getWines(): Collection {
+        return $this->wines;
+    }
+
+    public function addWine(Wine $wine): self {
+        if (!$this->wines->contains($wine)) {
+            $this->wines[] = $wine;
+            $wine->setProductor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWine(Wine $wine): self {
+        if ($this->wines->contains($wine)) {
+            $this->wines->removeElement($wine);
+            // set the owning side to null (unless already changed)
+            if ($wine->getProductor() === $this) {
+                $wine->setProductor(null);
+            }
+        }
+
+        return $this;
     }
 
 }

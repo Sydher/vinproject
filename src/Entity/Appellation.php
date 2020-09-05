@@ -53,8 +53,14 @@ class Appellation {
      */
     private $productors;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Wine::class, mappedBy="appellation")
+     */
+    private $wines;
+
     public function __construct() {
         $this->productors = new ArrayCollection();
+        $this->wines = new ArrayCollection();
     }
 
     public function getId(): ?int {
@@ -137,6 +143,34 @@ class Appellation {
             $this->productors->removeElement($productor);
             $productor->removeAppellation($this);
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Wine[]
+     */
+    public function getWines(): Collection {
+        return $this->wines;
+    }
+
+    public function addWine(Wine $wine): self {
+        if (!$this->wines->contains($wine)) {
+            $this->wines[] = $wine;
+            $wine->setAppellation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWine(Wine $wine): self {
+        if ($this->wines->contains($wine)) {
+            $this->wines->removeElement($wine);
+            // set the owning side to null (unless already changed)
+            if ($wine->getAppellation() === $this) {
+                $wine->setAppellation(null);
+            }
+        }
+
         return $this;
     }
 
