@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\AppellationRepository;
+use App\Repository\ProductorRepository;
 use App\Repository\RegionRepository;
+use App\Repository\WineRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,8 +14,23 @@ class ShopController extends AbstractController {
     /** @var RegionRepository */
     private $regionRepository;
 
-    public function __construct(RegionRepository $regionRepository) {
+    /** @var AppellationRepository */
+    private $appellationRepository;
+
+    /** @var ProductorRepository */
+    private $productorRepository;
+
+    /** @var WineRepository */
+    private $wineRepository;
+
+    public function __construct(RegionRepository $regionRepository,
+                                AppellationRepository $appellationRepository,
+                                ProductorRepository $productorRepository,
+                                WineRepository $wineRepository) {
         $this->regionRepository = $regionRepository;
+        $this->appellationRepository = $appellationRepository;
+        $this->productorRepository = $productorRepository;
+        $this->wineRepository = $wineRepository;
     }
 
     /**
@@ -27,31 +45,64 @@ class ShopController extends AbstractController {
         ]);
     }
 
-    // TODO vue par région
+    /**
+     * @Route("/boutique/region/{id}-{slug}", name="shop_region", requirements={"id": "[0-9]*"})
+     * @param string $id
+     * @return Response
+     */
+    public function viewByRegion(string $id): Response {
+        $region = $this->regionRepository->find($id);
+        return $this->render('shop/region.html.twig', [
+            'region' => $region,
+            'menu' => 'boutique'
+        ]);
+    }
 
-    // TODO vue toutes les bouteilles
+    /**
+     * @Route(
+     *     "/boutique/appellation/{id}-{slug}",
+     *     name="shop_appellation",
+     *     requirements={"id": "[0-9]*"}
+     * )
+     * @param string $id
+     * @return Response
+     */
+    public function viewByAppellation(string $id): Response {
+        $appellation = $this->appellationRepository->find($id);
+        return $this->render('shop/appellation.html.twig', [
+            'appellation' => $appellation,
+            'menu' => 'boutique'
+        ]);
+    }
 
-//
-//    /**
-//     * @Route("/blog/{slug}-{id}", name="blog_show_post", requirements={"slug": "[a-z0-9\-]*"})
-//     * @param Securizer $securizer
-//     * @param string $slug
-//     * @param string $id
-//     * @return Response
-//     */
-//    public function show(Securizer $securizer, string $slug, string $id): Response {
-//        $post = $this->postRepository->find($id);
-//
-//        if ($post->getIsVisible()
-//            || $securizer->isGranted($this->getUser(), 'ROLE_ADMIN')) {
-//
-//            return $this->render('blog/show.html.twig', [
-//                'post' => $post,
-//                'menu' => 'blog'
-//            ]);
-//        } else {
-//            return $this->redirectToRoute('blog_list');
-//        }
-//    }
+    /**
+     * @Route(
+     *     "/boutique/producteur/{id}-{slug}",
+     *     name="shop_productor",
+     *     requirements={"id": "[0-9]*"}
+     * )
+     * @param string $id
+     * @return Response
+     */
+    public function viewByProductor(string $id): Response {
+        $productor = $this->productorRepository->find($id);
+        return $this->render('shop/productor.html.twig', [
+            'productor' => $productor,
+            'menu' => 'boutique'
+        ]);
+    }
+
+    /**
+     * @Route("/boutique/vin/{id}-{slug}", name="shop_wine", requirements={"id": "[0-9]*"})
+     * @param string $id
+     * @return Response
+     */
+    public function showWine(string $id): Response {
+        $wine = $this->wineRepository->find($id);
+        return $this->render('shop/wine.html.twig', [
+            'wine' => $wine,
+            'menu' => 'boutique'
+        ]);
+    }
 
 }

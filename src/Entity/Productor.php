@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProductorRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -155,6 +156,10 @@ class Productor {
         }
 
         return $this;
+    }
+
+    public function getSlug(): ?string {
+        return (new Slugify())->slugify($this->name);
     }
 
 }

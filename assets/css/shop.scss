@@ -1,0 +1,40 @@
+@import "common/color";
+
+.by_appellation {
+  background-color: $bordeau;
+  font-size: 24px;
+}
+
+.by_appellation a {
+  color: $white;
+}
+
+.by_productor {
+  background-color: $vert;
+  font-size: 20px;
+}
+
+.by_productor a {
+  color: $white;
+}
+
+.wine_list_item {
+  list-style: none;
+  //border-bottom: 1px $darkgrey solid;
+}
+
+.region_wine_link {
+  text-decoration: none;
+}
+
+.wine_color_Rouge {
+  color: $wine_red;
+}
+
+.wine_color_Blanc {
+  color: $wine_white;
+}
+
+.wine_color_Rosé {
+  color: $wine_pink;
+}

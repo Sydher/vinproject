@@ -16,6 +16,7 @@ use App\Repository\AppellationRepository;
 use App\Repository\ProductorRepository;
 use App\Repository\RegionRepository;
 use App\Repository\WineRepository;
+use App\Service\Shop\RegionService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,9 @@ class ShopAdminController extends AbstractController {
 
     /** @var PaginatorInterface */
     private $paginator;
+
+    /** @var RegionService */
+    private $regionService;
 
     /** @var RegionRepository */
     private $regionRepository;
@@ -39,11 +43,13 @@ class ShopAdminController extends AbstractController {
     private $wineRepository;
 
     public function __construct(PaginatorInterface $paginator,
+                                RegionService $regionService,
                                 RegionRepository $regionRepository,
                                 AppellationRepository $appellationRepository,
                                 ProductorRepository $productorRepository,
                                 WineRepository $wineRepository) {
         $this->paginator = $paginator;
+        $this->regionService = $regionService;
         $this->regionRepository = $regionRepository;
         $this->appellationRepository = $appellationRepository;
         $this->productorRepository = $productorRepository;
@@ -59,7 +65,7 @@ class ShopAdminController extends AbstractController {
      * @return Response
      */
     public function listRegions(): Response {
-        $regions = $this->regionRepository->findAllOrderByName();
+        $regions = $this->regionService->getAllRegions();
         return $this->render('admin/shop/region/list.html.twig', [
             'regions' => $regions,
             'menu' => 'boutique'

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AppellationRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -172,6 +173,10 @@ class Appellation {
         }
 
         return $this;
+    }
+
+    public function getSlug(): ?string {
+        return (new Slugify())->slugify($this->name);
     }
 
 }

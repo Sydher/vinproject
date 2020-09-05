@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\WineRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -174,6 +175,10 @@ class Wine {
     public function setProductor(?Productor $productor): self {
         $this->productor = $productor;
         return $this;
+    }
+
+    public function getSlug(): ?string {
+        return (new Slugify())->slugify($this->name);
     }
 
 }

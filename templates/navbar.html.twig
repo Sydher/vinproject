@@ -23,9 +23,12 @@
                     Catalogue
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navCatalogueDD">
-                    <a class="dropdown-item" href="#">Région 1</a>
-                    <a class="dropdown-item" href="#">Région 2</a>
-                    <a class="dropdown-item" href="#">Région 3</a>
+                    {% for region in region_service.getAllRegions %}
+                        <a class="dropdown-item"
+                           href="{{ path('shop_region', {id : region.id, slug: region.slug}) }}">
+                            {{ region.name }}
+                        </a>
+                    {% endfor %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ path('shop_home') }}">Tous les Vin</a>
                 </div>
