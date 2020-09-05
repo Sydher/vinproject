@@ -9,15 +9,17 @@
     <div class="card">
         <div class="card-body">
             <h1 class="card-title">
-                <img src="{{ asset('build/images/bottle.svg') }}" alt="bouteille" class="h1_bottle">
+                <img src="{{ asset('build/images/bottle.svg') }}"
+                     alt="bouteille" class="h1_bottle">
                 La Cave en Ligne !
             </h1>
             <hr>
 
-            {# TODO travailler cette vue #}
             <ul class="list-group">
-                {% for region in regions %}
-                    <li class="list-group-item">{{ region.name }}</li>
+                {% for wine in wines %}
+                    <li class="list-group-item wine_list_item">
+                        {{ include('shop/_whine_list_item.html.twig', { wine: wine }) }}
+                    </li>
                 {% endfor %}
             </ul>
         </div>

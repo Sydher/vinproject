@@ -38,9 +38,9 @@ class ShopController extends AbstractController {
      * @return Response
      */
     public function index(): Response {
-        $regions = $this->regionRepository->findAll();
+        $wines = $this->wineRepository->findAll();
         return $this->render('shop/index.html.twig', [
-            'regions' => $regions,
+            'wines' => $wines,
             'menu' => 'boutique'
         ]);
     }
