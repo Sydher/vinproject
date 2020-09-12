@@ -18,37 +18,58 @@ use App\Repository\RegionRepository;
 use App\Repository\WineRepository;
 use App\Service\Shop\RegionService;
 use Knp\Component\Pager\PaginatorInterface;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class ShopAdminController extends AbstractController {
 
-    /** @var PaginatorInterface */
+    /**
+     * @var PaginatorInterface
+     */
     private $paginator;
 
-    /** @var RegionService */
+    /**
+     * @var CacheInterface
+     */
+    private $cache;
+
+    /**
+     * @var RegionService
+     */
     private $regionService;
 
-    /** @var RegionRepository */
+    /**
+     * @var RegionRepository
+     */
     private $regionRepository;
 
-    /** @var AppellationRepository */
+    /**
+     * @var AppellationRepository
+     */
     private $appellationRepository;
 
-    /** @var ProductorRepository */
+    /**
+     * @var ProductorRepository
+     */
     private $productorRepository;
 
-    /** @var WineRepository */
+    /**
+     * @var WineRepository
+     */
     private $wineRepository;
 
     public function __construct(PaginatorInterface $paginator,
+                                CacheInterface $cache,
                                 RegionService $regionService,
                                 RegionRepository $regionRepository,
                                 AppellationRepository $appellationRepository,
                                 ProductorRepository $productorRepository,
                                 WineRepository $wineRepository) {
         $this->paginator = $paginator;
+        $this->cache = $cache;
         $this->regionService = $regionService;
         $this->regionRepository = $regionRepository;
         $this->appellationRepository = $appellationRepository;
@@ -65,7 +86,7 @@ class ShopAdminController extends AbstractController {
      * @return Response
      */
     public function listRegions(): Response {
-        $regions = $this->regionService->getAllRegions();
+        $regions = $this->regionService->getAllRegionsWithoutCache();
         return $this->render('admin/shop/region/list.html.twig', [
             'regions' => $regions,
             'menu' => 'boutique'
@@ -76,6 +97,7 @@ class ShopAdminController extends AbstractController {
      * @Route("/admin/boutique/regions/creer", name="admin_shop_add_region")
      * @param Request $request
      * @return Response
+     * @throws InvalidArgumentException
      */
     public function createRegion(Request $request): Response {
         $region = new Region();
@@ -88,6 +110,7 @@ class ShopAdminController extends AbstractController {
             $entityManager->flush();
             $this->flashSuccess("Created");
             $entityManager->refresh($region);
+            $this->cache->delete('allRegion');
             return $this->redirectToRoute('admin_shop_list_region');
         }
 
@@ -103,6 +126,7 @@ class ShopAdminController extends AbstractController {
      * @param Request $request
      * @param string $id
      * @return Response
+     * @throws InvalidArgumentException
      */
     public function editRegion(Request $request, string $id): Response {
         $region = $this->regionRepository->find($id);
@@ -115,6 +139,7 @@ class ShopAdminController extends AbstractController {
             $entityManager->flush();
             $this->flashSuccess("Updated");
             $entityManager->refresh($region);
+            $this->cache->delete('allRegion');
             return $this->redirectToRoute('admin_shop_list_region');
         }
 
@@ -130,6 +155,7 @@ class ShopAdminController extends AbstractController {
      * @param Request $request
      * @param string $id
      * @return Response
+     * @throws InvalidArgumentException
      */
     public function deleteRegion(Request $request, string $id): Response {
         $region = $this->regionRepository->find($id);
@@ -141,6 +167,7 @@ class ShopAdminController extends AbstractController {
             $entityManager->remove($region);
             $entityManager->flush();
             $this->flashInfo("Deleted");
+            $this->cache->delete('allRegion');
             return $this->redirectToRoute('admin_shop_list_region');
         }
 
