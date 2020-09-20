@@ -19,6 +19,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Post {
 
+    use DateTimeTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -46,16 +48,6 @@ class Post {
      * @ORM\Column(type="string", length=255)
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
 
     /**
      * @var File|null
@@ -125,37 +117,6 @@ class Post {
     public function setDescription($description) {
         $this->description = $description;
         return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function updatedTimestamps(): void {
-        $this->setUpdatedAt(new \DateTime('now'));
-        if ($this->getCreatedAt() === null) {
-            $this->setCreatedAt(new \DateTime('now'));
-        }
     }
 
     public function getSlug(): ?string {
