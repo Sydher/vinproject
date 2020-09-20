@@ -54,8 +54,8 @@ class PostFixtures extends Fixture implements DependentFixtureInterface {
 
     private function getFakePostWithImage(Generator $faker): Post {
         $fakePost = $this->getFakePost($faker);
-        $fakePost->setImageName($faker->image('public/storage/images/post',
-            400, 300, null, false));
+//        $fakePost->setImageName($faker->image('public/storage/images/post',
+//            400, 300, null, false));
         return $fakePost;
     }
 

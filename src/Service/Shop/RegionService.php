@@ -19,26 +19,21 @@ class RegionService {
      */
     private $cache;
 
-    public function __construct(RegionRepository $regionRepository, CacheInterface $cache) {
+    public function __construct(RegionRepository $regionRepository,
+                                CacheInterface $cache) {
         $this->regionRepository = $regionRepository;
         $this->cache = $cache;
     }
 
     /**
+     * Récupère la liste des régions (chargée depuis le cache).
      * @return Region[]
      * @throws InvalidArgumentException
      */
-    public function getAllRegions(): array {
+    public function getAll(): array {
         return $this->cache->get('allRegion', function() {
             return $this->regionRepository->findAllOrderByName();
         });
-    }
-
-    /**
-     * @return Region[]
-     */
-    public function getAllRegionsWithoutCache(): array {
-        return $this->regionRepository->findAllOrderByName();
     }
 
 }

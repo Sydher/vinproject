@@ -16,7 +16,6 @@ use App\Repository\AppellationRepository;
 use App\Repository\ProductorRepository;
 use App\Repository\RegionRepository;
 use App\Repository\WineRepository;
-use App\Service\Shop\RegionService;
 use Knp\Component\Pager\PaginatorInterface;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,11 +34,6 @@ class ShopAdminController extends AbstractController {
      * @var CacheInterface
      */
     private $cache;
-
-    /**
-     * @var RegionService
-     */
-    private $regionService;
 
     /**
      * @var RegionRepository
@@ -63,14 +57,12 @@ class ShopAdminController extends AbstractController {
 
     public function __construct(PaginatorInterface $paginator,
                                 CacheInterface $cache,
-                                RegionService $regionService,
                                 RegionRepository $regionRepository,
                                 AppellationRepository $appellationRepository,
                                 ProductorRepository $productorRepository,
                                 WineRepository $wineRepository) {
         $this->paginator = $paginator;
         $this->cache = $cache;
-        $this->regionService = $regionService;
         $this->regionRepository = $regionRepository;
         $this->appellationRepository = $appellationRepository;
         $this->productorRepository = $productorRepository;
@@ -86,7 +78,7 @@ class ShopAdminController extends AbstractController {
      * @return Response
      */
     public function listRegions(): Response {
-        $regions = $this->regionService->getAllRegionsWithoutCache();
+        $regions = $this->regionRepository->findAllOrderByName();
         return $this->render('admin/shop/region/list.html.twig', [
             'regions' => $regions,
             'menu' => 'boutique'

@@ -6,18 +6,7 @@
     <div class="card mx-auto medium_form">
         <div class="card-body">
             <h5 class="card-title">Ajouter une région</h5>
-            {{ form_start(form) }}
-            {{ form_row(form.name) }}
-
-            <div class="text-center">
-                <a class="btn btn-light" href="{{ path('admin_shop_list_region') }}">
-                    Annuler
-                </a>
-                <button class="btn btn-success" type="submit">
-                    Ajouter
-                </button>
-            </div>
-            {{ form_end(form) }}
+            {% include 'admin/shop/region/_form.html.twig' %}
         </div>
     </div>
 {% endblock %}

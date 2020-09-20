@@ -1,0 +1,45 @@
+{{ form_start(form) }}
+{{ form_row(form.name) }}
+<div class="row">
+    <div class="col">
+        {{ form_row(form.region) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.appellation) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        {{ form_row(form.productor) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.color) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        {{ form_row(form.year) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.format) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        {{ form_row(form.vintage) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.price) }}
+    </div>
+</div>
+{{ form_row(form.description) }}
+
+<div class="text-center">
+    <a class="btn btn-light" href="{{ path('admin_shop_list_wine') }}">
+        Annuler
+    </a>
+    <button class="btn btn-success" type="submit">
+        Sauvegarder
+    </button>
+</div>
+{{ form_end(form) }}

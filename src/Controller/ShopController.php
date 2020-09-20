@@ -11,16 +11,24 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ShopController extends AbstractController {
 
-    /** @var RegionRepository */
+    /**
+     * @var RegionRepository
+     */
     private $regionRepository;
 
-    /** @var AppellationRepository */
+    /**
+     * @var AppellationRepository
+     */
     private $appellationRepository;
 
-    /** @var ProductorRepository */
+    /**
+     * @var ProductorRepository
+     */
     private $productorRepository;
 
-    /** @var WineRepository */
+    /**
+     * @var WineRepository
+     */
     private $wineRepository;
 
     public function __construct(RegionRepository $regionRepository,
@@ -46,7 +54,11 @@ class ShopController extends AbstractController {
     }
 
     /**
-     * @Route("/boutique/region/{id}-{slug}", name="shop_region", requirements={"id": "[0-9]*"})
+     * @Route(
+     *     "/boutique/region/{id}-{slug}",
+     *     name="shop_region",
+     *     requirements={"id": "[0-9]*"}
+     * )
      * @param string $id
      * @return Response
      */
@@ -93,7 +105,11 @@ class ShopController extends AbstractController {
     }
 
     /**
-     * @Route("/boutique/vin/{id}-{slug}", name="shop_wine", requirements={"id": "[0-9]*"})
+     * @Route(
+     *     "/boutique/vin/{id}-{slug}",
+     *     name="shop_wine",
+     *     requirements={"id": "[0-9]*"}
+     * )
      * @param string $id
      * @return Response
      */

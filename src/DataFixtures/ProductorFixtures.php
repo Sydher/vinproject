@@ -49,7 +49,7 @@ class ProductorFixtures extends Fixture implements DependentFixtureInterface {
     }
 
     private function getRandomNumber() {
-        return rand(1, 4);
+        return rand(2, 4);
     }
 
     private function getRandomSize(): int {
