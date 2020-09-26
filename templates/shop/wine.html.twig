@@ -8,23 +8,40 @@
 {% block body %}
     <div class="card">
         <div class="card-body">
-            <h1 class="card-title">
-                <img src="{{ asset('build/images/bottle.svg') }}"
-                     alt="bouteille" class="h1_bottle">
-                {{ wine.name }}
-            </h1>
-            <hr>
             <div>
                 <div class="row">
-                    <div class="col">
+                    <!-- Photo -->
+                    <div class="col-sm-4 text-center wine_img_desc">
+                        <img src="{{ asset('build/images/bottle-empty.png') }}"
+                             alt="photo {{ wine.name }}">
+                    </div>
+                    <!-- Description -->
+                    <div class="col-sm-8">
+                        <h2 class="wine_name">{{ wine.name }}</h2>
+                        <h4 class="wine_price">
+                            {{ wine.price }} €
+                            <small>4 bouteilles disponibles</small>
+                        </h4>
                         <table class="table">
                             <tr>
                                 <th scope="row">Appellation</th>
-                                <td>{{ wine.appellation.name }}</td>
+                                <td>
+                                    <a href="{{ path('shop_appellation', {
+                                        id: wine.appellation.id,
+                                        slug: wine.appellation.slug }) }}">
+                                        {{ wine.appellation.name }}
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">Producteur</th>
-                                <td>{{ wine.productor.name }}</td>
+                                <td>
+                                    <a href="{{ path('shop_productor', {
+                                        id: wine.productor.id,
+                                        slug: wine.productor.slug }) }}">
+                                        {{ wine.productor.name }}
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">Couleur</th>
@@ -48,12 +65,14 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="col">image</div>
                 </div>
-                <a class="btn btn-info" href="{{ path('cart_add', {id: wine.id}) }}">
-                    Ajouter au panier
-                </a><br>
-                {{ wine.description }}
+                <div class="text-center">
+                    <a class="btn btn-primary btn-lg"
+                       href="{{ path('cart_add', {id: wine.id}) }}">
+                        <i class="fas fa-cart-plus"></i>&nbsp;
+                        Ajouter au panier
+                    </a>
+                </div>
             </div>
         </div>
     </div>
