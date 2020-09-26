@@ -1,0 +1,20 @@
+<div class="card flex-row flex-wrap card_productor">
+    <div class="card-header border-0 w-25 card_left_productor">
+        <a href="{{ path('shop_productor',
+            { id: productor.id, slug: productor.slug }) }}">
+            {{ productor.name }}
+        </a>
+    </div>
+    <div class="card-block px-2 w-75 card_right_productor">
+        <ul>
+            {% for wine in productor.wines %}
+                <li class="wine_list_item">
+                    {{ include('shop/_whine_list_item.html.twig',
+                        {wine: wine}) }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="w-100"></div>
+</div>
+<div class="separator"></div>

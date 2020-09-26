@@ -1,26 +1,56 @@
 @import "common/color";
 
-.by_appellation {
+.card_appellation > .card-header {
   background-color: $bordeau;
-  font-size: 24px;
+  font-size: 26px;
+  font-family: 'Baloo Tammudu 2', sans-serif;
+  padding-bottom: 0;
 }
 
-.by_appellation a {
+.card_appellation > .card-header a {
   color: $white;
 }
 
-.by_productor {
+.card_appellation > .card-header a:hover {
+  opacity: 0.8;
+}
+
+.card_appellation > .card-body {
+  padding-bottom: 0px;
+}
+
+.card_productor {
+  border-radius: 0 !important;
+}
+
+.card_left_productor {
   background-color: $vert;
   font-size: 20px;
+  font-family: 'Baloo Tammudu 2', sans-serif;
+  padding-bottom: 0;
+  border-radius: 0 !important;
 }
 
-.by_productor a {
+.card_left_productor a {
   color: $white;
+}
+
+.card_left_productor a:hover {
+  opacity: 0.8;
+}
+
+.card_right_productor {
+  background-color: $lightgrey;
+  border-radius: 0 !important;
+}
+
+.card_right_productor > ul {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .wine_list_item {
   list-style: none;
-  //border-bottom: 1px $darkgrey solid;
 }
 
 .region_wine_link {

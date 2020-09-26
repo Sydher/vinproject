@@ -7,7 +7,7 @@
 
 {% block body %}
     <div class="card">
-        <div class="card-body">
+        <div class="card-body pb-0">
             <h1 class="card-title">
                 <img src="{{ asset('build/images/bottle.svg') }}"
                      alt="bouteille" class="h1_bottle">
@@ -16,28 +16,8 @@
             <hr>
             <div>
                 {% for appellation in region.appellations %}
-                    <h2 class="by_appellation">
-                        <a href="{{ path('shop_appellation',
-                            { id: appellation.id, slug: appellation.slug }) }}">
-                            {{ appellation.name }}
-                        </a>
-                    </h2>
-                    {% for productor in appellation.productors %}
-                        <h3 class="by_productor">
-                            <a href="{{ path('shop_productor',
-                                { id: productor.id, slug: productor.slug }) }}">
-                                {{ productor.name }}
-                            </a>
-                        </h3>
-                        <ul>
-                            {% for wine in productor.wines %}
-                                <li class="wine_list_item">
-                                    {{ include('shop/_whine_list_item.html.twig',
-                                        {wine: wine}) }}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endfor %}
+                    {{ include('shop/_appellation_list_item.html.twig',
+                        {appellation: appellation}) }}
                 {% endfor %}
             </div>
         </div>
