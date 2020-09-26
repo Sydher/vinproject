@@ -36,7 +36,6 @@ class AppellationFixtures extends Fixture implements DependentFixtureInterface {
         $fakeAppellation->setName($faker->text($this->getRandomSize())
             . $faker->randomLetter . $faker->randomNumber());
         $fakeAppellation->setRegion($this->getReference($this->getRandomRegion()));
-        $fakeAppellation->setDescription($faker->sentence(20));
         $this->addReference('appellation_' . $this->cpt, $fakeAppellation);
         $this->cpt++;
         return $fakeAppellation;

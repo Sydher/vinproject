@@ -34,15 +34,6 @@ class AppellationFormType extends AbstractType {
                 'class' => Region::class,
                 'choice_label' => 'name',
                 'required' => true
-            ])
-            ->add('description', TextareaType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'min' => 10,
-                        'max' => 800
-                    ])
-                ]
             ]);
     }
 

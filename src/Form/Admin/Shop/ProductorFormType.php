@@ -36,15 +36,6 @@ class ProductorFormType extends AbstractType {
                 'required' => true,
                 'multiple' => true,
                 'expanded' => true
-            ])
-            ->add('description', TextareaType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'min' => 10,
-                        'max' => 800
-                    ])
-                ]
             ]);
     }
 

@@ -94,15 +94,6 @@ class WineFormType extends AbstractType {
                 'constraints' => [
                     new NotBlank(),
                 ]
-            ])
-            ->add('description', TextareaType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Length([
-                        'min' => 10,
-                        'max' => 500
-                    ])
-                ]
             ]);
     }
 

@@ -38,7 +38,6 @@ class ProductorFixtures extends Fixture implements DependentFixtureInterface {
         for ($i = 1; $i <= $max; $i++) {
             $fakeProductor->addAppellation($this->getReference($this->getRandomAppellation()));
         }
-        $fakeProductor->setDescription($faker->sentence(20));
         $this->addReference('productor_' . $this->cpt, $fakeProductor);
         $this->cpt++;
         return $fakeProductor;
