@@ -11,7 +11,7 @@ liip_imagine:
                     size: [360, 230]
                     mode: outbound
         wine:
-            quality: 75
+            quality: 100
             filters:
                 thumbnail:
                     size: [200, 380]
