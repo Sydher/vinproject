@@ -12,8 +12,14 @@
                 <div class="row">
                     <!-- Photo -->
                     <div class="col-sm-4 text-center wine_img_desc">
-                        <img src="{{ asset('build/images/bottle-empty.png') }}"
-                             alt="photo {{ wine.name }}">
+                        {% if wine.imageName %}
+                            <img src="{{ vich_uploader_asset(wine, 'imageFile') | imagine_filter('wine') }}"
+                                 class="img-fluid"
+                                 alt="photo {{ wine.name }}">
+                        {% else %}
+                            <img src="{{ asset('build/images/bottle-empty.png') }}"
+                                 alt="photo {{ wine.name }}">
+                        {% endif %}
                     </div>
                     <!-- Description -->
                     <div class="col-sm-8">

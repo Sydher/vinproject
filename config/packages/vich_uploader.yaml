@@ -6,3 +6,7 @@ vich_uploader:
             uri_prefix: /storage/images/post
             upload_destination: '%kernel.project_dir%/public/storage/images/post'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
+        wine_image:
+            uri_prefix: /storage/images/wine
+            upload_destination: '%kernel.project_dir%/public/storage/images/wine'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer

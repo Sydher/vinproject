@@ -6,11 +6,16 @@ use App\Repository\WineRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=WineRepository::class)
  * @UniqueEntity(fields={"name"}, message="There is already a wine with this name")
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  */
 class Wine {
 
@@ -68,6 +73,21 @@ class Wine {
      * @ORM\Column(type="decimal", precision=5, scale=2)
      */
     private $price;
+
+    /**
+     * @var File|null
+     * @Assert\Image(
+     *     mimeTypes = {"image/jpeg", "image/png"}
+     * )
+     * @Vich\UploadableField(mapping="wine_image", fileNameProperty="imageName")
+     */
+    private $imageFile;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageName;
 
     public function getId(): ?int {
         return $this->id;
@@ -155,6 +175,41 @@ class Wine {
 
     public function setPrice(string $price): self {
         $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return Wine
+     */
+    public function setImageFile(?File $imageFile): Wine {
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->setUpdatedAt(new \DateTime('now'));
+        }
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageName(): ?string {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string|null $imageName
+     * @return Wine
+     */
+    public function setImageName(?string $imageName): Wine {
+        $this->imageName = $imageName;
         return $this;
     }
 

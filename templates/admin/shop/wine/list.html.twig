@@ -34,7 +34,8 @@
                         {% for wine in allWine %}
                             <tr>
                                 <td>
-                                    <a href="#"
+                                    <a href="{{ path('shop_wine',
+                                        {id: wine.id, slug: wine.slug}) }}"
                                        target="_blank">
                                         {{ wine.name }}
                                     </a>
