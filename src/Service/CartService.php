@@ -45,6 +45,14 @@ class CartService {
         ];
     }
 
+    public function getItem($id) {
+        $panier = $this->session->get('panier', []);
+        if (isset($panier[$id])) {
+            return $panier[$id];
+        }
+        return 0;
+    }
+
     /**
      * Ajoute un produit au panier.
      * @param $id l'identifiant du produit à ajouter au panier
