@@ -17,7 +17,8 @@ class CartService {
      */
     private $wineRepository;
 
-    public function __construct(SessionInterface $session, WineRepository $wineRepository) {
+    public function __construct(SessionInterface $session,
+                                WineRepository $wineRepository) {
         $this->session = $session;
         $this->wineRepository = $wineRepository;
     }
@@ -32,7 +33,7 @@ class CartService {
         $total = 0;
 
         foreach ($panier as $id => $quantity) {
-            $product = $this->wineRepository->find($id);
+            $product = $this->getProductWithId($id);
             $total += $product->getPrice() * $quantity;
             $items[] = [
                 'product' => $product,
@@ -93,6 +94,19 @@ class CartService {
             unset($panier[$id]);
         }
         $this->session->set('panier', $panier);
+    }
+
+    private function getProductWithId($idProduct) {
+        $productWithId = explode("-", $idProduct);
+        switch ($productWithId[0]) {
+            case "wine":
+                return $this->wineRepository->find($productWithId[1]);
+                break;
+            case "bear":
+                return null;
+                break;
+        }
+        return null;
     }
 
 }

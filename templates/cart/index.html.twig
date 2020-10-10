@@ -34,15 +34,15 @@
                                 <td>{{ item.quantity }}</td>
                                 <td>{{ item.product.price * item.quantity }} €</td>
                                 <td>
-                                    <a href="{{ path('cart_remove', { id: item.product.id }) }}"
+                                    <a href="{{ path('cart_remove', { id: "wine-" ~ item.product.id }) }}"
                                        class="btn btn-dark">
                                         <i class="fas fa-minus"></i>
                                     </a>
-                                    <a href="{{ path('cart_add', { id: item.product.id }) }}"
+                                    <a href="{{ path('cart_add', { id: "wine-" ~ item.product.id }) }}"
                                        class="btn btn-success">
                                         <i class="fas fa-plus"></i>
                                     </a>
-                                    <a href="{{ path('cart_delete', { id: item.product.id }) }}"
+                                    <a href="{{ path('cart_delete', { id: "wine-" ~ item.product.id }) }}"
                                        class="btn btn-danger">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>

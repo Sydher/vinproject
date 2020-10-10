@@ -123,7 +123,7 @@ class ShopController extends AbstractController {
      */
     public function showWine(string $id): Response {
         $wine = $this->wineRepository->find($id);
-        $quantity = $this->cartService->getItem($id);
+        $quantity = $this->cartService->getItem("wine-" . $id);
         return $this->render('shop/wine.html.twig', [
             'wine' => $wine,
             'quantity' => $quantity,
