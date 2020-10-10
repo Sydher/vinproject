@@ -17,9 +17,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
-class Wine {
+class Wine implements Product {
 
-    use DateTimeTrait;
+    use DateTimeTrait, ProductTrait;
 
     /**
      * @ORM\Id()
@@ -70,11 +70,6 @@ class Wine {
     private $vintage;
 
     /**
-     * @ORM\Column(type="decimal", precision=5, scale=2)
-     */
-    private $price;
-
-    /**
      * @var File|null
      * @Assert\Image(
      *     mimeTypes = {"image/jpeg", "image/png"}
@@ -88,11 +83,6 @@ class Wine {
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $imageName;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $stock;
 
     public function getId(): ?int {
         return $this->id;
@@ -174,15 +164,6 @@ class Wine {
         return $this;
     }
 
-    public function getPrice(): ?string {
-        return $this->price;
-    }
-
-    public function setPrice(string $price): self {
-        $this->price = $price;
-        return $this;
-    }
-
     /**
      * @return File|null
      */
@@ -215,15 +196,6 @@ class Wine {
      */
     public function setImageName(?string $imageName): Wine {
         $this->imageName = $imageName;
-        return $this;
-    }
-
-    public function getStock(): ?int {
-        return $this->stock;
-    }
-
-    public function setStock(int $stock): self {
-        $this->stock = $stock;
         return $this;
     }
 

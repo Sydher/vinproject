@@ -1,0 +1,21 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Ajouter une bière{% endblock %}
+
+{% block body %}
+    <div class="card mx-auto medium_form">
+        <div class="card-body">
+            <h5 class="card-title">Ajouter une bière</h5>
+            {% include 'admin/shop/beer/_form.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        })
+    </script>
+{% endblock %}

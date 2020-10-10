@@ -25,24 +25,34 @@
                         {% for item in items %}
                             <tr>
                                 <td>
-                                    <a href="{{ path('shop_wine',
-                                        {id: item.product.id, slug: item.product.slug}) }}">
-                                        {{ item.product.name }}
-                                    </a>
+                                    {% if item.type == 'wine' %}
+                                        <a href="{{ path('shop_wine',
+                                            {id: item.product.id, slug: item.product.slug}) }}">
+                                            <i class="fas fa-wine-bottle"></i>&nbsp;
+                                            {{ item.product.name }}
+                                        </a>
+                                    {% elseif item.type == 'beer' %}
+                                        <a href="{{ path('shop_beer',
+                                            {id: item.product.id, slug: item.product.slug}) }}">
+                                            <i class="fas fa-beer"></i>&nbsp;
+                                            {{ item.product.name }}
+                                        </a>
+                                    {% endif %}
+                                    {# <i class="fas fa-utensils"></i> #}
                                 </td>
                                 <td>{{ item.product.price }} €</td>
                                 <td>{{ item.quantity }}</td>
                                 <td>{{ item.product.price * item.quantity }} €</td>
                                 <td>
-                                    <a href="{{ path('cart_remove', { id: "wine-" ~ item.product.id }) }}"
+                                    <a href="{{ path('cart_remove', { id: item.type ~ "-" ~ item.product.id }) }}"
                                        class="btn btn-dark">
                                         <i class="fas fa-minus"></i>
                                     </a>
-                                    <a href="{{ path('cart_add', { id: "wine-" ~ item.product.id }) }}"
+                                    <a href="{{ path('cart_add', { id: item.type ~ "-" ~ item.product.id }) }}"
                                        class="btn btn-success">
                                         <i class="fas fa-plus"></i>
                                     </a>
-                                    <a href="{{ path('cart_delete', { id: "wine-" ~ item.product.id }) }}"
+                                    <a href="{{ path('cart_delete', { id: item.type ~ "-" ~ item.product.id }) }}"
                                        class="btn btn-danger">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>

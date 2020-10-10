@@ -38,6 +38,7 @@ class WineFixtures extends Fixture implements DependentFixtureInterface {
         $fakeWine->setYear($faker->year('now'));
         $fakeWine->setFormat('Bouteille (' . $faker->numberBetween(25, 100) . ' cl)');
         $fakeWine->setPrice($faker->randomFloat(2, 8, 200));
+        $fakeWine->setStock($faker->numberBetween(2, 20));
         return $fakeWine;
     }
 

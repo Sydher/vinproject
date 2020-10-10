@@ -16,3 +16,4 @@
 'PatternPassword': "Votre mot de passe doit comporter au moins 1 lettre minuscule, 1 lettre majuscule, 1 chiffre et 1 caractère spécial"
 'AppelationUnique': "Une appellation existe déjà avec ce nom"
 'ProductorUnique': "Un producteur existe déjà avec ce nom"
+'ProductNameUnique': "Un produit existe déjà avec ce nom"

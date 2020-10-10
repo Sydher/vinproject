@@ -15,3 +15,10 @@ liip_imagine:
             filters:
                 thumbnail:
                     size: [200, 380]
+                    mode: inset
+        beer:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [200, 380]
+                    mode: inset

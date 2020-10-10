@@ -2,6 +2,10 @@
 
 namespace App\Service;
 
+use App\Entity\Product;
+use App\Entity\ProductTrait;
+use App\Entity\Wine;
+use App\Repository\BeerRepository;
 use App\Repository\WineRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -17,10 +21,17 @@ class CartService {
      */
     private $wineRepository;
 
+    /**
+     * @var BeerRepository
+     */
+    private $beerRepository;
+
     public function __construct(SessionInterface $session,
-                                WineRepository $wineRepository) {
+                                WineRepository $wineRepository,
+                                BeerRepository $beerRepository) {
         $this->session = $session;
         $this->wineRepository = $wineRepository;
+        $this->beerRepository = $beerRepository;
     }
 
     /**
@@ -33,10 +44,11 @@ class CartService {
         $total = 0;
 
         foreach ($panier as $id => $quantity) {
-            $product = $this->getProductWithId($id);
+            list($product, $type) = $this->getProductWithId($id);
             $total += $product->getPrice() * $quantity;
             $items[] = [
                 'product' => $product,
+                'type' => $type,
                 'quantity' => $quantity
             ];
         }
@@ -96,20 +108,31 @@ class CartService {
         $this->session->set('panier', $panier);
     }
 
+    /**
+     * @param $idProduct
+     * @return array|null[]
+     */
     private function getProductWithId($idProduct) {
         $productWithId = explode("-", $idProduct);
         switch ($productWithId[0]) {
             case "wine":
-                return $this->wineRepository->find($productWithId[1]);
+                return [
+                    $this->wineRepository->find($productWithId[1]),
+                    "wine"
+                ];
                 break;
-            case "bear":
-                return null;
+            case "beer":
+                return [
+                    $this->beerRepository->find($productWithId[1]),
+                    "beer"
+                ];
                 break;
         }
-        return null;
+        return [null, null];
     }
 
     private function updateStock($idProduct) {
+        // TODO
         $productWithId = explode("-", $idProduct);
         switch ($productWithId[0]) {
             case "wine":

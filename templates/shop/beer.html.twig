@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ beer.name }}{% endblock %}
+{% block description %}
+    <meta name="description" content="Page de vente de {{ beer.name }}">
+{% endblock %}
+
+{% block body %}
+    <div class="card medium_page">
+        <div class="card-body">
+            <div>
+                <div class="row">
+                    <!-- Photo -->
+                    <div class="col-sm-4 text-center beer_img_desc">
+                        {% if beer.imageName %}
+                            <img src="{{ vich_uploader_asset(beer, 'imageFile') | imagine_filter('beer') }}"
+                                 class="img-fluid"
+                                 alt="photo {{ beer.name }}">
+                        {% else %}
+                            <img src="{{ asset('build/images/bottle-empty.png') }}"
+                                 alt="photo {{ beer.name }}">
+                        {% endif %}
+                    </div>
+                    <!-- Description -->
+                    <div class="col-sm-8">
+                        <h2 class="beer_name">{{ beer.name }}</h2>
+                        <h4 class="beer_price">
+                            {{ beer.price }} €
+                            <small>{{ beer.stock }} bouteilles disponibles</small>
+                        </h4>
+                        <table class="table">
+                            <tr>
+                                <th scope="row">Ingrédients</th>
+                                <td>{{ beer.ingredients }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Alcool</th>
+                                <td>{{ beer.degree }}</td>
+                            </tr>
+                        </table>
+                        <p>{{ beer.description }}</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    {% if quantity == 0 %}
+                        <a class="btn btn-primary btn-lg"
+                           href="{{ path('cart_add', {id: "beer-" ~ beer.id}) }}">
+                            <i class="fas fa-cart-plus"></i>&nbsp;
+                            Ajouter au panier
+                        </a>
+                    {% else %}
+                        <a href="{{ path('cart_remove', { id: "beer-" ~ beer.id }) }}"
+                           class="btn btn-dark">
+                            <i class="fas fa-minus"></i>
+                        </a>
+                        <span class="ml-2 mr-2">{{ quantity }}</span>
+                        <a href="{{ path('cart_add', { id: "beer-" ~ beer.id }) }}"
+                           class="btn btn-success">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
