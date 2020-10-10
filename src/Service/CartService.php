@@ -109,4 +109,17 @@ class CartService {
         return null;
     }
 
+    private function updateStock($idProduct) {
+        $productWithId = explode("-", $idProduct);
+        switch ($productWithId[0]) {
+            case "wine":
+                return $this->wineRepository->find($productWithId[1]);
+                break;
+            case "bear":
+                return null;
+                break;
+        }
+        return null;
+    }
+
 }

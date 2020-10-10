@@ -26,9 +26,19 @@
                         <h2 class="wine_name">{{ wine.name }}</h2>
                         <h4 class="wine_price">
                             {{ wine.price }} €
-                            <small>4 bouteilles disponibles</small>
+                            <small>{{ wine.stock}} bouteilles disponibles</small>
                         </h4>
                         <table class="table">
+                            <tr>
+                                <th scope="row">Région</th>
+                                <td>
+                                    <a href="{{ path('shop_region', {
+                                        id: wine.region.id,
+                                        slug: wine.region.slug }) }}">
+                                        {{ wine.region.name }}
+                                    </a>
+                                </td>
+                            </tr>
                             <tr>
                                 <th scope="row">Appellation</th>
                                 <td>

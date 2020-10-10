@@ -89,6 +89,11 @@ class Wine {
      */
     private $imageName;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $stock;
+
     public function getId(): ?int {
         return $this->id;
     }
@@ -210,6 +215,15 @@ class Wine {
      */
     public function setImageName(?string $imageName): Wine {
         $this->imageName = $imageName;
+        return $this;
+    }
+
+    public function getStock(): ?int {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): self {
+        $this->stock = $stock;
         return $this;
     }
 

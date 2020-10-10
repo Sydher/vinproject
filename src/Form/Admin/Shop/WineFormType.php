@@ -95,6 +95,11 @@ class WineFormType extends AbstractType {
                     new NotBlank(),
                 ]
             ])
+            ->add('stock', NumberType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                ]
+            ])
             ->add('imageFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,

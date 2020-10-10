@@ -17,19 +17,22 @@
     </div>
 </div>
 <div class="row">
-    <div class="col">
+    <div class="col-2">
         {{ form_row(form.year) }}
     </div>
-    <div class="col">
+    <div class="col-4">
         {{ form_row(form.format) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.vintage) }}
     </div>
 </div>
 <div class="row">
     <div class="col">
-        {{ form_row(form.vintage) }}
+        {{ form_row(form.price) }}
     </div>
     <div class="col">
-        {{ form_row(form.price) }}
+        {{ form_row(form.stock) }}
     </div>
 </div>
 {{ form_row(form.imageFile) }}
