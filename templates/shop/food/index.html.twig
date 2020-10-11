@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits alimentaires{% endblock %}
+{% block description %}
+    <meta name="description" content="Toutes les produits alimentaires en vente.">
+{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">
+                <img src="{{ asset('build/images/bottle.svg') }}"
+                     alt="bouteille" class="h1_bottle">
+                La Cave en Ligne : Liste de nos produits alimentaires
+            </h1>
+            <hr>
+
+            <ul class="list-group">
+                {% for food in allFood %}
+                    <li class="list-group-item wine_list_item">
+                        <i class="fas fa-utensils"></i>
+                        &nbsp;
+                        <a href="{{ path('shop_food', {id: food.id, slug: food.slug}) }}"
+                           class="region_wine_link">
+                            {{ food.name }}
+                        </a>
+                        -
+                        {{ food.price }} €
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

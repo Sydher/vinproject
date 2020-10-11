@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ food.name }}{% endblock %}
+{% block description %}
+    <meta name="description" content="Page de vente de {{ food.name }}">
+{% endblock %}
+
+{% block body %}
+    <div class="card medium_page">
+        <div class="card-body">
+            <div>
+                <div class="row">
+                    <!-- Photo -->
+                    <div class="col-sm-6 text-center beer_img_desc">
+                        {% if food.imageName %}
+                            <img src="{{ vich_uploader_asset(food, 'imageFile') | imagine_filter('food') }}"
+                                 class="img-fluid"
+                                 alt="photo {{ food.name }}">
+                        {% else %}
+                            <img src="{{ asset('build/images/food_default.jpg') | imagine_filter('food') }}"
+                                 alt="photo {{ food.name }}">
+                        {% endif %}
+                    </div>
+                    <!-- Description -->
+                    <div class="col-sm-6">
+                        <h2 class="beer_name">{{ food.name }}</h2>
+                        <h4 class="beer_price">
+                            {{ food.price }} €
+                            <small>{{ food.stock }} disponibles</small>
+                        </h4>
+                        <p>{{ food.description }}</p>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    {% if quantity == 0 %}
+                        <a class="btn btn-primary btn-lg"
+                           href="{{ path('cart_add', {id: "food-" ~ food.id}) }}">
+                            <i class="fas fa-cart-plus"></i>&nbsp;
+                            Ajouter au panier
+                        </a>
+                    {% else %}
+                        <a href="{{ path('cart_remove', { id: "food-" ~ food.id }) }}"
+                           class="btn btn-dark">
+                            <i class="fas fa-minus"></i>
+                        </a>
+                        <span class="ml-2 mr-2">{{ quantity }}</span>
+                        <a href="{{ path('cart_add', { id: "food-" ~ food.id }) }}"
+                           class="btn btn-success">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

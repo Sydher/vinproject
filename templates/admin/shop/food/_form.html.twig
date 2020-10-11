@@ -1,0 +1,22 @@
+{{ form_start(form) }}
+{{ form_row(form.name) }}
+<div class="row">
+    <div class="col">
+        {{ form_row(form.price) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.stock) }}
+    </div>
+</div>
+{{ form_row(form.description) }}
+{{ form_row(form.imageFile) }}
+
+<div class="text-center">
+    <a class="btn btn-light" href="{{ path('admin_shop_list_food') }}">
+        Annuler
+    </a>
+    <button class="btn btn-success" type="submit">
+        Sauvegarder
+    </button>
+</div>
+{{ form_end(form) }}

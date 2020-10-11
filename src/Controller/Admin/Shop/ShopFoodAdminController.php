@@ -3,17 +3,17 @@
 namespace App\Controller\Admin\Shop;
 
 use App\Controller\AbstractController;
-use App\Entity\Beer;
-use App\Form\Admin\Shop\BeerFormType;
+use App\Entity\Food;
+use App\Form\Admin\Shop\FoodFormType;
 use App\Form\ConfirmDeleteFormType;
-use App\Repository\BeerRepository;
+use App\Repository\FoodRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\CacheInterface;
 
-class ShopBeerAdminController extends AbstractController {
+class ShopFoodAdminController extends AbstractController {
 
     /**
      * @var PaginatorInterface
@@ -26,111 +26,111 @@ class ShopBeerAdminController extends AbstractController {
     private $cache;
 
     /**
-     * @var BeerRepository
+     * @var FoodRepository
      */
-    private $beerRepository;
+    private $foodRepository;
 
     public function __construct(PaginatorInterface $paginator,
                                 CacheInterface $cache,
-                                BeerRepository $beerRepository) {
+                                FoodRepository $foodRepository) {
         $this->paginator = $paginator;
         $this->cache = $cache;
-        $this->beerRepository = $beerRepository;
+        $this->foodRepository = $foodRepository;
     }
 
     /**
-     * @Route("/admin/boutique/bieres", name="admin_shop_list_beer")
+     * @Route("/admin/boutique/alimentations", name="admin_shop_list_food")
      * @param PaginatorInterface $paginator
      * @param Request $request
      * @return Response
      */
-    public function listBeer(PaginatorInterface $paginator, Request $request): Response {
-        $allBeer = $paginator->paginate(
-            $this->beerRepository->findAllOrderByLastUpdateQuery(),
+    public function index(PaginatorInterface $paginator, Request $request): Response {
+        $allFood = $paginator->paginate(
+            $this->foodRepository->findAllOrderByLastUpdateQuery(),
             $request->query->getInt('page', 1),
             10
         );
-        return $this->render('admin/shop/beer/list.html.twig', [
-            'allBeer' => $allBeer,
+        return $this->render('admin/shop/food/list.html.twig', [
+            'allFood' => $allFood,
             'menu' => 'boutique'
         ]);
     }
 
     /**
-     * @Route("/admin/boutique/bieres/creer", name="admin_shop_add_beer")
+     * @Route("/admin/boutique/alimentations/creer", name="admin_shop_add_food")
      * @param Request $request
      * @return Response
      */
-    public function createBeer(Request $request): Response {
-        $beer = new Beer();
-        $form = $this->createForm(BeerFormType::class, $beer);
+    public function create(Request $request): Response {
+        $food = new Food();
+        $form = $this->createForm(FoodFormType::class, $food);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($beer);
+            $entityManager->persist($food);
             $entityManager->flush();
             $this->flashSuccess("Created");
-            $entityManager->refresh($beer);
-            return $this->redirectToRoute('admin_shop_list_beer');
+            $entityManager->refresh($food);
+            return $this->redirectToRoute('admin_shop_list_food');
         }
 
-        return $this->render('admin/shop/beer/create.html.twig', [
+        return $this->render('admin/shop/food/create.html.twig', [
             'form' => $form->createView(),
-            'beer' => $beer,
+            'food' => $food,
             'menu' => 'boutique'
         ]);
     }
 
     /**
-     * @Route("/admin/boutique/bieres/modifier/{id}", name="admin_shop_edit_beer")
+     * @Route("/admin/boutique/alimentations/modifier/{id}", name="admin_shop_edit_food")
      * @param Request $request
      * @param string $id
      * @return Response
      */
-    public function editBeer(Request $request, string $id): Response {
-        $beer = $this->beerRepository->find($id);
-        $form = $this->createForm(BeerFormType::class, $beer);
+    public function edit(Request $request, string $id): Response {
+        $food = $this->foodRepository->find($id);
+        $form = $this->createForm(FoodFormType::class, $food);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($beer);
+            $entityManager->persist($food);
             $entityManager->flush();
             $this->flashSuccess("Updated");
-            $entityManager->refresh($beer);
-            return $this->redirectToRoute('admin_shop_list_beer');
+            $entityManager->refresh($food);
+            return $this->redirectToRoute('admin_shop_list_food');
         }
 
-        return $this->render('admin/shop/beer/edit.html.twig', [
+        return $this->render('admin/shop/food/edit.html.twig', [
             'form' => $form->createView(),
-            'beer' => $beer,
+            'food' => $food,
             'menu' => 'boutique'
         ]);
     }
 
     /**
-     * @Route("/admin/boutique/bieres/supprimer/{id}", name="admin_shop_delete_beer")
+     * @Route("/admin/boutique/alimentations/supprimer/{id}", name="admin_shop_delete_food")
      * @param Request $request
      * @param string $id
      * @return Response
      */
-    public function deleteBeer(Request $request, string $id): Response {
-        $beer = $this->beerRepository->find($id);
-        $form = $this->createForm(ConfirmDeleteFormType::class, $beer);
+    public function delete(Request $request, string $id): Response {
+        $food = $this->foodRepository->find($id);
+        $form = $this->createForm(ConfirmDeleteFormType::class, $food);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($beer);
+            $entityManager->remove($food);
             $entityManager->flush();
             $this->flashInfo("Deleted");
-            return $this->redirectToRoute('admin_shop_list_beer');
+            return $this->redirectToRoute('admin_shop_list_food');
         }
 
-        return $this->render('admin/shop/beer/delete.html.twig', [
+        return $this->render('admin/shop/food/delete.html.twig', [
             'form' => $form->createView(),
-            'beer' => $beer,
+            'food' => $food,
             'menu' => 'boutique'
         ]);
     }

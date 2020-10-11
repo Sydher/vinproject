@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Entity\ProductTrait;
 use App\Entity\Wine;
 use App\Repository\BeerRepository;
+use App\Repository\FoodRepository;
 use App\Repository\WineRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -26,12 +27,19 @@ class CartService {
      */
     private $beerRepository;
 
+    /**
+     * @var FoodRepository
+     */
+    private $foodRepository;
+
     public function __construct(SessionInterface $session,
                                 WineRepository $wineRepository,
-                                BeerRepository $beerRepository) {
+                                BeerRepository $beerRepository,
+                                FoodRepository $foodRepository) {
         $this->session = $session;
         $this->wineRepository = $wineRepository;
         $this->beerRepository = $beerRepository;
+        $this->foodRepository = $foodRepository;
     }
 
     /**
@@ -125,6 +133,12 @@ class CartService {
                 return [
                     $this->beerRepository->find($productWithId[1]),
                     "beer"
+                ];
+                break;
+            case "food":
+                return [
+                    $this->foodRepository->find($productWithId[1]),
+                    "food"
                 ];
                 break;
         }

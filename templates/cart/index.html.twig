@@ -37,8 +37,13 @@
                                             <i class="fas fa-beer"></i>&nbsp;
                                             {{ item.product.name }}
                                         </a>
+                                    {% elseif item.type == 'food' %}
+                                        <a href="{{ path('shop_food',
+                                            {id: item.product.id, slug: item.product.slug}) }}">
+                                            <i class="fas fa-utensils"></i>&nbsp;
+                                            {{ item.product.name }}
+                                        </a>
                                     {% endif %}
-                                    {# <i class="fas fa-utensils"></i> #}
                                 </td>
                                 <td>{{ item.product.price }} €</td>
                                 <td>{{ item.quantity }}</td>

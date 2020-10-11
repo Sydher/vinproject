@@ -22,3 +22,9 @@ liip_imagine:
                 thumbnail:
                     size: [200, 380]
                     mode: inset
+        food:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [500, 350]
+                    mode: inset
