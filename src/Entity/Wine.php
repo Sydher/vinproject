@@ -84,6 +84,11 @@ class Wine implements Product {
      */
     private $imageName;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $degree;
+
     public function getId(): ?int {
         return $this->id;
     }
@@ -196,6 +201,15 @@ class Wine implements Product {
      */
     public function setImageName(?string $imageName): Wine {
         $this->imageName = $imageName;
+        return $this;
+    }
+
+    public function getDegree(): ?string {
+        return $this->degree;
+    }
+
+    public function setDegree(string $degree): self {
+        $this->degree = $degree;
         return $this;
     }
 

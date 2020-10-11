@@ -11,6 +11,11 @@ stop-docker:
 	docker rm vinproject_mysql
 	docker rm vinproject_maildev
 
+# Recréer la BD
+.PHONY: open-mysql
+open-mysql:
+	docker exec -it vinproject_mysql mysql -uroot -proot
+
 # Initialisation et remplissage de la BD
 .PHONY: init-database
 init-database:

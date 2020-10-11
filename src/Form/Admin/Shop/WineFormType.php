@@ -90,6 +90,13 @@ class WineFormType extends AbstractType {
                 ],
                 'required' => false
             ])
+            ->add('degree', TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'min' => 2
+                    ])
+                ]
+            ])
             ->add('price', NumberType::class, [
                 'constraints' => [
                     new NotBlank(),
