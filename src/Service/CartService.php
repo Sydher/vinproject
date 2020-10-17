@@ -2,9 +2,6 @@
 
 namespace App\Service;
 
-use App\Entity\Product;
-use App\Entity\ProductTrait;
-use App\Entity\Wine;
 use App\Repository\BeerRepository;
 use App\Repository\FoodRepository;
 use App\Repository\WineRepository;
@@ -77,8 +74,9 @@ class CartService {
     /**
      * Ajoute un produit au panier.
      * @param $id l'identifiant du produit à ajouter au panier
+     * @return int la quantité du produit dans le panier
      */
-    public function add($id): void {
+    public function add($id): int {
         $panier = $this->session->get('panier', []);
         if (!empty($panier[$id])) {
             $panier[$id]++;
@@ -86,22 +84,27 @@ class CartService {
             $panier[$id] = 1;
         }
         $this->session->set('panier', $panier);
+        return $panier[$id];
     }
 
     /**
      * Retire un produit du panier.
      * @param $id l'identifiant du produit à retirer du panier
+     * @return int la quantité du produit dans le panier
      */
-    public function remove($id): void {
+    public function remove($id): int {
+        $quantity = 0;
         $panier = $this->session->get('panier', []);
         if (!empty($panier[$id])) {
             if ($panier[$id] > 1) {
                 $panier[$id]--;
+                $quantity = $panier[$id];
             } else {
                 unset($panier[$id]);
             }
         }
         $this->session->set('panier', $panier);
+        return $quantity;
     }
 
     /**

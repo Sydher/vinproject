@@ -36,8 +36,12 @@ class CartController extends AbstractController {
      * @return Response
      */
     public function add(string $id): Response {
-        $this->cartService->add($id);
-        return $this->redirectToRoute('cart_home');
+        $quantity = $this->cartService->add($id);
+        return $this->json([
+            'code' => 200,
+            'message' => $id.' : +1 dans le panier',
+            'quantity' => $quantity
+        ], 200);
     }
 
     /**
@@ -46,6 +50,30 @@ class CartController extends AbstractController {
      * @return Response
      */
     public function remove(string $id): Response {
+        $quantity = $this->cartService->remove($id);
+        return $this->json([
+            'code' => 200,
+            'message' => $id.' : -1 dans le panier',
+            'quantity' => $quantity
+        ], 200);
+    }
+
+    /**
+     * @Route("/panier/ajouter-au-panier/{id}", name="cart_add_redirect")
+     * @param string $id
+     * @return Response
+     */
+    public function addToCart(string $id): Response {
+        $this->cartService->add($id);
+        return $this->redirectToRoute('cart_home');
+    }
+
+    /**
+     * @Route("/panier/enlever-du-panier/{id}", name="cart_remove_redirect")
+     * @param string $id
+     * @return Response
+     */
+    public function removeToCart(string $id): Response {
         $this->cartService->remove($id);
         return $this->redirectToRoute('cart_home');
     }

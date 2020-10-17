@@ -1,0 +1,65 @@
+{% if quantity == 0 %}
+    <div class="text-center" id="div_empty">
+        <a class="btn btn-primary btn-lg" id="btn_cart_add_from_empty"
+           href="{{ path('cart_add', { id: url }) }}">
+            <i class="fas fa-cart-plus"></i>&nbsp;
+            Ajouter au panier
+        </a>
+    </div>
+{% endif %}
+<!-- Masqué par défaut, sera affiché via le JS si besoin -->
+<div class="text-center {% if quantity == 0 %}hidden{% endif %}"
+     id="div_not_empty">
+    <a class="btn btn-dark" id="btn_cart_remove"
+       href="{{ path('cart_remove', { id: url }) }}">
+        <i class="fas fa-minus"></i>
+    </a>
+    <span class="ml-2 mr-2" id="cart_count">{{ quantity }}</span>
+    <a class="btn btn-success" id="btn_cart_add"
+       href="{{ path('cart_add', { id: url }) }}">
+        <i class="fas fa-plus"></i>
+    </a>
+</div>
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function onClickCartAddFromEmpty(event) {
+            event.preventDefault();
+            axios.get(this.href).then(function (response) {
+                let divNotEmpty = document.getElementById("div_not_empty");
+                if (divNotEmpty !== null && divNotEmpty.classList.contains("hidden")) {
+                    let divEmpty = document.getElementById("div_empty");
+                    divNotEmpty.classList.remove("hidden");
+                    divEmpty.classList.add("hidden");
+                }
+
+                let cartCount = document.getElementById("cart_count");
+                cartCount.textContent = response.data.quantity;
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+
+        function onClickUpdateCart(event) {
+            event.preventDefault();
+            axios.get(this.href).then(function (response) {
+                let cartCount = document.getElementById("cart_count");
+                cartCount.textContent = response.data.quantity;
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+
+        let btnCartAddFromEmpty = document.getElementById('btn_cart_add_from_empty');
+        if (btnCartAddFromEmpty !== null) {
+            btnCartAddFromEmpty.addEventListener("click", onClickCartAddFromEmpty);
+        }
+
+        let btnCartAdd = document.getElementById('btn_cart_add');
+        btnCartAdd.addEventListener("click", onClickUpdateCart);
+
+        let btnCartRemove = document.getElementById('btn_cart_remove');
+        btnCartRemove.addEventListener("click", onClickUpdateCart);
+    </script>
+{% endblock %}

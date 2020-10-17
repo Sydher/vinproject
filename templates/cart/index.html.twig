@@ -49,11 +49,11 @@
                                 <td>{{ item.quantity }}</td>
                                 <td>{{ item.product.price * item.quantity }} €</td>
                                 <td>
-                                    <a href="{{ path('cart_remove', { id: item.type ~ "-" ~ item.product.id }) }}"
+                                    <a href="{{ path('cart_remove_redirect', { id: item.type ~ "-" ~ item.product.id }) }}"
                                        class="btn btn-dark">
                                         <i class="fas fa-minus"></i>
                                     </a>
-                                    <a href="{{ path('cart_add', { id: item.type ~ "-" ~ item.product.id }) }}"
+                                    <a href="{{ path('cart_add_redirect', { id: item.type ~ "-" ~ item.product.id }) }}"
                                        class="btn btn-success">
                                         <i class="fas fa-plus"></i>
                                     </a>

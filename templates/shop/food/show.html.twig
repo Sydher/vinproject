@@ -31,25 +31,8 @@
                         <p>{{ food.description }}</p>
                     </div>
                 </div>
-                <div class="text-center mt-4">
-                    {% if quantity == 0 %}
-                        <a class="btn btn-primary btn-lg"
-                           href="{{ path('cart_add', {id: "food-" ~ food.id}) }}">
-                            <i class="fas fa-cart-plus"></i>&nbsp;
-                            Ajouter au panier
-                        </a>
-                    {% else %}
-                        <a href="{{ path('cart_remove', { id: "food-" ~ food.id }) }}"
-                           class="btn btn-dark">
-                            <i class="fas fa-minus"></i>
-                        </a>
-                        <span class="ml-2 mr-2">{{ quantity }}</span>
-                        <a href="{{ path('cart_add', { id: "food-" ~ food.id }) }}"
-                           class="btn btn-success">
-                            <i class="fas fa-plus"></i>
-                        </a>
-                    {% endif %}
-                </div>
+                {{ include('shop/_add_to_cart.html.twig',
+                    { quantity: quantity, url: "food-" ~ food.id }) }}
             </div>
         </div>
     </div>
