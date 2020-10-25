@@ -1,6 +1,9 @@
 import '../css/app.scss';
 import noUiSlider from 'nouislider';
 import 'nouislider/distribute/nouislider.css';
+import Filter from './modules/Filter';
+
+new Filter(document.querySelector('.js-filter'));
 
 const $ = require("jquery");
 
@@ -17,8 +20,8 @@ $(function () {
 // Configuration No UI Slider
 const slider = document.getElementById('price_slider');
 if (slider) {
-    let actualMin = (document.getElementById('min') as HTMLInputElement);
-    let actualMax = (document.getElementById('max') as HTMLInputElement);
+    let actualMin = document.getElementById('min');
+    let actualMax = document.getElementById('max');
     const minValue = Math.floor(parseInt(slider.dataset.min) / 10) * 10;
     const maxValue = Math.ceil(parseInt(slider.dataset.max) / 10) * 10;
 
