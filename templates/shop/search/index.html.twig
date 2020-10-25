@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rechercher un vin{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            {{ include('shop/search/_form.html.twig', { form: form, min: min, max: max }) }}
+        </div>
+        <div class="col-md-8">
+            {{ include('shop/search/_products.html.twig', { wines: wines }) }}
+        </div>
+    </div>
+{% endblock %}

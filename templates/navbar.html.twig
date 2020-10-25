@@ -20,7 +20,7 @@
             <li class="nav-item dropdown {{ menu_active('boutique') }}">
                 <a class="nav-link dropdown-toggle" href="#" id="navCatalogueDD" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Catalogue
+                    Boutique
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navCatalogueDD">
                     {% for region in region_service.getAll %}
@@ -31,6 +31,7 @@
                     {% endfor %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ path('shop_home') }}">Tous les Vin</a>
+                    <a class="dropdown-item" href="{{ path('shop_search') }}">Rechercher</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ path('shop_beer_list') }}">Bières</a>
                     <a class="dropdown-item" href="{{ path('shop_food_list') }}">Alimentations</a>

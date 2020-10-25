@@ -128,4 +128,8 @@ class Appellation {
         return (new Slugify())->slugify($this->name);
     }
 
+    public function __toString() {
+        return $this->name;
+    }
+
 }

@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">
+            <img src="{{ asset('build/images/bottle.svg') }}"
+                 alt="bouteille" class="h1_bottle">
+            Les vins
+        </h1>
+        <div class="d-flex justify-content-end mb-2">
+            {{ knp_pagination_sortable(wines, 'prix', 'w.price') }}
+        </div>
+        <ul class="list-group">
+            {% for wine in wines %}
+                <li class="list-group-item">
+                    <i class="fas fa-wine-bottle wine_color_{{ wine.color }}"></i>
+                    &nbsp;
+                    <a href="{{ path('shop_wine', {id: wine.id, slug: wine.slug}) }}"
+                       class="region_wine_link">
+                        {{ wine.name }}
+                    </a>
+                    -
+                    {{ wine.price }} €
+                    -
+                    {{ wine.appellation.name }}
+                    {{ wine.productor.name }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="pagination mt-4">
+            {{ knp_pagination_render(wines) }}
+        </div>
+    </div>
+</div>

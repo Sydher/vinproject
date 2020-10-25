@@ -53,3 +53,6 @@
 'Stock': "Stock"
 'Degree': "Dégré d'alcool"
 'Ingredients': "Ingrédients"
+'SearchProductFormNamePlaceHolder': "Rechercher par nom de bouteille"
+'PriceMinPlaceHolder': "Prix min"
+'PriceMaxPlaceHolder': "Prix max"
