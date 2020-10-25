@@ -16,6 +16,15 @@ liip_imagine:
                 thumbnail:
                     size: [200, 380]
                     mode: inset
+        winemini:
+            quality: 75
+            filters:
+                thumbnail:
+                    size: [252, 200]
+                    mode: inset
+                background:
+                    size: [252, 200]
+                    color: '#FFFFFF'
         beer:
             quality: 100
             filters:

@@ -44,7 +44,7 @@ class WineRepository extends ServiceEntityRepository {
      */
     public function findSearch(SearchProduct $search): PaginationInterface {
         $results = $this->getSearchQuery($search)->getQuery();
-        return $this->paginator->paginate($results, $search->page, 10);
+        return $this->paginator->paginate($results, $search->page, 9);
     }
 
     /**

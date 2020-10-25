@@ -3,12 +3,20 @@
 {% block title %}Rechercher un vin{% endblock %}
 
 {% block body %}
-    <div class="row">
+    <div class="row js-filter">
         <div class="col-md-4">
             {{ include('shop/search/_form.html.twig', { form: form, min: min, max: max }) }}
         </div>
         <div class="col-md-8">
-            {{ include('shop/search/_products.html.twig', { wines: wines }) }}
+            <div class="d-flex justify-content-end mb-2 js-filter-sorting">
+                {{ include('shop/search/_sorting.html.twig', { wines: wines }) }}
+            </div>
+            <div class="js-filter-content">
+                {{ include('shop/search/_content.html.twig', { wines: wines }) }}
+            </div>
+            <div class="pagination mt-4 js-filter-pagination">
+                {{ include('shop/search/_pagination.html.twig', { wines: wines }) }}
+            </div>
         </div>
     </div>
 {% endblock %}

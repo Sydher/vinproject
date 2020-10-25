@@ -1,9 +1,13 @@
 <div class="card">
     <div class="card-body">
-        {{ form_start(form) }}
+        {{ form_start(form, { attr: { class: 'js-filter-form' } }) }}
+
+        <div class="spinner-border js-filter-loading" role="status"
+             aria-hidden="true" style="display: none">
+            <span class="sr-only">Loading</span>
+        </div>
+
         {{ form_row(form.name) }}
-        {{ form_row(form.appellation) }}
-        {{ form_row(form.productor) }}
 
         <h6>Prix</h6>
         <div class="row">
@@ -16,9 +20,8 @@
         </div>
         <div id="price_slider" data-min="{{ min }}" data-max="{{ max }}"></div>
 
-        <div class="text-center mt-4">
-            <button type="submit" class="btn btn-primary">Rechercher</button>
-        </div>
+        {{ form_row(form.appellation) }}
+        {{ form_row(form.productor) }}
         {{ form_end(form) }}
     </div>
 </div>

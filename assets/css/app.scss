@@ -39,6 +39,25 @@ h1 {
   display: none;
 }
 
+.is-loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  opacity: .5;
+  z-index: 4;
+}
+
+.is-loading .spinner-border {
+  position: absolute;
+  top: calc(50% - 1rem);
+  left: calc(50% - 1rem);
+  z-index: 5;
+}
+
 @import "common/navbar";
 @import "common/footer";
 @import "common/toast";

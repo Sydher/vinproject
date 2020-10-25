@@ -44,4 +44,7 @@ if (slider) {
             actualMax.value = String(Math.round(values[1]));
         }
     });
+    range.on('end', function (values, handle) {
+        actualMin.dispatchEvent(new Event('change'));
+    });
 }

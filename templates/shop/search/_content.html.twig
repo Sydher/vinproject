@@ -1,0 +1,26 @@
+<div class="row">
+    {% for wine in wines %}
+        <div class="col-lg-4 search-product-card" id="search-product-card-{{ wine.id }}">
+            <div class="card mb-4 search_card">
+                {% if wine.imageName %}
+                    <img src="{{ vich_uploader_asset(wine, 'imageFile') | imagine_filter('winemini') }}"
+                         alt="photo {{ wine.name }}">
+                {% else %}
+                    <img src="{{ asset('build/images/bottle-empty.png') | imagine_filter('winemini') }}"
+                         alt="photo {{ wine.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <i class="fas fa-wine-bottle wine_color_{{ wine.color }}"></i>
+                    &nbsp;
+                    <a href="{{ path('shop_wine', {id: wine.id, slug: wine.slug}) }}"
+                       class="region_wine_link">
+                        {{ wine.name }}
+                    </a><br>
+                    {{ wine.price }} €<br>
+                    {{ wine.appellation.name }}<br>
+                    {{ wine.productor.name }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
