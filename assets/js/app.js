@@ -1,5 +1,6 @@
 import '../css/app.scss';
 import SearchWineFilter from './modules/SearchWineFilter';
+import AdHandler from "./modules/AdHandler";
 
 const $ = require("jquery");
 
@@ -14,4 +15,5 @@ $(document).ready(function () {
 
     // Initialisation des modules
     new SearchWineFilter(document.querySelector('.js-filter'));
+    new AdHandler(document.querySelector('#ad_special_button'));
 });

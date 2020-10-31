@@ -36,6 +36,17 @@
         <!-- Pied du site -->
         {% include 'footer.html.twig' %}
 
+        <!-- Annonce spéciale -->
+        {% if ad_service.isSpecialAdOn %}
+            <div class="alert ad_special text-center hidden" role="alert">
+                {{ ad_service.getSpecialAdMessage }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                        id="ad_special_button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
                 crossorigin="anonymous"></script>

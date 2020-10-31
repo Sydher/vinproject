@@ -58,6 +58,15 @@ h1 {
   z-index: 5;
 }
 
+.ad_special {
+  background-color: $yellow;
+  color: white;
+  position: fixed;
+  bottom: 25px;
+  width: 100%;
+  font-weight: bold;
+}
+
 @import "common/navbar";
 @import "common/footer";
 @import "common/toast";
