@@ -30,7 +30,6 @@
                         </a>
                     {% endfor %}
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ path('shop_home') }}">Tous les Vin</a>
                     <a class="dropdown-item" href="{{ path('shop_search') }}">Rechercher</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ path('shop_beer_list') }}">Bières</a>
@@ -43,10 +42,13 @@
         </ul>
 
         <ul class="navbar-nav">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search"
-                       placeholder="Rechercher" aria-label="Search">
-            </form>
+            <li class="nav-item mr-2">
+                <a class="nav-link" href="{{ path('shop_search') }}"
+                   data-toggle="tooltip" data-placement="bottom"
+                   title="Rechercher un vin">
+                    <i class="fas fa-search"></i>
+                </a>
+            </li>
             {% if app.user %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ menu_active('session') }}" href="#"
