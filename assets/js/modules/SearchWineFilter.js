@@ -1,3 +1,5 @@
+import noUiSlider from 'nouislider';
+import 'nouislider/distribute/nouislider.css';
 import {Flipper, spring} from 'flip-toolkit';
 
 /**
@@ -8,7 +10,7 @@ import {Flipper, spring} from 'flip-toolkit';
  * @property {number} page
  * @property {boolean} moreNav
  */
-export default class Filter {
+export default class SearchWineFilter {
 
     /**
      * @param {HTMLElement|null} element
@@ -17,6 +19,7 @@ export default class Filter {
         if (element === null) {
             return;
         }
+        this.initSlider();
         this.form = element.querySelector('.js-filter-form');
         this.sorting = element.querySelector('.js-filter-sorting');
         this.content = element.querySelector('.js-filter-content');
@@ -24,6 +27,42 @@ export default class Filter {
         this.page = parseInt(new URLSearchParams(window.location.search).get('page') || 1);
         this.moreNav = this.page === 1;
         this.bindEvents();
+    }
+
+    /**
+     * Configuration du slider pour les prix.
+     */
+    initSlider() {
+        const slider = document.getElementById('price_slider');
+        if (slider) {
+            let actualMin = document.getElementById('min');
+            let actualMax = document.getElementById('max');
+            const minValue = Math.floor(parseInt(slider.dataset.min) / 10) * 10;
+            const maxValue = Math.ceil(parseInt(slider.dataset.max) / 10) * 10;
+
+            let range = noUiSlider.create(slider, {
+                start: [parseInt(actualMin.value) || minValue, parseInt(actualMax.value) || maxValue],
+                connect: true,
+                range: {
+                    'min': minValue,
+                    'max': maxValue
+                },
+                step: 10,
+                margin: 10
+            });
+
+            range.on('slide', function (values, handle) {
+                if (handle === 0) {
+                    actualMin.value = String(Math.round(values[0]));
+                }
+                if (handle === 1) {
+                    actualMax.value = String(Math.round(values[1]));
+                }
+            });
+            range.on('end', function (values, handle) {
+                actualMin.dispatchEvent(new Event('change'));
+            });
+        }
     }
 
     /**
