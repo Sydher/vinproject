@@ -1,31 +1,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,300;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@300;400;700&display=swap');
+
+$font-text: 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$font-title: 'Yanone Kaffeesatz', sans-serif, 'Montserrat', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
 @import "common/color";
+
+/* ************************************** */
+/* ***** Définition de la structure ***** */
+/* ************************************** */
 
 body {
   height: 100%;
-  font-family: "Roboto", sans-serif;
+  font-family: $font-text;
   background-color: $lightgrey;
 }
 
 #body {
-  margin: 15px;
+  max-width: 1280px;
+  margin: 0 auto;
   height: 100%;
+}
+
+/* *********************** */
+/* ***** Utilitaires ***** */
+/* *********************** */
+
+// Afficher/masquer mobile
+.mobile_only {
+  @media (min-width: 767px) {
+    display: none;
+  }
+}
+.mobile_hidden {
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 
 .separator {
   margin-bottom: 15px;
 }
 
+.color_primary {
+  color: $primary;
+}
+
+.color_secondary {
+  color: $secondary;
+}
+
+/* ****************** */
+/* ***** Titres ***** */
+/* ****************** */
+
 h1 {
-  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-family: $font-title;
   font-size: 45px;
 }
 
 .h1_bottle {
   height: 45px;
 }
+
+// //////////////// TODO à trier
 
 .short_form {
   max-width: 500px;
@@ -66,6 +105,9 @@ h1 {
   width: 100%;
   font-weight: bold;
 }
+
+/* ******************** */
+/* ******************** */
 
 @import "common/navbar";
 @import "common/footer";

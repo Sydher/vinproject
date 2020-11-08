@@ -1,16 +1,28 @@
-$bordeau: #6D071A;
-$yellow: #FFBE3A;
-$bleu_marine: #03224c;
-$beige: #fcddb3;
-$vert: #0A7A46;
-$jaune: #CCB112;
-$dark: #383E40;
-$aqua: #02A0AE;
+$primary: #6D071A;
+$secondary: #0A7A46;
 $white: #FFFFFF;
 $black: #000000;
 $lightgrey: #F8F9FB;
 $darkgrey: #343333;
+
+// deprecated
+$bordeau: #6D071A;
+$vert: #0A7A46;
+
+// a trier
+$yellow: #FFBE3A;
+$bleu_marine: #03224c;
+$beige: #fcddb3;
+$jaune: #CCB112;
+$dark: #383E40;
+$aqua: #02A0AE;
 $red_error: #DC3545;
 $wine_red: #DC3545;
 $wine_white: #FFC107;
 $wine_pink: #E27BB9;
+
+// qui va bien avec le bordeau (à tester)
+$x: #484ED4;
+$y: #5BEBA1;
+$z: #D4C748;
+$o: #F67E54;

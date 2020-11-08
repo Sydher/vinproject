@@ -9,7 +9,6 @@ a.card_product_mini_link:hover {
 // La carte du produit
 .card_product_mini {
   max-width: 253px;
-  border: $darkgrey solid 1px;
   background-clip: border-box;
   border-radius: .25rem;
   margin-left: auto;
@@ -17,7 +16,6 @@ a.card_product_mini_link:hover {
 
   // L'image de fond
   .card-img-top {
-    background-color: $lightgrey;
     max-height: 160px;
     opacity: 0.3;
   }

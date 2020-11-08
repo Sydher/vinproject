@@ -4,18 +4,54 @@
   max-height: 390px;
 }
 
+.home_body {
+  width: 100%;
+}
+
+/* ****************** */
+/* ***** Gauche ***** */
+/* ****************** */
+
+.home_text {
+  padding: 15px 0 15px 30px;
+}
+
 .home_socials {
   display: inline;
+
+  a {
+    font-size: 42px;
+    color: $yellow;
+  }
+
+  a:hover {
+    font-size: 42px;
+    color: $bordeau;
+    opacity: 0.7;
+    text-decoration: none;
+  }
 }
 
-.home_socials a {
-  font-size: 42px;
-  color: $yellow;
-}
+//.home_socials {
+//  display: inline;
+//}
+//
+//.home_socials a {
+//  font-size: 42px;
+//  color: $yellow;
+//}
+//
+//.home_socials a:hover {
+//  font-size: 42px;
+//  color: $bordeau;
+//  opacity: 0.7;
+//  text-decoration: none;
+//}
 
-.home_socials a:hover {
-  font-size: 42px;
-  color: $bordeau;
-  opacity: 0.7;
-  text-decoration: none;
+/* ****************** */
+/* ***** Droite ***** */
+/* ****************** */
+
+.home_shop_preview {
+  padding-left: 30px;
 }
