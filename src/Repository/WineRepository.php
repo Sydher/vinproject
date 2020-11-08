@@ -39,6 +39,36 @@ class WineRepository extends ServiceEntityRepository {
     }
 
     /**
+     * @param int $nb nombre de résultat à retourner
+     * @return Wine[]
+     */
+    public function findLastCreated(int $nb): array {
+        return $this->createQueryBuilder('w')
+            ->select('w, a, p')
+            ->join('w.appellation', 'a')
+            ->join('w.productor', 'p')
+            ->orderBy('w.createdAt', 'DESC')
+            ->setMaxResults($nb)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param int $id
+     * @return Wine
+     */
+    public function findByIdJoined(int $id): Wine {
+        return $this->createQueryBuilder('w')
+            ->select('w, a, p')
+            ->join('w.appellation', 'a')
+            ->join('w.productor', 'p')
+            ->andWhere('w.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()[0];
+    }
+
+    /**
      * @param SearchProduct $search
      * @return PaginationInterface
      */

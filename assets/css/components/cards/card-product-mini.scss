@@ -1,0 +1,48 @@
+@import "../../common/color";
+
+// Le lien autour de la carte
+a.card_product_mini_link,
+a.card_product_mini_link:hover {
+  color: inherit;
+}
+
+// La carte du produit
+.card_product_mini {
+  max-width: 253px;
+  border: $darkgrey solid 1px;
+  background-clip: border-box;
+  border-radius: .25rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  // L'image de fond
+  .card-img-top {
+    background-color: $lightgrey;
+    max-height: 160px;
+    opacity: 0.3;
+  }
+
+  // Les informations
+  .card-img-overlay {
+    text-align: right;
+    color: $dark;
+    font-family: 'Baloo Tammudu 2', sans-serif;
+  }
+
+  // Nom du produit
+  .card_product_mini_name {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  // Prix du produit
+  .card_product_mini_price {
+    font-size: 16px;
+  }
+}
+
+// La carte du produit au survol
+.card_product_mini:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}

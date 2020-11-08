@@ -396,6 +396,7 @@ class ShopAdminController extends AbstractController {
      * @Route("/admin/boutique/vins/creer", name="admin_shop_add_wine")
      * @param Request $request
      * @return Response
+     * @throws InvalidArgumentException
      */
     public function createWine(Request $request): Response {
         $wine = new Wine();
@@ -408,6 +409,7 @@ class ShopAdminController extends AbstractController {
             $entityManager->flush();
             $this->flashSuccess("Created");
             $entityManager->refresh($wine);
+            $this->cache->delete("last3Created");
             return $this->redirectToRoute('admin_shop_list_wine');
         }
 

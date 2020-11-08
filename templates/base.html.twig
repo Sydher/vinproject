@@ -23,12 +23,6 @@
 
         <!-- Corps du site -->
         <div id="body">
-            {% if app.user and not app.user.verified %}
-                <div class="alert alert-warning" role="alert">
-                    Merci de valider votre adresse mail <i>(via l'email reçu à l'inscription)</i>
-                    afin de pouvoir profiter de toutes les fonctionnalités du site.
-                </div>
-            {% endif %}
             {% include 'common/flash.html.twig' %}
             {% block body %}{% endblock %}
         </div>
