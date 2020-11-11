@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+{{ form_row(form.name) }}
+
+<div class="text-center mt-3">
+    <a class="btn btn-dark" href="{{ path(indexRouteName) }}">
+        <i class="fas fa-window-close"></i>&nbsp;
+        Annuler
+    </a>
+    <button class="btn btn-success" type="submit">
+        <i class="fas fa-check-circle"></i>&nbsp;
+        {{ ok_label }}
+    </button>
+</div>
+{{ form_end(form) }}

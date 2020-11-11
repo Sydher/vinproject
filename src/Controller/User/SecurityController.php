@@ -5,6 +5,7 @@ namespace App\Controller\User;
 use App\Controller\AbstractController;
 use App\Entity\User;
 use App\Form\User\RegistrationFormType;
+use App\Repository\User\BannedDomainRepository;
 use App\Service\Security\EmailVerifier;
 use App\Service\Security\LoginFormAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,39 +70,45 @@ class SecurityController extends AbstractController {
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param LoginFormAuthenticator $authenticator
+     * @param BannedDomainRepository $bannedDomainRepository
      * @return Response
      * @throws TransportExceptionInterface
      */
     public function register(Request $request,
                              UserPasswordEncoderInterface $passwordEncoder,
                              GuardAuthenticatorHandler $guardHandler,
-                             LoginFormAuthenticator $authenticator): Response {
+                             LoginFormAuthenticator $authenticator,
+                             BannedDomainRepository $bannedDomainRepository): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
+            if ($this->canRegister($bannedDomainRepository, $user)) {
+                // encode the plain password
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                // generate a signed url and email it to the user
+                $this->emailVerifier->sendEmailConfirmationFR($user);
+
+                return $guardHandler->authenticateUserAndHandleSuccess(
                     $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmationFR($user);
-
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+                    $request,
+                    $authenticator,
+                    'main' // firewall name in security.yaml
+                );
+            } else {
+                $this->flashError("RegisterDomainForbidden");
+            }
         }
 
         return $this->render('user/register.html.twig', [
@@ -128,6 +135,19 @@ class SecurityController extends AbstractController {
 
         $this->flashSuccess('Email verified');
         return $this->redirectToRoute('home');
+    }
+
+    /**
+     * Vérifie si l'utilisteur peut s'inscrire.
+     * @param BannedDomainRepository $bannedDomainRepository le repository
+     * @param User $user l'utilisateur qui souhaite s'inscrire
+     * @return bool true si l'utilisateur peut s'inscrire, false sinon
+     */
+    private function canRegister(BannedDomainRepository $bannedDomainRepository,
+                                 User $user): bool {
+        $domaine = explode('@', $user->getEmail());
+        $result = $bannedDomainRepository->findBy(['name' => $domaine]);
+        return empty($result);
     }
 
 }

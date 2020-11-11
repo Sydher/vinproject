@@ -54,3 +54,4 @@
 'SearchProductFormNamePlaceHolder': "Rechercher par nom de bouteille"
 'PriceMinPlaceHolder': "Prix min"
 'PriceMaxPlaceHolder': "Prix max"
+'RegisterDomainForbidden': "L'inscription avec ce domain est interdite (exemple @mondomaine.fr). Si le problème persiste veuillez contacter un administrateur."

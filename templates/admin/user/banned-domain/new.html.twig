@@ -1,0 +1,13 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Bannir un domaine{% endblock %}
+
+{% block body %}
+    <div class="card mx-auto medium_form mt-3 mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Bannir un domaine</h5>
+            {{ include('admin/user/banned-domain/_form.html.twig',
+                { form: form, indexRouteName: indexRouteName, ok_label: "Bannir" }) }}
+        </div>
+    </div>
+{% endblock %}

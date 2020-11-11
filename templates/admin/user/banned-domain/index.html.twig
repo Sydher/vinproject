@@ -1,0 +1,73 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Gestion des domaines bannies{% endblock %}
+
+{% block body %}
+    <h1 class="mt-3 ml-3">
+        <img src="{{ asset('build/images/icons/bottles_in_box.svg') }}"
+             class="h1_bottle" alt="titre page">
+        Gestion des domaines bannies
+    </h1>
+
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>Attention !</strong><br>
+        Cette zone est réservé à l'administrateur du site.
+        Les modifications réalisables ici sont dangeureuses.
+    </div>
+
+    <div class="text-right mr-5 mb-3">
+        <a type="button" class="btn btn-success" href="{{ path(addRouteName) }}">
+            <i class="fas fa-plus"></i>
+            Bannir un domaine
+        </a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{{ "Name" | trans }}</th>
+                <th scope="col" class="mobile_hidden">Date du ban</th>
+                <th scope="col" class="mobile_hidden">Dernière modification</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td>
+                        @{{ row.name }}
+                    </td>
+                    <td class="mobile_hidden">
+                        {{ row.createdAt | format_datetime('short') }}
+                    </td>
+                    <td class="mobile_hidden">
+                        {{ row.updatedAt | format_datetime('short') }}
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-primary"
+                           href="{{ path(editRouteName, {id: row.id}) }}">
+                            <i class="fas fa-cog"></i>
+                            Modifier
+                        </a>
+                        <a type="button" class="btn btn-danger"
+                           href="{{ path(deleteRouteName, {id: row.id}) }}">
+                            <i class="fas fa-trash-alt"></i>
+                            Débannir
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagination ml-3 mr-3">
+        {{ knp_pagination_render(rows) }}
+    </div>
+
+    <div class="text-right mr-5 mb-3">
+        <a type="button" class="btn btn-success" href="{{ path(addRouteName) }}">
+            <i class="fas fa-plus"></i>
+            Bannir un domaine
+        </a>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Débannir un domaine{% endblock %}
+
+{% block body %}
+    <div class="card mx-auto medium_form mt-3 mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Débannir un domaine</h5>
+
+            <div class="jumbotron">
+                <h1 class="display-4">{{ entity.name }}</h1>
+                <hr class="my-4">
+                <p>
+                    Banni le {{ entity.updatedAt | format_datetime() }}<br>
+                    Dernière modification le {{ entity.updatedAt | format_datetime() }}
+                </p>
+            </div>
+
+            {{ form_start(form) }}
+            {{ form_row(form.sureDelete) }}
+
+            <div class="text-center">
+                <a class="btn btn-dark" href="{{ path(indexRouteName) }}">
+                    <i class="fas fa-undo"></i>&nbsp;
+                    Garder le domaine banni
+                </a>
+                <button class="btn btn-danger" type="submit">
+                    <i class="fas fa-trash-alt"></i>&nbsp;
+                    Débannir le domaine
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
