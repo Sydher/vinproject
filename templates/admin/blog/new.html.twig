@@ -1,13 +1,13 @@
 {% extends 'admin/admin_base.html.twig' %}
 
-{% block title %}Modifier un article{% endblock %}
+{% block title %}Créer un article{% endblock %}
 
 {% block body %}
     <div class="card mx-auto medium_form mt-3 mb-3">
         <div class="card-body">
-            <h5 class="card-title">Modifier l'article {{ entity.title }}</h5>
+            <h5 class="card-title">Créer un article</h5>
             {{ include('admin/blog/_form.html.twig',
-                { form: form, indexRouteName: indexRouteName, ok_label: "Modifier" }) }}
+                { form: form, indexRouteName: indexRouteName, ok_label: "Créer" }) }}
         </div>
     </div>
 {% endblock %}

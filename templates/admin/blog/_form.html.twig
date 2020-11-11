@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+{{ form_row(form.title) }}
+{{ form_row(form.description) }}
+{{ form_row(form.imageFile) }}
+{{ form_row(form.content) }}
+<small id="emailHelp" class="form-text text-muted text-center">
+    Par défaut l'article sera invisible (non affiché dans le blog).
+    Il faut l'activer via la liste des articles.
+</small>
+
+<div class="text-center mt-3">
+    <a class="btn btn-dark" href="{{ path(indexRouteName) }}">
+        <i class="fas fa-window-close"></i>&nbsp;
+        Annuler
+    </a>
+    <button class="btn btn-success" type="submit">
+        <i class="fas fa-check-circle"></i>&nbsp;
+        {{ ok_label }}
+    </button>
+</div>
+{{ form_end(form) }}

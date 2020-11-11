@@ -1,0 +1,96 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Gestion du blog{% endblock %}
+
+{% block body %}
+    <h1 class="mt-3 ml-3">
+        <img src="{{ asset('build/images/icons/bottles_in_box.svg') }}"
+             class="h1_bottle" alt="titre page">
+        Gestion des articles du blog
+    </h1>
+
+    <div class="text-right mr-5 mb-3">
+        <a type="button" class="btn btn-success" href="{{ path(addRouteName) }}">
+            <i class="fas fa-plus"></i>
+            Créer un article
+        </a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{{ "Title" | trans }}</th>
+                <th scope="col" class="mobile_hidden">{{ "Author" | trans }}</th>
+                <th scope="col" class="mobile_hidden">Dernière modification</th>
+                <th scope="col" class="mobile_hidden">Etat</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in rows %}
+                <tr>
+                    <td>
+                        <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}"
+                           target="_blank">
+                            {{ post.title }}
+                        </a>
+                    </td>
+                    <td class="mobile_hidden">
+                        {{ post.author.username }}
+                    </td>
+                    <td class="mobile_hidden">
+                        {{ post.updatedAt | format_datetime('short') }}
+                    </td>
+                    <td class="mobile_hidden">
+                        {% if post.isVisible %}
+                            <i class="fas fa-eye text-success"
+                               data-toggle="tooltip" data-placement="top"
+                               title="L'article est visible dans le blog !"></i>
+                        {% else %}
+                            <i class="fas fa-eye-slash text-warning"
+                               data-toggle="tooltip" data-placement="top"
+                               title="L'article n'est PAS visible dans le blog !"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if post.isVisible %}
+                            <a type="button" class="btn btn-dark"
+                               href="{{ path('admin_blog_set_invisible_post', {id: post.id}) }}">
+                                <i class="fas fa-glasses"></i>
+                                Masquer
+                            </a>
+                        {% else %}
+                            <a type="button" class="btn btn-info"
+                               href="{{ path('admin_blog_set_visible_post', {id: post.id}) }}">
+                                <i class="fas fa-glasses"></i>
+                                Afficher&nbsp;&nbsp;
+                            </a>
+                        {% endif %}
+
+                        <a type="button" class="btn btn-primary"
+                           href="{{ path(editRouteName, {id: post.id}) }}">
+                            <i class="fas fa-cog"></i>
+                            Modifier
+                        </a>
+                        <a type="button" class="btn btn-danger"
+                           href="{{ path(deleteRouteName, {id: post.id}) }}">
+                            <i class="fas fa-trash-alt"></i>
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagination ml-3 mr-3">
+        {{ knp_pagination_render(rows) }}
+    </div>
+
+    <div class="text-right mr-5 mb-3">
+        <a type="button" class="btn btn-success" href="{{ path(addRouteName) }}">
+            <i class="fas fa-plus"></i>
+            Créer un article
+        </a>
+    </div>
+{% endblock %}

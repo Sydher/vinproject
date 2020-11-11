@@ -3,19 +3,19 @@
 {% block title %}Supprimer un article{% endblock %}
 
 {% block body %}
-    <div class="card mx-auto medium_form">
+    <div class="card mx-auto medium_form mt-3 mb-3">
         <div class="card-body">
             <h5 class="card-title">Supprimer un article</h5>
 
             <div class="jumbotron">
-                <h1 class="display-4">{{ post.title }}</h1>
+                <h1 class="display-4">{{ entity.title }}</h1>
                 <p class="lead">
-                    Article écris par <strong>{{ post.author.username }}</strong>
-                    le {{ post.createdAt | format_datetime() }}
+                    Article écris par <strong>{{ entity.author.username }}</strong>
+                    le {{ entity.createdAt | format_datetime() }}
                 </p>
                 <hr class="my-4">
                 <p>
-                    Dernière modification le {{ post.updatedAt | format_datetime() }}
+                    Dernière modification le {{ entity.updatedAt | format_datetime() }}
                 </p>
             </div>
 
@@ -23,11 +23,12 @@
             {{ form_row(form.sureDelete) }}
 
             <div class="text-center">
-                <a class="btn btn-light" href="{{ path('admin_blog_list') }}">
+                <a class="btn btn-dark" href="{{ path(indexRouteName) }}">
+                    <i class="fas fa-undo"></i>&nbsp;
                     Ne PAS supprimer l'article
                 </a>
                 <button class="btn btn-danger" type="submit">
-                    <i class="fas fa-trash-alt"></i>
+                    <i class="fas fa-trash-alt"></i>&nbsp;
                     Supprimer l'article
                 </button>
             </div>
