@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crédits{% endblock %}
+
+{% block body %}
+    <div class="container mt-3 mb-3">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ asset('build/images/wine.svg') }}"
+                         class="card-img-top" alt="wine_logo">
+                    <div class="card-body">
+                        <p class="card-text">
+                            Icons made by <a href="https://www.flaticon.com/authors/freepik"
+                                             title="Freepik">Freepik</a>
+                            from <a href="https://www.flaticon.com/"
+                                    title="Flaticon">www.flaticon.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ asset('build/images/wine_with_glasses.svg') }}"
+                         class="card-img-top" alt="wine_with_glasses">
+                    <div class="card-body">
+                        <p class="card-text">
+                            Icons made by <a href="https://www.flaticon.com/authors/icongeek26"
+                                             title="Icongeek26">Icongeek26</a>
+                            from <a href="https://www.flaticon.com/"
+                                    title="Flaticon">www.flaticon.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
