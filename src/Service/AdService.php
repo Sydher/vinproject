@@ -31,7 +31,8 @@ class AdService {
      */
     public function isSpecialAdOn(): bool {
         return $this->cache->get('specialAdOn', function() {
-            return $this->aboutRepository->findValue('specialAdOn')->getValue() == "ON";
+            $data = $this->aboutRepository->findValue('specialAdOn');
+            return $data != null && $data->getValue() == "ON";
         });
     }
 
