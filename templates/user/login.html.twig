@@ -9,7 +9,7 @@
             Pour se déconnecter c'est <a href="{{ path('logout') }}">ici</a> !
         </div>
     {% else %}
-        <div class="card mx-auto short_form">
+        <div class="card mx-auto short_form mt-3 mb-3">
             <div class="card-body">
                 <h5 class="card-title">Se connecter</h5>
                 <form method="post">
@@ -61,9 +61,11 @@
                     </div>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                    <button class="btn btn-primary" type="submit">
-                        Connexion
-                    </button>
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit">
+                            Connexion
+                        </button>
+                    </div>
                 </form>
             </div>
             <div class="card-footer text-center">

@@ -31,8 +31,6 @@ class SecurityController extends AbstractController {
     }
 
     /**
-     * @Route("/connexion")
-     * @Route("/se-connecter")
      * @Route("/login", name="login")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response

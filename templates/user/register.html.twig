@@ -15,19 +15,34 @@
             Pour se déconnecter c'est <a href="{{ path('logout') }}">ici</a> !
         </div>
     {% else %}
-        <div class="card mx-auto short_form">
+        <div class="card mx-auto medium_form mt-3 mb-3">
             <div class="card-body">
                 <h5 class="card-title">S'inscrire</h5>
                 {{ form_start(registrationForm) }}
-                {{ form_row(registrationForm.email) }}
-                {{ form_row(registrationForm.username) }}
-                {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
-                {{ form_row(registrationForm.agreeTerms) }}
-                {{ form_row(registrationForm.captcha) }}
+                <div class="row">
+                    <div class="col">{{ form_row(registrationForm.email) }}</div>
+                    <div class="col">{{ form_row(registrationForm.username) }}</div>
+                </div>
+                <div class="row">
+                    {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(registrationForm.agreeTerms) }}
+                        <small class="text-muted text-justify">
+                            Vos données personnelles (email et nom d'utilisateur)
+                            ne sont utilisées qu'à des fins d'authentification et ne sont
+                            pas partagées avec des tiers <a href="#">(En savoir plus)</a>.
+                        </small>
+                    </div>
+                    <div class="col">{{ form_row(registrationForm.captcha) }}</div>
+                </div>
 
-                <button class="btn btn-lg btn-primary" type="submit">
-                    Inscription
-                </button>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit">
+                        Inscription
+                    </button>
+                </div>
                 {{ form_end(registrationForm) }}
             </div>
             <div class="card-footer text-center">

@@ -3,16 +3,18 @@
 {% block title %}Modification du profile{% endblock %}
 
 {% block body %}
-    <div class="card mx-auto short_form">
+    <div class="card mx-auto short_form mt-3 mb-3">
         <div class="card-body">
             <h5 class="card-title">Modifier mon profile</h5>
             {{ form_start(editProfileForm) }}
             {{ form_row(editProfileForm.email) }}
             {{ form_row(editProfileForm.username) }}
 
-            <button class="btn btn-primary" type="submit">
-                Sauvegarder
-            </button>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit">
+                    Sauvegarder
+                </button>
+            </div>
             {{ form_end(editProfileForm) }}
         </div>
         <div class="card-footer text-center">
