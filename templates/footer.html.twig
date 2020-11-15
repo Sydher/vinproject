@@ -5,10 +5,18 @@
             <div class="col-3">
                 <h6 class="footer_title">Nous contacter</h6>
                 <ul class="list-unstyled">
-                    <li><a class="footer_link" href="#">FAQ</a></li>
-                    <li><a class="footer_link" href="#">Presse</a></li>
-                    <li><a class="footer_link" href="{{ path('contact') }}">Contactez-nous</a></li>
-                    <li><a class="footer_link" href="#">Proposer votre vin</a></li>
+                    <li><a class="footer_link" href="{{ path('page_faq') }}">FAQ</a></li>
+                    <li><a class="footer_link" href="{{ path('page_presse') }}">Presse</a></li>
+                    <li>
+                        <a class="footer_link" href="{{ path('contact') }}">
+                            Contactez-nous
+                        </a>
+                    </li>
+                    <li>
+                        <a class="footer_link" href="{{ path('page_proposal') }}">
+                            Proposer votre vin
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="col-3">
@@ -88,6 +96,12 @@
                     Interdiction de vente de boissons alcooliques aux mineurs.
                 </a>
             </div>
+        </div>
+
+        <!-- Mentions légales -->
+        <div class="text-center mt-3">
+            <img src="{{ asset('build/images/bandeau_boissons_alcooliques.jpg') }}"
+                 alt="loi alcool">
         </div>
     </div>
 </footer>

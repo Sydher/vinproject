@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block body %}
+    <div class="container mt-3 mb-3">
+        <h1>
+            <img src="{{ asset('build/images/bottle.svg') }}" alt="bouteille" class="h1_bottle">
+            Foire aux questions
+        </h1>
+        <div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-question-circle"></i>
+                        Question 1
+                    </h5>
+                    <p class="card-text">
+                        Blablabla la réponse
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nam neque quam, pulvinar a porttitor nec, consequat
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-question-circle"></i>
+                        Question 2
+                    </h5>
+                    <p class="card-text">
+                        Blablabla la réponse
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nam neque quam, pulvinar a porttitor nec, consequat
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-question-circle"></i>
+                        Question 3
+                    </h5>
+                    <p class="card-text">
+                        Blablabla la réponse
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nam neque quam, pulvinar a porttitor nec, consequat
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
