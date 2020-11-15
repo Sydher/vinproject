@@ -1,11 +1,11 @@
-<div class="card flex-row flex-wrap card_productor">
-    <div class="card-header border-0 w-25 card_left_productor">
+<div class="card mb-3">
+    <div class="card-header bg_secondary productor_title">
         <a href="{{ path('shop_productor',
             { id: productor.id, slug: productor.slug }) }}">
             {{ productor.name }}
         </a>
     </div>
-    <div class="card-block px-2 w-75 card_right_productor">
+    <div class="card-body">
         <ul>
             {% for wine in productor.wines %}
                 <li class="wine_list_item">
@@ -15,6 +15,4 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="w-100"></div>
 </div>
-<div class="separator"></div>

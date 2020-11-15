@@ -1,0 +1,12 @@
+<div class="card mb-3">
+    <div class="card-header bg_primary appellation_title">
+        <a href="{{ path('shop_appellation',
+            { id: appellation.id, slug: appellation.slug }) }}">
+            {{ appellation.name }}
+        </a>
+    </div>
+</div>
+{% for productor in appellation.productors %}
+    {{ include('shop/wine/_productor_list_item.html.twig',
+        {productor: productor}) }}
+{% endfor %}

@@ -6,34 +6,31 @@
 {% endblock %}
 
 {% block body %}
-    <div class="card medium_page">
-        <div class="card-body">
-            <div>
-                <div class="row">
-                    <!-- Photo -->
-                    <div class="col-sm-6 text-center beer_img_desc">
-                        {% if food.imageName %}
-                            <img src="{{ vich_uploader_asset(food, 'imageFile') | imagine_filter('food') }}"
-                                 class="img-fluid"
-                                 alt="photo {{ food.name }}">
-                        {% else %}
-                            <img src="{{ asset('build/images/food_default.jpg') | imagine_filter('food') }}"
-                                 alt="photo {{ food.name }}">
-                        {% endif %}
-                    </div>
-                    <!-- Description -->
-                    <div class="col-sm-6">
-                        <h2 class="beer_name">{{ food.name }}</h2>
-                        <h4 class="beer_price">
-                            {{ food.price }} €
-                            <small>{{ food.stock }} disponibles</small>
-                        </h4>
-                        <p>{{ food.description }}</p>
-                    </div>
-                </div>
-                {{ include('shop/_add_to_cart.html.twig',
-                    { quantity: quantity, url: "food-" ~ food.id }) }}
+    <div class="container mt-3 mb-3">
+        <div class="row">
+            <!-- Photo -->
+            <div class="col-sm-6 text-center beer_img_desc">
+                {% if food.imageName %}
+                    <img src="{{ vich_uploader_asset(food, 'imageFile') | imagine_filter('food') }}"
+                         class="img-fluid"
+                         alt="photo {{ food.name }}">
+                {% else %}
+                    <img src="{{ asset('build/images/food_default.jpg') | imagine_filter('food') }}"
+                         class="img-fluid"
+                         alt="photo {{ food.name }}">
+                {% endif %}
+            </div>
+            <!-- Description -->
+            <div class="col-sm-6">
+                <h2 class="beer_name">{{ food.name }}</h2>
+                <h4 class="beer_price">
+                    {{ food.price }} €
+                    <small>{{ food.stock }} disponibles</small>
+                </h4>
+                <p>{{ food.description }}</p>
             </div>
         </div>
+        {{ include('shop/_add_to_cart.html.twig',
+            { quantity: quantity, url: "food-" ~ food.id }) }}
     </div>
 {% endblock %}

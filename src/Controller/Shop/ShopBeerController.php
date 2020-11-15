@@ -32,7 +32,7 @@ class ShopBeerController extends AbstractController {
      */
     public function index(): Response {
         $allBeer = $this->beerRepository->findAll();
-        return $this->render('shop/beer_list.html.twig', [
+        return $this->render('shop/beer/index.html.twig', [
             'allBeer' => $allBeer,
             'menu' => 'boutique'
         ]);
@@ -54,7 +54,7 @@ class ShopBeerController extends AbstractController {
     public function showBeer(string $id): Response {
         $beer = $this->beerRepository->find($id);
         $quantity = $this->cartService->getItem("beer-" . $id);
-        return $this->render('shop/beer.html.twig', [
+        return $this->render('shop/beer/show.html.twig', [
             'beer' => $beer,
             'quantity' => $quantity,
             'menu' => 'boutique'

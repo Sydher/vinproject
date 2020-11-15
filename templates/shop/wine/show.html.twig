@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ wine.name }}{% endblock %}
+{% block description %}
+    <meta name="description" content="Page de vente de {{ wine.name }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-3 mb-3">
+        <div class="row">
+            <!-- Photo -->
+            <div class="col-sm-4 text-center wine_img_desc">
+                {% if wine.imageName %}
+                    <img src="{{ vich_uploader_asset(wine, 'imageFile') | imagine_filter('wine') }}"
+                         class="img-fluid"
+                         alt="photo {{ wine.name }}">
+                {% else %}
+                    <img src="{{ asset('build/images/bottle-empty.png') }}"
+                         alt="photo {{ wine.name }}">
+                {% endif %}
+            </div>
+            <!-- Description -->
+            <div class="col-sm-8">
+                <h2 class="wine_name">{{ wine.name }}</h2>
+                <h4 class="wine_price">
+                    {{ wine.price }} €
+                    <small>{{ wine.stock }} bouteilles disponibles</small>
+                </h4>
+                <table class="table">
+                    <tr>
+                        <th scope="row">Région</th>
+                        <td>
+                            <a href="{{ path('shop_region', {
+                                id: wine.region.id,
+                                slug: wine.region.slug }) }}">
+                                {{ wine.region.name }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Appellation</th>
+                        <td>
+                            <a href="{{ path('shop_appellation', {
+                                id: wine.appellation.id,
+                                slug: wine.appellation.slug }) }}">
+                                {{ wine.appellation.name }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Producteur</th>
+                        <td>
+                            <a href="{{ path('shop_productor', {
+                                id: wine.productor.id,
+                                slug: wine.productor.slug }) }}">
+                                {{ wine.productor.name }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Couleur</th>
+                        <td>
+                            {{ wine.color }}
+                            <i class="fas fa-wine-bottle wine_color_{{ wine.color }}">
+                            </i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Millésime</th>
+                        <td>{{ wine.year }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Alcool</th>
+                        <td>{{ wine.degree }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Cuvée</th>
+                        <td>{{ wine.vintage }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Format</th>
+                        <td>{{ wine.format }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        {{ include('shop/_add_to_cart.html.twig',
+            { quantity: quantity, url: "wine-" ~ wine.id }) }}
+    </div>
+{% endblock %}

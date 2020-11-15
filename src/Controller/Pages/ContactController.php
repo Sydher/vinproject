@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController {
 
     /**
-     * @Route("/presse", name="page_faq")
+     * @Route("/faq", name="page_faq")
      * @return Response
      */
     public function faq(): Response {

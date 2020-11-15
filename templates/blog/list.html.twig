@@ -3,54 +3,47 @@
 {% block title %}Blog{% endblock %}
 
 {% block body %}
-    <div class="card">
-        <div class="card-body">
-            <h1 class="card-title">
-                <img src="{{ asset('build/images/bottle.svg') }}" alt="bouteille" class="h1_bottle">
-                Blog
-            </h1>
-            <hr>
-
-            <div class="row">
-                {% for post in allPosts %}
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            {% if post.imageName %}
-                                <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}">
-                                    <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('thumb') }}"
-                                         class="card-img-top img-fluid"
-                                         alt="image-{{ post.slug }}">
-                                </a>
-                            {% else %}
-                                <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}">
-                                    <img src="{{ asset('build/images/postit.jpg') | imagine_filter('thumb') }}"
-                                         class="card-img-top img-fluid"
-                                         alt="image-{{ post.slug }}">
-                                </a>
-                            {% endif %}
-                            <div class="card-body">
-                                <h5 class="card-title">{{ post.title }}</h5>
-                                <div class="mb-1 text-muted">
-                                    {{ post.createdAt | format_datetime() }}
-                                    -
-                                    {{ post.author.username }}
-                                </div>
-                                <p class="card-text">
-                                    {{ post.description | u.truncate(200, '...') }}
-                                </p>
-                                <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}"
-                                   class="btn btn-primary">
-                                    Lire l'article
-                                </a>
+    <div class="container mt-3 mb-3">
+        {{ include('components/titles/title1.html.twig', { title: "Blog" }) }}
+        <div class="row">
+            {% for post in allPosts %}
+                <div class="col-md-4">
+                    <div class="card mb-4 card_blog">
+                        {% if post.imageName %}
+                            <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}">
+                                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('thumb') }}"
+                                     class="card-img-top img-fluid"
+                                     alt="image-{{ post.slug }}">
+                            </a>
+                        {% else %}
+                            <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}">
+                                <img src="{{ asset('build/images/postit.jpg') | imagine_filter('thumb') }}"
+                                     class="card-img-top img-fluid"
+                                     alt="image-{{ post.slug }}">
+                            </a>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <div class="mb-1 text-muted">
+                                {{ post.createdAt | format_datetime() }}
+                                -
+                                {{ post.author.username }}
                             </div>
+                            <p class="card-text">
+                                {{ post.description | u.truncate(200, '...') }}
+                            </p>
+                            <a href="{{ path('blog_show_post', {id : post.id, slug: post.slug}) }}"
+                               class="btn btn-primary">
+                                Lire l'article
+                            </a>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
+        </div>
 
-            <div class="pagination">
-                {{ knp_pagination_render(allPosts) }}
-            </div>
+        <div class="pagination">
+            {{ knp_pagination_render(allPosts) }}
         </div>
     </div>
 {% endblock %}

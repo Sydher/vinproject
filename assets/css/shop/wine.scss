@@ -1,0 +1,28 @@
+@import "../common/color";
+@import "../common/font";
+
+/* ******************** */
+/* *** viewByRegion *** */
+/* ******************** */
+
+.appellation_title {
+  border-radius: calc(.25rem - 1px) !important;
+
+  a {
+    color: $white;
+    font-size: 26px;
+    font-family: $font-baloo;
+  }
+}
+
+/* ************************* */
+/* *** viewByAppellation *** */
+/* ************************* */
+
+.productor_title {
+  a {
+    color: $white;
+    font-size: 20px;
+    font-family: $font-baloo;
+  }
+}

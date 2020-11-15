@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Shop;
 
+use App\Controller\AbstractController;
 use App\Repository\AppellationRepository;
 use App\Repository\ProductorRepository;
 use App\Repository\RegionRepository;
@@ -10,7 +11,7 @@ use App\Service\CartService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ShopController extends AbstractController {
+class ShopWineController extends AbstractController {
 
     /**
      * @var RegionRepository
@@ -54,6 +55,7 @@ class ShopController extends AbstractController {
      * @return Response
      */
     public function index(): Response {
+        // TODO Refacto (ShopController)
         $wines = $this->wineRepository->findAll();
         return $this->render('shop/index.html.twig', [
             'wines' => $wines,
@@ -67,12 +69,16 @@ class ShopController extends AbstractController {
      *     name="shop_region",
      *     requirements={"id": "[0-9]*"}
      * )
+     * @Route(
+     *     "/boutique/region/{id}",
+     *     requirements={"id": "[0-9]*"}
+     * )
      * @param string $id
      * @return Response
      */
     public function viewByRegion(string $id): Response {
         $region = $this->regionRepository->find($id);
-        return $this->render('shop/region.html.twig', [
+        return $this->render('shop/wine/region.html.twig', [
             'region' => $region,
             'menu' => 'boutique'
         ]);
@@ -84,12 +90,16 @@ class ShopController extends AbstractController {
      *     name="shop_appellation",
      *     requirements={"id": "[0-9]*"}
      * )
+     * @Route(
+     *     "/boutique/appellation/{id}",
+     *     requirements={"id": "[0-9]*"}
+     * )
      * @param string $id
      * @return Response
      */
     public function viewByAppellation(string $id): Response {
         $appellation = $this->appellationRepository->find($id);
-        return $this->render('shop/appellation.html.twig', [
+        return $this->render('shop/wine/appellation.html.twig', [
             'appellation' => $appellation,
             'menu' => 'boutique'
         ]);
@@ -106,7 +116,7 @@ class ShopController extends AbstractController {
      */
     public function viewByProductor(string $id): Response {
         $productor = $this->productorRepository->find($id);
-        return $this->render('shop/productor.html.twig', [
+        return $this->render('shop/wine/productor.html.twig', [
             'productor' => $productor,
             'menu' => 'boutique'
         ]);
@@ -124,7 +134,7 @@ class ShopController extends AbstractController {
     public function showWine(string $id): Response {
         $wine = $this->wineRepository->find($id);
         $quantity = $this->cartService->getItem("wine-" . $id);
-        return $this->render('shop/wine.html.twig', [
+        return $this->render('shop/wine/show.html.twig', [
             'wine' => $wine,
             'quantity' => $quantity,
             'menu' => 'boutique'

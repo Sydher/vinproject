@@ -14,10 +14,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@300;400;700&display=swap');
 
-$font-text: 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-$font-title: 'Yanone Kaffeesatz', sans-serif, 'Montserrat', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-
 @import "common/color";
+@import "common/font";
 
 /* ************************************** */
 /* ***** Définition de la structure ***** */
@@ -63,6 +61,16 @@ body {
   color: $secondary;
 }
 
+.bg_primary {
+  background-color: $primary;
+  color: $white;
+}
+
+.bg_secondary {
+  background-color: $secondary;
+  color: $white;
+}
+
 /* ****************** */
 /* ***** Titres ***** */
 /* ****************** */
@@ -70,10 +78,6 @@ body {
 h1 {
   font-family: $font-title;
   font-size: 45px;
-}
-
-.h1_bottle {
-  height: 45px;
 }
 
 // //////////////// TODO à trier
@@ -125,6 +129,8 @@ h1 {
 @import "common/footer";
 @import "common/toast";
 @import "components/cards/card-product-mini";
+@import "components/titles/title1";
 @import "home";
 @import "blog";
 @import "shop";
+@import "shop/wine";
