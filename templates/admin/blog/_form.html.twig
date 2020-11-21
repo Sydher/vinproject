@@ -2,6 +2,11 @@
 {{ form_row(form.title) }}
 {{ form_row(form.description) }}
 {{ form_row(form.imageFile) }}
+{% if entity.imageName %}
+    <img src="{{ vich_uploader_asset(entity, 'imageFile') | imagine_filter('mini') }}"
+         class="img-fluid mb-5"
+         alt="image-{{ entity.slug }}">
+{% endif %}
 {{ form_row(form.content) }}
 <small id="emailHelp" class="form-text text-muted text-center">
     Par défaut l'article sera invisible (non affiché dans le blog).

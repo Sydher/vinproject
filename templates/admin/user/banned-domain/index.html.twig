@@ -3,11 +3,8 @@
 {% block title %}Gestion des domaines bannies{% endblock %}
 
 {% block body %}
-    <h1 class="mt-3 ml-3">
-        <img src="{{ asset('build/images/icons/bottles_in_box.svg') }}"
-             class="h1_bottle" alt="titre page">
-        Gestion des domaines bannies
-    </h1>
+    {{ include('components/titles/title-admin.html.twig',
+        { title: "Gestion des domaines bannies" }) }}
 
     <div class="alert alert-danger text-center" role="alert">
         <strong>Attention !</strong><br>
