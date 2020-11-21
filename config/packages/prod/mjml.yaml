@@ -1,0 +1,4 @@
+mjml:
+    options:
+        minify: true
+        validation_level: skip

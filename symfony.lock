@@ -194,6 +194,19 @@
     "nikic/php-parser": {
         "version": "v4.6.0"
     },
+    "notfloran/mjml-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "025b969514039a9da280b3e14d1a96b636acee3d"
+        },
+        "files": [
+            "config/packages/mjml.yaml",
+            "config/packages/prod/mjml.yaml"
+        ]
+    },
     "ocramius/proxy-manager": {
         "version": "2.8.0"
     },

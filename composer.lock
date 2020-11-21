@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "986fd50bc401a99626d9abce12e91bb7",
+    "content-hash": "a28e3d2368d9b57563bad2abb3d2f23e",
     "packages": [
         {
             "name": "beelab/recaptcha2-bundle",
@@ -1513,6 +1513,7 @@
                 "reflection",
                 "static"
             ],
+            "abandoned": "roave/better-reflection",
             "time": "2020-03-27T11:06:43+00:00"
         },
         {
@@ -2452,6 +2453,55 @@
                 }
             ],
             "time": "2020-07-23T08:41:23+00:00"
+        },
+        {
+            "name": "notfloran/mjml-bundle",
+            "version": "v3.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/notFloran/mjml-bundle.git",
+                "reference": "ca2a3e4d7d64454cd753bf94c6af10d115889529"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/notFloran/mjml-bundle/zipball/ca2a3e4d7d64454cd753bf94c6af10d115889529",
+                "reference": "ca2a3e4d7d64454cd753bf94c6af10d115889529",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.0",
+                "symfony/dependency-injection": "^3.4 || ^4.0 || ^5.0",
+                "symfony/process": "^3.4 || ^4.0 || ^5.0",
+                "symfony/twig-bundle": "^3.4 || ^4.0 || ^5.0"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-config-test": "^4.1",
+                "phpstan/phpstan": "^0.12.0",
+                "phpunit/phpunit": "^7.0",
+                "symplify/easy-coding-standard": "^6.0|^7.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "NotFloran\\MjmlBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Floran Brutel",
+                    "email": "me@floran.fr"
+                }
+            ],
+            "description": "Symfony bundle for MJML",
+            "keywords": [
+                "email",
+                "mjml"
+            ],
+            "time": "2020-11-10T12:59:05+00:00"
         },
         {
             "name": "ocramius/proxy-manager",
@@ -8773,6 +8823,7 @@
                 "faker",
                 "fixtures"
             ],
+            "abandoned": true,
             "time": "2019-12-12T13:22:17+00:00"
         },
         {

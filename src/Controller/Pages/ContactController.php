@@ -73,7 +73,10 @@ class ContactController extends AbstractController {
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $notification->notify($contact);
+                $htmlBody = $this->renderView('email/contact_email.html.twig', [
+                    'contact' => $contact
+                ]);
+                $notification->notify($contact, $htmlBody);
                 $this->flashSuccess("MessageSend");
             } catch (TransportExceptionInterface $e) {
                 $this->flashError("Erreur : " . $e->getMessage());

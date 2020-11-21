@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "flip-toolkit": "^7.0.11",
+        "mjml": "^4.7.1",
         "nouislider": "^14.6.2"
     }
 }

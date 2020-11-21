@@ -3,6 +3,7 @@
 namespace App\Notification;
 
 use App\Entity\Contact;
+use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -15,24 +16,30 @@ class ContactNotification {
      */
     private $mailer;
 
-    public function __construct(MailerInterface $mailer) {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(MailerInterface $mailer, LoggerInterface $logger) {
         $this->mailer = $mailer;
+        $this->logger = $logger;
     }
 
-    /**
-     * @param Contact $contact
-     * @throws TransportExceptionInterface
-     */
-    public function notify(Contact $contact) {
+    public function notify(Contact $contact, $htmlBody) {
         $email = (new TemplatedEmail())
-            ->from(new Address('noreply@vinproject.fr', 'VinProject'))// TODO nom
-            ->to('contact@vinproject.fr')// TODO nom
+            ->from(new Address('noreply@o-melchior.fr', 'Ô Melchior'))
+            ->to('contact@o-melchior.fr')
             ->subject('[Contact] Message de ' . $contact->getEmail())
-            ->htmlTemplate('email/contact_email.html.twig')
+            ->html($htmlBody)
             ->context([
                 'contact' => $contact
             ]);
-        $this->mailer->send($email);
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            $this->logger->error("Erreur lors de l'envoi du mail de contact");
+        }
     }
 
 }
