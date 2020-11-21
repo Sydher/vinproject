@@ -22,19 +22,34 @@
             <div class="col-3">
                 <h6 class="footer_title">A propos</h6>
                 <ul class="list-unstyled">
-                    <li><a class="footer_link" href="#">Notre histoire</a></li>
-                    <li><a class="footer_link" href="#">L'équipe</a></li>
-                    <li><a class="footer_link" href="#">Notre boutique</a></li>
+                    <li>
+                        <a class="footer_link" href="{{ path('page_history') }}">
+                            Notre histoire
+                        </a>
+                    </li>
+                    <li>
+                        <a class="footer_link" href="{{ path('page_team') }}">L'équipe</a>
+                    </li>
+                    <li>
+                        <a class="footer_link" href="{{ path('page_local_shop') }}">
+                            Notre boutique
+                        </a>
+                    </li>
                     <li><a class="footer_link" href="{{ path('credits') }}">Crédits</a></li>
                 </ul>
             </div>
             <div class="col-3">
                 <h6 class="footer_title">Nos services</h6>
                 <ul class="list-unstyled">
-                    <li><a class="footer_link" href="#">Acheter en ligne</a></li>
-                    <li><a class="footer_link" href="#">La cave</a></li>
-                    <li><a class="footer_link" href="#">Evénements</a></li>
-                    <li><a class="footer_link" href="#">Réservation</a></li>
+                    <li>
+                        <a class="footer_link" href="{{ path('') }}">Acheter en ligne</a>
+                    </li>
+                    <li>
+                        <a class="footer_link" href="{{ path('page_events') }}">Evénements</a>
+                    </li>
+                    <li>
+                        <a class="footer_link" href="{{ path('page_booking') }}">Réservation</a>
+                    </li>
                 </ul>
             </div>
             <!-- Réseaux sociaux -->

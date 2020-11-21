@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}L'équipe{% endblock %}
+
+{% block body %}
+    <div class="container mt-3 mb-3">
+        {{ include('components/titles/title1.html.twig', { title: "L'équipe" }) }}
+        <div>
+            <p class="text-justify">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam neque quam, pulvinar a porttitor
+                nec,
+                consequat faucibus risus. Maecenas vulputate non tellus et mattis. Vivamus volutpat massa
+                tortor, vel
+                molestie lectus lobortis ac. In nec fermentum nisi, sed malesuada elit. Integer at odio ut justo
+                tempor
+                porttitor.<br>
+                Ut eros erat, tristique eget malesuada ac, sollicitudin non arcu. Nam elit magna, iaculis et
+                tortor eu, semper aliquet arcu. Integer egestas augue nec ante finibus, et vestibulum turpis
+                rutrum.
+                Donec finibus pharetra elit, et placerat ex pharetra et. Integer dictum molestie metus, sit amet
+                fermentum dui malesuada ut.
+            </p>
+        </div>
+    </div>
+{% endblock %}
