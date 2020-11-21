@@ -51,19 +51,6 @@ class ShopWineController extends AbstractController {
     }
 
     /**
-     * @Route("/boutique", name="shop_home")
-     * @return Response
-     */
-    public function index(): Response {
-        // TODO Refacto (ShopController)
-        $wines = $this->wineRepository->findAll();
-        return $this->render('shop/index.html.twig', [
-            'wines' => $wines,
-            'menu' => 'boutique'
-        ]);
-    }
-
-    /**
      * @Route(
      *     "/boutique/region/{id}-{slug}",
      *     name="shop_region",

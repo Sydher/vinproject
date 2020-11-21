@@ -22,6 +22,15 @@ class FoodRepository extends ServiceEntityRepository {
     /**
      * @return Query
      */
+    public function findAllQuery(): Query {
+        return $this->createQueryBuilder('f')
+            ->orderBy('f.name', 'ASC')
+            ->getQuery();
+    }
+
+    /**
+     * @return Query
+     */
     public function findAllOrderByLastUpdateQuery(): Query {
         return $this->createQueryBuilder('f')
             ->orderBy('f.updatedAt', 'DESC')

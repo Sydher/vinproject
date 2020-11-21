@@ -22,6 +22,15 @@ class BeerRepository extends ServiceEntityRepository {
     /**
      * @return Query
      */
+    public function findAllQuery(): Query {
+        return $this->createQueryBuilder('b')
+            ->orderBy('b.name', 'ASC')
+            ->getQuery();
+    }
+
+    /**
+     * @return Query
+     */
     public function findAllOrderByLastUpdateQuery(): Query {
         return $this->createQueryBuilder('b')
             ->orderBy('b.updatedAt', 'DESC')

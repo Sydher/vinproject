@@ -32,6 +32,18 @@ class WineRepository extends ServiceEntityRepository {
     /**
      * @return Query
      */
+    public function findAllQuery(): Query {
+        return $this->createQueryBuilder('w')
+            ->select('w, a, p')
+            ->join('w.appellation', 'a')
+            ->join('w.productor', 'p')
+            ->orderBy('w.name', 'ASC')
+            ->getQuery();
+    }
+
+    /**
+     * @return Query
+     */
     public function findAllOrderByLastUpdateQuery(): Query {
         return $this->createQueryBuilder('w')
             ->orderBy('w.updatedAt', 'DESC')

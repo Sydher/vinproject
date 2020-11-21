@@ -2,26 +2,70 @@
 
 {% block title %}Boutique{% endblock %}
 {% block description %}
-    <meta name="description" content="La boutique de VinProject, retrouvé toutes nos bouteilles !">
+    <meta name="description"
+          content="La boutique de VinProject, retrouvé toutes nos bouteilles !">
 {% endblock %}
 
 {% block body %}
-    <div class="card">
-        <div class="card-body">
-            <h1 class="card-title">
-                <img src="{{ asset('build/images/bottle.svg') }}"
-                     alt="bouteille" class="h1_bottle">
-                La Cave en Ligne !
-            </h1>
-            <hr>
+    <div class="container mt-3 mb-3">
+        {{ include('components/titles/title1.html.twig', { title: "Tous nos produits" }) }}
+        <div class="row">
+            <div class="col-md">
+                <h3>Vins</h3>
+                <ul class="list-group">
+                    {% for wine in wines %}
+                        <li class="list-group-item wine_list_item">
+                            {{ include('shop/_whine_list_item.html.twig', { wine: wine }) }}
+                        </li>
+                    {% endfor %}
+                </ul>
 
-            <ul class="list-group">
-                {% for wine in wines %}
-                    <li class="list-group-item wine_list_item">
-                        {{ include('shop/_whine_list_item.html.twig', { wine: wine }) }}
-                    </li>
-                {% endfor %}
-            </ul>
+                <div class="pagination mt-3">
+                    {{ knp_pagination_render(wines) }}
+                </div>
+            </div>
+            <div class="col-md">
+                <h3>Bières</h3>
+                <ul class="list-group">
+                    {% for beer in beers %}
+                        <li class="list-group-item wine_list_item">
+                            <i class="fas fa-beer"></i>
+                            &nbsp;
+                            <a href="{{ path('shop_beer', {id: beer.id, slug: beer.slug}) }}"
+                               class="region_wine_link">
+                                {{ beer.name }}
+                            </a>
+                            -
+                            {{ beer.price }} €
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="pagination mt-3">
+                    {{ knp_pagination_render(beers) }}
+                </div>
+            </div>
+            <div class="col-md">
+                <h3>Alimentations</h3>
+                <ul class="list-group">
+                    {% for food in foods %}
+                        <li class="list-group-item wine_list_item">
+                            <i class="fas fa-utensils"></i>
+                            &nbsp;
+                            <a href="{{ path('shop_food', {id: food.id, slug: food.slug}) }}"
+                               class="region_wine_link">
+                                {{ food.name }}
+                            </a>
+                            -
+                            {{ food.price }} €
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="pagination mt-3">
+                    {{ knp_pagination_render(foods) }}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
